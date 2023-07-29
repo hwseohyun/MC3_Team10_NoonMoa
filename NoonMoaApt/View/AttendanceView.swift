@@ -179,7 +179,6 @@ struct AttendanceView: View {
                                 //TODO: AttendanceCompleteViewModel에 정보를 저장합니다.
                                 viewRouter.currentView = .apt
                                 attendanceCompletedViewModel.saveAttendanceRecord(record: regenAttendanceRecord())
-//                                아래는 실행되지 않을 것임
                                 attendanceCompletedViewModel.updateUserLastActiveDate()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
@@ -206,7 +205,7 @@ struct AttendanceView: View {
 //        let emptyRoomsRef = db.collection("User").document("emptyRooms")
 //        emptyRoomsRef.getDocument { (document, error) in
             
-        let userId = "\(currentUser?.uid ?? "")"
+        let userId = currentUser?.uid ?? ""
         let weatherCondition = weatherViewModel.currentWeather
         let eyeDirection = [savedFaceOrientation.x, savedFaceOrientation.y, savedFaceOrientation.z]
         

@@ -15,16 +15,17 @@ class AttendanceCompletedViewModel: ObservableObject {
     @Published var eyeDirection: [Float]
     @Published var attendanceRecord: AttendanceRecord? = nil
     @Published var user: User? = nil
-    
+    private let currentUser = Auth.auth().currentUser
+
     private var firestoreManager: FirestoreManager {
         FirestoreManager.shared
     }
     private var db: Firestore {
         firestoreManager.db
     }
-    
+
     init(record: AttendanceRecord) {
-        self.userId = record.userId
+        self.userId = currentUser?.uid ?? ""
         self.weatherCondition = record.weatherCondition
         self.eyeDirection = record.eyeDirection
         self.attendanceRecord = record
@@ -64,7 +65,7 @@ class AttendanceCompletedViewModel: ObservableObject {
                     print("Error writing new attendance record to Firestore: \(error)")
                 }
             } else {
-                print("User does not exist!")
+                print("saveAttendanceRecord: User does not exist!")
             }
         }
     }
@@ -85,6 +86,8 @@ class AttendanceCompletedViewModel: ObservableObject {
                     "lastActiveDate": Date()
 //                    "userState": UserState.active.rawValue
                 ])
+            } else {
+                print("updateUserLastActiveDate: User does not exist!")
             }
         }
     }
