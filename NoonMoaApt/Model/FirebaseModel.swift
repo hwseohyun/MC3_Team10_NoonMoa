@@ -152,12 +152,13 @@ enum EyeColor: String, Codable {
     }
 }
 
-enum WeatherCondition: String, Codable {
+enum Weather: String, Codable {
     case clear = "clear"
     case cloudy = "cloudy"
     case rainy = "rainy"
-    case snow = "snow"
-    case thunderstorms = "thunderstorms"
+    case snowy = "snowy"
+    case windy = "windy"
+    case thunder = "thunder"
 }
 
 /*
