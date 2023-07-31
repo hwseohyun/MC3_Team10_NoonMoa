@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 
 class AttendanceViewModel: ObservableObject {
-    @Published var weatherCondition = WeatherCondition.clear.rawValue
+    @Published var weatherCondition = Weather.clear.rawValue
     @Published var eyeDirection: [Float] = [Float.random(in: 0...1), Float.random(in: 0...1), Float.random(in: 0...1)]
     @Published var attendanceRecord: AttendanceRecord? = nil
     @Published var currentRecord: AttendanceRecord?
@@ -27,7 +27,7 @@ class AttendanceViewModel: ObservableObject {
     // function to get the weather condition
     func fetchWeatherCondition() {
         // this is a placeholder, replace with real code to fetch weather condition
-        self.weatherCondition = WeatherCondition.clear.rawValue
+        self.weatherCondition = Weather.clear.rawValue
     }
     
     func createAttendanceRecord() {
