@@ -51,14 +51,14 @@ extension User {
 }
 
 
-struct AttendanceRecord: Codable, Identifiable {
-    @DocumentID var id: String? // = UUID().uuidString <- 이 부분 제거
-    var userId: String
-    var date: Date
-    var weatherCondition: String
-    var eyeDirection: [Float]
-    var aptId: String? // add this line
-}
+//struct AttendanceRecord: Codable, Identifiable {
+//    @DocumentID var id: String? // = UUID().uuidString <- 이 부분 제거
+//    var userId: String
+//    var date: Date
+//    var weatherCondition: String
+//    var eyeDirection: [Float]
+//    var aptId: String? // add this line
+//}
 
 
 struct AttendanceSheet: Codable, Identifiable {

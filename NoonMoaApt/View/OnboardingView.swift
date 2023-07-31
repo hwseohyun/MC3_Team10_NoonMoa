@@ -72,7 +72,7 @@ struct OnboardingView: View {
             ZStack{
             
                 //배경색
-                Color.sky.clearDay.opacity(0.3)
+                LinearGradient.sky.clearMorning.opacity(0.3)
                 
                 VStack{
                         //화면 가장 위에서부터 띄우기

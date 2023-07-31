@@ -21,21 +21,34 @@ struct NoonMoaAptApp: App {
     var midnightUpdater = MidnightUpdater()
     
     // Initialize a sample AttendanceRecord
-    let attendanceRecord = AttendanceRecord(userId: UUID().uuidString, date: Date(), weatherCondition: "Sunny", eyeDirection: [0.1, 0.2, 0.3], aptId: "sampleAptId")
+    let attendanceRecord = AttendanceRecord(
+             userId: UUID().uuidString,
+             date: Date(),
+             rawIsSmiling: false,
+             rawIsBlinkingLeft: true,
+             rawIsBlinkingRight: false,
+             rawLookAtPoint: [0, 0, 0],
+             rawFaceOrientation: [0, 0, 0],
+             rawCharacterColor: [0, 0, 0],
+             rawWeather: "clear",
+             rawTime: Date(),
+             rawtSunriseTime: Date(),
+             rawSunsetTime: Date()
+         )
+    
     
     var body: some Scene {
         WindowGroup {
-            MainView(
-                attendanceCompletedViewModel: AttendanceCompletedViewModel(record: attendanceRecord),
-                attendanceViewModel: AttendanceViewModel(),
-                calendarFullViewModel: CalendarFullViewModel(),
-                calendarSingleController: CalendarSingleController(viewModel: CalendarFullViewModel()),
-                loginViewModel: LoginViewModel(viewRouter: delegate.viewRouter),
-                aptViewModel: AptViewModel(),
-                weatherViewModel: WeatherViewModel(),
-                timeViewModel: TimeViewModel(),
-                eyeViewController: EyeViewController()
-            )
+
+            MainView(attendanceModel: AttendanceModel(newAttendanceRecord: attendanceRecord),
+                     characterModel: CharacterModel(),
+                     environmentModel: EnvironmentModel(),
+                     customViewModel: CustomViewModel(),
+                     calendarFullViewModel: CalendarFullViewModel(),
+                     calendarSingleController: CalendarSingleController(viewModel: CalendarFullViewModel()),
+                     loginViewModel: LoginViewModel(viewRouter: ViewRouter()),
+                     aptModel: AptModel(),
+                     eyeViewController: EyeViewController())
             .environmentObject(delegate.viewRouter)
             .environmentObject(midnightUpdater) // Pass to view here
         }

@@ -9,15 +9,14 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var viewRouter: ViewRouter
-    @StateObject var attendanceCompletedViewModel: AttendanceCompletedViewModel
-    @StateObject var attendanceViewModel: AttendanceViewModel
+    @StateObject var attendanceModel: AttendanceModel
+    @StateObject var characterModel: CharacterModel
+    @StateObject var environmentModel: EnvironmentModel
+    @StateObject var customViewModel: CustomViewModel
     @StateObject var calendarFullViewModel: CalendarFullViewModel
     @StateObject var calendarSingleController: CalendarSingleController
     @StateObject var loginViewModel: LoginViewModel
-    @StateObject var aptViewModel: AptViewModel
-    
-    @StateObject var weatherViewModel: WeatherViewModel
-    @StateObject var timeViewModel: TimeViewModel
+    @StateObject var aptModel: AptModel
     @StateObject var eyeViewController: EyeViewController
     
     var body: some View {
@@ -32,25 +31,21 @@ struct MainView: View {
             LoginView()
                 .environmentObject(LoginViewModel(viewRouter: ViewRouter()))
         case .attendance:
-            let record = attendanceViewModel.ensureCurrentRecord()
+//            let record = attendanceModel.ensureCurrentRecord()
             AttendanceView()
-                .environmentObject(attendanceViewModel)
-                .environmentObject(attendanceCompletedViewModel)
-                .environmentObject(weatherViewModel)
-                .environmentObject(timeViewModel)
+                .environmentObject(viewRouter)
+                .environmentObject(attendanceModel)
+                .environmentObject(environmentModel)
+                .environmentObject(characterModel)
+                .environmentObject(customViewModel)
                 .environmentObject(eyeViewController)
-                .environmentObject(AttendanceCompletedViewModel(record: record))
-
-            
-            //        case .attendanceCompleted:
-            //            let record = attendanceViewModel.ensureCurrentRecord()
-            //            AttendanceCompletedView(record: record)
-            //                .environmentObject(AttendanceCompletedViewModel(record: record))
         case .apt:
             AptView()
-                .environmentObject(aptViewModel)
-                .environmentObject(weatherViewModel)
-                .environmentObject(timeViewModel)
+                .environmentObject(viewRouter)
+                .environmentObject(attendanceModel)
+                .environmentObject(environmentModel)
+                .environmentObject(characterModel)
+                .environmentObject(customViewModel)
                 .environmentObject(eyeViewController)
             
         case .CalendarFull:
