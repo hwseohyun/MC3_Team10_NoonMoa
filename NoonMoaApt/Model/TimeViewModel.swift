@@ -18,8 +18,35 @@ class TimeViewModel: ObservableObject {
 //        return currentTime >= 6 && currentTime < 18
 //    }
     
+    // var currentTime =  “Sunrise” “Morning” “Afternoon” “Sunset” “Evening” “Night”
     //테스트용, 버튼으로 시간 바꾸기 위해 사용
-    @Published var isDayTime: Bool = true
+    @Published var currentTimeRaw: Date = Date() // Current time's raw data
+    @Published var currentTime: String = ""      // Current time as a string
     
-    
+    func updateCurrentTime() {
+        let dateFormatter = DateFormatter()
+        let currentTimeString = dateFormatter.string(from: currentTimeRaw)
+        
+        let timeComponents = currentTimeString.split(separator: ":") // timeCompontents 10:10 중 :을 기준으로 앞-시간, 뒤-분으로 분리
+        guard let hour = Int(timeComponents.first ?? "")
+        else {
+            return
+        }
+            
+        switch hour {
+            case 3..<6:
+                currentTime = "Sunrise"
+            case 6..<12:
+                currentTime = "Morning"
+            case 12..<17:
+                currentTime = "Afternoon"
+            case 17..<19:
+                currentTime = "Sunset"
+            case 19..<21:
+                currentTime = "Evening"
+            default:
+                // Night: 21:00-2:59 and 0:00-2:59 (next day)
+                currentTime = "Night"
+        }
+    }
 }
