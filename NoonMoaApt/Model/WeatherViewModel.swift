@@ -39,18 +39,25 @@ extension WeatherViewModel {
     
     func getCurrentWeather() {
         switch currentWeatherRaw {
+            // clear
             case .clear, .hot, .mostlyClear:
             currentWeather = WeatherViewModel.clear
+            // cloudy
             case .blowingDust, .cloudy, .foggy, .haze, .hurricane, .mostlyCloudy, .partlyCloudy, .smoky:
                 currentWeather = WeatherViewModel.cloudy
+            // rainy
             case .rain, .heavyRain, .freezingRain, .sunShowers, .drizzle, .freezingDrizzle, .hail:
                 currentWeather = WeatherViewModel.rainy
+            // snowy
             case .blizzard, .snow, .sunFlurries, .heavySnow, .blowingSnow, .flurries, .sleet, .frigid, .wintryMix:
                 currentWeather = WeatherViewModel.snowy
+            // windy
             case .breezy, .windy, .tropicalStorm:
                 currentWeather = WeatherViewModel.windy
+            // thunder
             case .isolatedThunderstorms, .scatteredThunderstorms, .strongStorms, .thunderstorms:
                 currentWeather = WeatherViewModel.thunder
+            // default
             @unknown default:
                 currentWeather = WeatherViewModel.clear
         }
@@ -65,7 +72,7 @@ extension WeatherViewModel {
     //TODO: db에서 string으로 날씨 받아서 self.currentWeather에 부여할 것
         
         switch self.currentWeather {
-        case "clear": // 맑은 날
+        case "clear": // clear
             switch time.currentTime {
             case "Sunrise":
                 savedSkyColor = Color.sky.sunrise
@@ -83,7 +90,7 @@ extension WeatherViewModel {
                 break
             }
             
-        case "cloudy": // 흐린 날
+        case "cloudy": // cloudy
             switch time.currentTime {
             case "Sunrise":
                 savedSkyColor = Color.sky.sunrise
@@ -101,7 +108,7 @@ extension WeatherViewModel {
                 break
             }
             
-        case "rainy": // 비오는 날
+        case "rainy": // rainy
             switch time.currentTime {
             case "Sunrise":
                 savedSkyColor = Color.sky.rainyDay
@@ -119,7 +126,7 @@ extension WeatherViewModel {
                 break
             }
             
-        case "snowy": // 눈오는 날
+        case "snowy": // snowy
             switch time.currentTime {
             case "Sunrise":
                 savedSkyColor = Color.sky.sunrise
@@ -136,7 +143,7 @@ extension WeatherViewModel {
             default:
                 break
             }
-        case "thunder": // 번개 치는 날
+        case "thunder": // thunder
             savedSkyColor = Color.sky.cloudyDay
             savedSkyImage = Image.assets.largeStamp.thunder
             default : break
