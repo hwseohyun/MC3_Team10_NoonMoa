@@ -39,6 +39,12 @@ extension Color {
         static let snowyDay = LinearGradient(colors: [Color(hex: 0xB8CBEF), Color(hex: 0xB4B7BD)], startPoint: .top, endPoint: .bottom)
         static let snowyNight = LinearGradient(colors: [Color(hex: 0x514B98), Color(hex: 0xBCBBC9)], startPoint: .top, endPoint: .bottom)
         static let unStampedWhite = LinearGradient(colors: [Color(hex: 0xFFFFFF).opacity(0.5), Color(hex: 0xFFFFFF).opacity(0.5)], startPoint: .top, endPoint: .bottom)
+        static let sunrise = LinearGradient(colors: [Color(hex: 0xBCD8E9), Color(hex: 0xFFD9D9)], startPoint: .top, endPoint: .bottom)
+        static let sunset = LinearGradient(stops: [
+            Gradient.Stop(color: Color(hex: 0xC4DCE1),location: 0.00),
+            Gradient.Stop(color: Color(hex: 0xDAC1AF), location: 0.50),
+            Gradient.Stop(color: Color(hex: 0xF2A482), location: 1.00),
+        ], startPoint: .top, endPoint: .bottom)
     }
     
     struct ground {
