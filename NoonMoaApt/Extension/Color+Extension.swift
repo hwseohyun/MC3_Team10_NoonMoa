@@ -18,7 +18,11 @@ extension Color {
     
     static let systemGray = Color(hex: 0x787678)
     static let warmBlack = Color(hex: 0x333333)
-    
+    static let userPink = Color(hex: 0xDC7E7E)
+    static let userYellow = Color(hex: 0xD4DA97)
+    static let userCyan = Color(hex: 0x8BB2B2)
+    static let userBlue = Color(hex: 0x8A8DC5)
+   
     struct stampBorder {
         static let clearSunrise = Color(hex: 0xABD5ED)
         static let clearMorning = Color(hex: 0xABD5ED)
@@ -399,4 +403,3 @@ extension Text {
                                "아,아 관리사무소에서 안내말씀 드리겠습니다.\n청결한 눈모아 아파트를 위해 각 세대에서는\n방청소에 신경 써주시길 바랍니다"]
     }
 }
-
