@@ -22,6 +22,7 @@ struct AptView: View {
     @State private var users: [[User]] = User.UTData
     @State private var buttonText: String = ""
     @State private var isCalendarOpen: Bool = false
+    @State private var announcement: Bool = false
     
     //아파트 등장 애니메이션
     @State private var isAptEffectPlayed: Bool = false
@@ -159,6 +160,23 @@ struct AptView: View {
             // 상단 캘린더 & 설정 버튼
             GeometryReader { proxy in
                 HStack (spacing: 16) {
+                    Button {
+                        
+                    } label: {
+                        if announcement {
+                            Image("announcementOn")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: proxy.size.width * 0.08)
+                        } else {
+                            Image("announcementOff")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: proxy.size.width * 0.08)
+                        }
+                    }
+
+                    
                     Spacer()
                     
                     Button { // 캘린더 버튼
@@ -194,7 +212,7 @@ struct AptView: View {
                             .frame(width: proxy.size.width * 0.08)
                     }
                 }
-                .padding(.trailing, proxy.size.width * 0.06)
+                .padding(.horizontal, proxy.size.width * 0.06)
             }
         }//ZStack
         .onAppear {
