@@ -10,10 +10,6 @@ struct EyeMyViewModel {
     var blinkRight: Float = 0.0
     var lookAtPoint: SIMD3 = SIMD3<Float>(0.0, 0.0, 0.0)
     var faceOrientation: SIMD3 = SIMD3<Float>(0.0, 0.0, 0.0)
-    var bodyColor: LinearGradient = .userBlue
-    var eyeColor: LinearGradient = .eyeBlue
-    var cheekColor: LinearGradient = .cheekRed
-
     
     var lookAtPointHistory: Array<SIMD3<Float>> = []
     var lookAtPointAverage: SIMD3 = SIMD3<Float>(0.0, 0.0, 0.0)
