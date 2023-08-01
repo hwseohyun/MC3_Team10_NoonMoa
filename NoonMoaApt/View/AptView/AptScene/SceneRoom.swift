@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SceneRoom: View {
     @EnvironmentObject var eyeViewController: EyeViewController
+    @EnvironmentObject var customViewModel: CustomViewModel
+
     @Binding var roomUser: User
     @State private var isBlindUp: Bool = false
     
@@ -31,11 +33,14 @@ struct SceneRoom: View {
                     if roomUser.roomId == "5" {
                         SceneMyEye()
                             .environmentObject(eyeViewController)
+                            .environmentObject(customViewModel)
+
                     } else {
                         SceneNeighborEye(roomUser: $roomUser)
                     }
                 } else if roomUser.userState == "inactive" || roomUser.userState == "sleep" {
                     SceneInactiveEye(roomUser: $roomUser)
+
                 } else if roomUser.userState == "vacant" {
                     EmptyView()
                 }

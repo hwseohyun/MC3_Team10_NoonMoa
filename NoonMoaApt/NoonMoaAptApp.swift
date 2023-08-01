@@ -22,32 +22,32 @@ struct NoonMoaAptApp: App {
     
     // Initialize a sample AttendanceRecord
     let attendanceRecord = AttendanceRecord(
-             userId: UUID().uuidString,
-             date: Date(),
-             rawIsSmiling: false,
-             rawIsBlinkingLeft: true,
-             rawIsBlinkingRight: false,
-             rawLookAtPoint: [0, 0, 0],
-             rawFaceOrientation: [0, 0, 0],
-             rawCharacterColor: [0, 0, 0],
-             rawWeather: "clear",
-             rawTime: Date(),
-             rawtSunriseTime: Date(),
-             rawSunsetTime: Date()
-         )
+        userId: UUID().uuidString,
+        date: Date(),
+        rawIsSmiling: false,
+        rawIsBlinkingLeft: true,
+        rawIsBlinkingRight: false,
+        rawLookAtPoint: [0, 0, 0],
+        rawFaceOrientation: [0, 0, 0],
+        rawCharacterColor: [0, 0, 0],
+        rawWeather: "clear",
+        rawTime: Date(),
+        rawtSunriseTime: Date(),
+        rawSunsetTime: Date()
+    )
     
     
     var body: some Scene {
         WindowGroup {
-
-            MainView(attendanceModel: AttendanceModel(newAttendanceRecord: attendanceRecord),
+            
+            MainView(aptModel: AptModel(),
+                     attendanceModel: AttendanceModel(newAttendanceRecord: attendanceRecord),
                      characterModel: CharacterModel(),
                      environmentModel: EnvironmentModel(),
                      customViewModel: CustomViewModel(),
                      calendarFullViewModel: CalendarFullViewModel(),
                      calendarSingleController: CalendarSingleController(viewModel: CalendarFullViewModel()),
                      loginViewModel: LoginViewModel(viewRouter: ViewRouter()),
-                     aptModel: AptModel(),
                      eyeViewController: EyeViewController())
             .environmentObject(delegate.viewRouter)
             .environmentObject(midnightUpdater) // Pass to view here
@@ -77,7 +77,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var timer: Timer?
     var isAppActiveFirst: Bool = true  // handleSceneActive를 처음 실행하는지를 판단하는 불 변수
     var messagingToken: String?
-
+    
     
     private var firestoreManager: FirestoreManager {
         FirestoreManager.shared
@@ -122,8 +122,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         application.registerForRemoteNotifications()
         
-//        var pushNotiController = PushNotiController()
-//        pushNotiController.responsePushNotification()
+        //        var pushNotiController = PushNotiController()
+        //        pushNotiController.responsePushNotification()
         
         Messaging.messaging().delegate = self
         
@@ -139,7 +139,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             }
         }
     }
-
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
@@ -156,7 +156,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             if let user = Auth.auth().currentUser {
                 firestoreManager.syncDB()
                 let userRef = db.collection("User").document(user.uid)
-    
+                
                 userRef.getDocument { (document, error) in
                     if let document = document, document.exists {
                         if let userData = document.data(), let userState = userData["userState"] as? String {
@@ -206,28 +206,28 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func handleSceneInactive() {
         print("AppDelegate: ScenePhase: inactive")
-//        // ... do something when inactive
-//        // When the app is in the background, update the user's state to .inactive
-//        if let user = Auth.auth().currentUser {
-//            firestoreManager.syncDB()
-//            let userRef = db.collection("User").document(user.uid)
-//
-//            userRef.getDocument { (document, error) in
-//                if let document = document, document.exists {
-//                    if let userData = document.data(), let userState = userData["userState"] as? String {
-//                        if userState == UserState.sleep.rawValue {
-//                            _ = 0
-//                        } else {
-//                            self.db.collection("User").document(user.uid).updateData([
-//                                "userState": UserState.inactive.rawValue
-//                            ])
-//                        }
-//                    }
-//                } else {
-//                    print("No user is signed in.")
-//                }
-//            }
-//        }
+        //        // ... do something when inactive
+        //        // When the app is in the background, update the user's state to .inactive
+        //        if let user = Auth.auth().currentUser {
+        //            firestoreManager.syncDB()
+        //            let userRef = db.collection("User").document(user.uid)
+        //
+        //            userRef.getDocument { (document, error) in
+        //                if let document = document, document.exists {
+        //                    if let userData = document.data(), let userState = userData["userState"] as? String {
+        //                        if userState == UserState.sleep.rawValue {
+        //                            _ = 0
+        //                        } else {
+        //                            self.db.collection("User").document(user.uid).updateData([
+        //                                "userState": UserState.inactive.rawValue
+        //                            ])
+        //                        }
+        //                    }
+        //                } else {
+        //                    print("No user is signed in.")
+        //                }
+        //            }
+        //        }
     }
     
     func handleSceneUnexpectedState() {
@@ -246,7 +246,7 @@ extension AppDelegate: MessagingDelegate {
 
 @available(iOS 10, *)
 extension AppDelegate: UNUserNotificationCenterDelegate {
-
+    
     // 1. foreground 상태일 때: remote 혹은 local 알림이 도착했을 때, 알림을 띄우기 전에 이 메서드를 실행
     // 2. background 상태일 때: remote 알림이 도착했을 때, "알림을 띄우기 전"에 이 메서드를 실행
     // 여기에서는 알림을 받아서, print문을 출력, completionHandler로 알림 배너 띄우기
@@ -254,16 +254,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions)
                                 -> Void) {
-
+        
         let userInfo = notification.request.content.userInfo
-
+        
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
         print(userInfo)
         completionHandler([[.banner, .badge, .sound]])
     }
-
+    
     // - remote, local 알림을 "눌렀을 때" 실행하는 메서드
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,

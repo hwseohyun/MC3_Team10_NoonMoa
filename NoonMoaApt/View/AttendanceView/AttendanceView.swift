@@ -113,6 +113,12 @@ struct AttendanceView: View {
                                 withAnimation(.linear.speed(1.5).repeatCount(1, autoreverses: true)) {
                                     isShutterEffectPlayed = true
                                 }
+                                characterModel.currentIsSmiling = eyeViewController.eyeMyViewModel.isSmiling
+                                characterModel.currentIsBlinkingLeft = eyeViewController.eyeMyViewModel.isBlinkingLeft
+                                characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
+                                characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
+                                characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
+//                                customViewModel.currentCharacterColor = [0,1,0]
                                 environmentModel.getCurrentEnvironment()
                                 characterModel.getCurrentCharacter()
                             }
@@ -155,7 +161,7 @@ struct AttendanceView: View {
                             // 시작하기 버튼
                             Button (action: {
                                 viewRouter.currentView = .apt
-                                attendanceModel.uploadAttendanceRecord()
+//                                attendanceModel.uploadAttendanceRecord()
 //                                attendanceCompletedViewModel.updateUserLastActiveDate()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SceneNeighborEye: View {
     @Binding var roomUser: User
-    @EnvironmentObject var eyeNeighborModel: EyeNeighborViewModel
+    @State private var eyeNeighborModel = EyeNeighborViewModel()
     
     var body: some View {
         EyeView(isSmiling: eyeNeighborModel.isSmiling,

@@ -40,15 +40,11 @@ class CharacterModel: ObservableObject {
     func getCurrentCharacter() {
         getCurrentCharacterViewData()
         convertViewDataToRawCharacter(isSmiling: currentIsSmiling, isBlinkingLeft: currentIsBlinkingLeft, isBlinkingRight: currentIsBlinkingRight, lookAtPoint: currentLookAtPoint, faceOrientation: currentFaceOrientation, characterColor: currentCharacterColor)
+        print(rawLookAtPoint)
     }
     
     func getCurrentCharacterViewData() {
-        currentIsSmiling = EyeMyViewModel().isSmiling
-        currentIsBlinkingLeft = EyeMyViewModel().isBlinkingLeft
-        currentIsBlinkingRight = EyeMyViewModel().isBlinkingRight
-        currentLookAtPoint = EyeMyViewModel().lookAtPoint
-        currentFaceOrientation = EyeMyViewModel().faceOrientation
-        currentCharacterColor = CustomViewModel().currentCharacterColor
+    print("currentLookAtPoint: \(currentLookAtPoint)")
     }
     
     //AttendanceModel을 통해 저장할 때 사용

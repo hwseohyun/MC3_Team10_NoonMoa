@@ -11,8 +11,7 @@ import SwiftUI
 struct SceneInactiveEye: View {
     
     @Binding var roomUser: User
-    @EnvironmentObject var eyeNeighborViewModel: EyeNeighborViewModel
-
+    @State private var eyeNeighborViewModel = EyeNeighborViewModel()
     var body: some View {
        
         EyeView(isSmiling: false,

@@ -7,7 +7,7 @@
 import SwiftUI
 
 //TODO: 아직 서버에서는 상대방의 움직임을 받아오는게 없으므로, 초기화 값을 지정해 주었다. 나중에는 이 뷰모델에, 서버에서 받은 값을 각 값에 뿌려주는 func를 작성한다.
-class EyeNeighborViewModel: ObservableObject {
+struct EyeNeighborViewModel {
     var isSmiling: Bool = false
     var isBlinkingLeft: Bool = false
     var isBlinkingRight: Bool = false
@@ -17,7 +17,7 @@ class EyeNeighborViewModel: ObservableObject {
     var eyeColor: LinearGradient = .eyeBlue
     var cheekColor: LinearGradient = .cheekRed
     
-    func update(roomUser: User) {
+    mutating func update(roomUser: User) {
         switch roomUser.eyeColor {
         case "eyeBlue" :
             bodyColor = .userBlue
@@ -37,7 +37,7 @@ class EyeNeighborViewModel: ObservableObject {
     }
     
     //이웃 눈의 랜덤한 움직임 함수
-    func randomEyeMove(roomUser: User) {
+    mutating func randomEyeMove(roomUser: User) {
             
             switch roomUser.roomId {
             case "1", "3", "8", "11":

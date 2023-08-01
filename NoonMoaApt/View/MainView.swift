@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var viewRouter: ViewRouter
+    @StateObject var aptModel: AptModel
     @StateObject var attendanceModel: AttendanceModel
     @StateObject var characterModel: CharacterModel
     @StateObject var environmentModel: EnvironmentModel
@@ -16,9 +17,8 @@ struct MainView: View {
     @StateObject var calendarFullViewModel: CalendarFullViewModel
     @StateObject var calendarSingleController: CalendarSingleController
     @StateObject var loginViewModel: LoginViewModel
-    @StateObject var aptModel: AptModel
     @StateObject var eyeViewController: EyeViewController
-    
+
     var body: some View {
         
         switch viewRouter.currentView {
@@ -42,11 +42,13 @@ struct MainView: View {
         case .apt:
             AptView()
                 .environmentObject(viewRouter)
+                .environmentObject(aptModel)
                 .environmentObject(attendanceModel)
                 .environmentObject(environmentModel)
                 .environmentObject(characterModel)
                 .environmentObject(customViewModel)
                 .environmentObject(eyeViewController)
+
             
         case .CalendarFull:
             CalendarFullView()

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SceneMyEye: View {
     @EnvironmentObject var eyeViewController: EyeViewController
+    @EnvironmentObject var customViewModel: CustomViewModel
 
     var body: some View {
         
@@ -17,8 +18,8 @@ struct SceneMyEye: View {
                 isBlinkingRight: eyeViewController.eyeMyViewModel.isBlinkingRight,
                 lookAtPoint: eyeViewController.eyeMyViewModel.lookAtPoint,
                 faceOrientation: eyeViewController.eyeMyViewModel.faceOrientation,
-                bodyColor: eyeViewController.eyeMyViewModel.bodyColor,
-                eyeColor: eyeViewController.eyeMyViewModel.eyeColor, cheekColor: eyeViewController.eyeMyViewModel.cheekColor)
+                bodyColor: customViewModel.currentBodyColor,
+                eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor)
     }
 }
 
