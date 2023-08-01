@@ -125,8 +125,8 @@
 		8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBroadcast.swift; sourceTree = "<group>"; };
 		8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneMyEye.swift; sourceTree = "<group>"; };
 		8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneNeighborEye.swift; sourceTree = "<group>"; };
-		8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptTests.xctest; path = "/Users/seohyunhwang/Desktop/애플아카데미/MC3/NoonMoa/build/Debug-iphoneos/NoonMoaAptTests.xctest"; sourceTree = "<absolute>"; };
+		8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptUITests.xctest; path = "/Users/seohyunhwang/Desktop/애플아카데미/MC3/NoonMoa/build/Debug-iphoneos/NoonMoaAptUITests.xctest"; sourceTree = "<absolute>"; };
 		8A9910812A789F8F0083602F /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		8A9910832A78A03B0083602F /* WeatherTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTestView.swift; sourceTree = "<group>"; };
 		8A9910852A78A3A20083602F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -319,10 +319,8 @@
 		E32E3E0B2A6951B600B865E8 = {
 			isa = PBXGroup;
 			children = (
+				DA10AFFA2A7923E000D20C1C /* GoogleService-Info.plist */,
 				E32E3E162A6951B600B865E8 /* NoonMoaApt */,
-				8A6FB9EA2A70FC18009827C1 /* NoonMoaApt.app */,
-				8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */,
-				8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -330,7 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				8A9910852A78A3A20083602F /* Info.plist */,
-				8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */,
 				E3F739382A6A575F00E5F291 /* Assets.xcassets */,
 				E3F739152A6A540000E5F291 /* README.md */,
 				E3CBB3E52A69730700195326 /* Extension */,

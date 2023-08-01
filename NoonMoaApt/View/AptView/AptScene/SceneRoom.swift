@@ -65,11 +65,14 @@ struct SceneRoom: View {
                             isBlindUp = true
                         }
                     }
-                
+                Image("windowBorder")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: geo.size.width)
             }//ZStack
             .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: 1)
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(Color.black, lineWidth: 2)
                     .frame(width: geo.size.width, height: geo.size.width / 1.2)
             )
             .clipShape(
