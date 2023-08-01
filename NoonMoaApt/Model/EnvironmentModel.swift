@@ -10,7 +10,7 @@ import SwiftUI
 
 class EnvironmentModel: ObservableObject {
     
-    //rawData to be uploaded to the server
+    //rawData to be uploaded e server
     var rawWeather: String = ""
     var rawTime: Date = Date()
     var rawSunriseTime: Date {
@@ -70,8 +70,9 @@ class EnvironmentModel: ObservableObject {
     var recordedStampSmallSkyImage: Image = Image.assets.stampSmall.clearMorning
     var recordedStampBorderColor: Color = Color.stampBorder.clearMorning
     
-    //MARK: --
    
+    // MARK: - 업로드 -
+    
     //앱을 시작할 때 실행시키며, 10분단위로 실행시킨다. 이 모델을 따르는 뷰는 자동으로 업데이트 된다.
     func getCurrentEnvironment() {
 //        getCurrentRawEnvironment()
@@ -83,6 +84,7 @@ class EnvironmentModel: ObservableObject {
         print("lottie: \(currentLottieImageName)")
     }
     
+    // WeatherKit에서 데이터를 받아와서, raw data 업데이트
     func getCurrentRawEnvironment() {
         //웨더킷?
             rawWeather = "2"
@@ -91,25 +93,54 @@ class EnvironmentModel: ObservableObject {
             rawTime = Date()
     }
     
-    func saveRawEnvironmentToAttendanceModel()  {
-        //attendanceModel.newAttendanceRecord(...)
+    // 서버에 저장하기 위해, Attendance 모델을 업데이트 할 때 사용
+    // attendanceModel.newAttendanceRecord에 접근하여, Environment와 관련된 recordedRaw...변수를 업데이트 해주는 방식
+    // 이후 newAttendanceRecord는 CharacterModel로도 업데이트 받은 뒤에, 서버에 업로드
+//        func saveRawEnvironmentToAttendanceModel()  {
+//        //attendanceModel.newAttendanceRecord(...)
+//    }
+    
+    func saveRawEnvironmentToAttendanceModel(newAttendanceRecord: inout AttendanceRecord?) {
+        // Update recorded environment-related data properties in newAttendanceRecord with the raw environment data from EnvironmentModel
+        if newAttendanceRecord == nil {
+            rawWeather = "11"
+            rawSunriseTime = Date()
+            rawSunsetTime = Date()
+            rawTime = Date()
+            return
+        }
+        newAttendanceRecord?.rawWeather = rawWeather
+        newAttendanceRecord?.rawTime = rawTime
+        newAttendanceRecord?.rawSunriseTime = rawSunriseTime
+        newAttendanceRecord?.rawSunsetTime = rawSunsetTime
+        // Update other recorded environment-related properties as needed
     }
+
+
+    
+    // MARK: - 다운로드 -
     
     //앱을 시작할 때 실행시키고, 달력을 켰을 때 접근한다.
     func fetchRecordedEnvironment(record: AttendanceRecord)  {
+        print("EnvironmentModel | fetchRecordedEnvironment arrived")
         saveRecordedRawEnvironmentToEnvironmentModel(record: record)
         convertRawDataToEnvironment(isInputCurrentData: false, weather: recordedRawWeather, time: recordedRawTime, sunrise: recordedRawSunriseTime, sunset: recordedRawSunsetTime)
         convertEnvironmentToViewData(isInputCurrentData: false, weather: recordedWeather, time: recordedTime, isThunder: recordedIsThunder)
     }
     
+    // 저장된 recordedRaw... 변수를 받아와서 EnvironmentModel을 업데이트
     func saveRecordedRawEnvironmentToEnvironmentModel(record: AttendanceRecord) {
+        print("EnvironmentModel | saveRecordedRawEnvironmentToEnvironmentModel arrived")
         recordedRawWeather = record.rawWeather
-        recordedRawSunriseTime = record.rawtSunriseTime
+        recordedRawSunriseTime = record.rawSunriseTime
         recordedRawSunsetTime = record.rawSunsetTime
         recordedRawTime = record.rawTime
     }
     
     
+    // MARK: - 업로드 & 다운로드 -
+    
+    // W[WeatherKit으로부터 받아온 raw data or 서버로부터 받아온 recordedRaw]를 Environment로 중간 변환
     func convertRawDataToEnvironment(isInputCurrentData: Bool, weather: String, time: Date, sunrise: Date, sunset: Date) {
         
         let environmentWeather: String
@@ -171,6 +202,7 @@ class EnvironmentModel: ObservableObject {
         return hour
     }
     
+    // [WeatherKit으로부터 받아온 raw data or 서버로부터 받아온 recordedRaw]를 변환한 Environment를, View에서 사용할 수 있는 ViewData로 변환
     func convertEnvironmentToViewData(isInputCurrentData: Bool, weather: String, time: String, isThunder: Bool) {
         var viewData = [String: Any]()
         switch weather {
