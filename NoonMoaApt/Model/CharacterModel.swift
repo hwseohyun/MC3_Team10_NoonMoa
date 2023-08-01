@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class CharacterModel: ObservableObject {
     
@@ -21,7 +22,7 @@ class CharacterModel: ObservableObject {
     var currentIsBlinkingRight: Bool = false
     var currentLookAtPoint: SIMD3<Float> = SIMD3<Float>(0.0, 0.0, 0.0)
     var currentFaceOrientation: SIMD3<Float> = SIMD3<Float>(0.0, 0.0, 0.0)
-    var currentCharacterColor: [Float] = [0.0, 0.0, 0.0]
+    var currentCharacterColor: Color = Color.userCyan
     
     var recordedRawIsSmiling: Bool = false
     var recordedRawIsBlinkingLeft: Bool = false
@@ -54,13 +55,13 @@ class CharacterModel: ObservableObject {
     
     // AttendanceModel을 통해 서버에 저장할 때 사용
     //원본 데이터를 서버에 저장할 수 있는 데이터 형식으로 변환
-    func convertViewDataToRawCharacter(isSmiling: Bool, isBlinkingLeft: Bool, isBlinkingRight: Bool, lookAtPoint: SIMD3<Float>, faceOrientation: SIMD3<Float>, characterColor: [Float]) {
+    func convertViewDataToRawCharacter(isSmiling: Bool, isBlinkingLeft: Bool, isBlinkingRight: Bool, lookAtPoint: SIMD3<Float>, faceOrientation: SIMD3<Float>, characterColor: Color) {
         rawIsSmiling = isSmiling
         rawIsBlinkingLeft = isBlinkingLeft
         rawIsBlinkingRight = isBlinkingRight
         rawLookAtPoint = [Float(lookAtPoint.x), Float(lookAtPoint.y), Float(lookAtPoint.z)]
         rawFaceOrientation = [Float(faceOrientation.x), Float(faceOrientation.y), Float(faceOrientation.z)]
-        rawCharacterColor = characterColor
+        rawCharacterColor = [Float(characterColor.rgba.red), Float(characterColor.rgba.green), Float(characterColor.rgba.blue)]
     }
     
     // 서버에 저장하기 위해, Attendance 모델을 업데이트 할 때 사용

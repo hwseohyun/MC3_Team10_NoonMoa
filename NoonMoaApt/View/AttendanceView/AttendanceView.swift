@@ -24,6 +24,7 @@ struct AttendanceView: View {
     @State private var isScaleEffectPlayed: Bool = false
     @State private var isBlurEffectPlayed: Bool = false
     @State private var isShutterEffectPlayed: Bool = false
+    @State private var isColorPickerAppeared: Bool = false
     
     private var firestoreManager: FirestoreManager {
         FirestoreManager.shared
@@ -40,19 +41,19 @@ struct AttendanceView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             if !isStamped {
-                                Text("좋은 아침이에요!")
+                                Text(environmentModel.currentBroadcastAttendanceIncompleteTitle)
                                     .font(.title)
-                                    .fontWeight(.bold)
+                                    .fontWeight(.black)
                                     .padding(.bottom, 4)
-                                Text("매일 눈을 뜬다는 건 멋진 일이예요.\n오늘의 시작을 기록해주세요.")
+                                Text(environmentModel.currentBroadcastAttendanceIncompleteBody)
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             } else {
-                                Text("오늘은 날씨가 꽤나 맑군요")
+                                Text(environmentModel.currentBroadcastAttendanceCompletedTitle)
                                     .font(.title)
-                                    .fontWeight(.bold)
+                                    .fontWeight(.black)
                                     .padding(.bottom, 4)
-                                Text("오늘 하루도 상쾌하길 바라요!")
+                                Text(environmentModel.currentBroadcastAttendanceCompletedBody)
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
@@ -62,7 +63,6 @@ struct AttendanceView: View {
                     .frame(height: geo.size.height * 0.16)
                     .offset(x: 8)
                     
-                    Spacer()
                     
                     if !isStamped {
                         //출석체크 전 눈 움직이는 뷰
@@ -74,147 +74,156 @@ struct AttendanceView: View {
                                        bodyColor: LinearGradient.unStampedWhite,
                                        eyeColor: LinearGradient.unStampedWhite, cheekColor: LinearGradient.cheekGray)
                         .frame(width: geo.size.width, height: geo.size.width)
-                        .offset(y: -16)
                         .blur(radius: isBlurEffectPlayed ? 5 : 0)
                         .onTapGesture {
                             eyeViewController.resetFaceAnchor()
                         }
                         
+                        //                        Spacer().frame(height: 50)
+                        
                     } else {
                         //출석체크 후 저장된 날씨와, 캐릭터의 움직임 좌표값으로 표현된 뷰
                         StampLargeView(skyColor: environmentModel.currentColorOfSky, skyImage: environmentModel.currentStampLargeSkyImage, isSmiling: characterModel.currentIsSmiling, isBlinkingLeft: characterModel.currentIsBlinkingLeft, isBlinkingRight: characterModel.currentIsBlinkingRight, lookAtPoint: characterModel.currentLookAtPoint, faceOrientation: characterModel.currentFaceOrientation, bodyColor: customViewModel.currentBodyColor, eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor)
                             .frame(width: geo.size.width, height: geo.size.width)
-                            .offset(y: -16)
                             .scaleEffect(isScaleEffectPlayed ? 0.9 : 1)
                             .opacity(isShutterEffectPlayed ? 1 : 0)
                         
                     }
+                }//VStack
+                
+                VStack(alignment: .leading) {
                     
-                    Spacer()
+                Spacer()
                     
-                    if !isStamped {
-                        // 눈도장 찍기 버튼
-                        Button (action: {
-                            DispatchQueue.main.async {
-                                withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
-                                    isBlurEffectPlayed = true
-                                }
+                //컬러피커
+                CharacterColorPickerView()
+                    .frame(height: 50)
+                    .scaleEffect(0.9)
+                    .opacity(isColorPickerAppeared ? 1 : 0)
+                    .padding(.bottom, 64)
+                
+                if !isStamped {
+                    // 눈도장 찍기 버튼
+                    Button (action: {
+                        //사용자 색상 최초 지정(default값)
+                        customViewModel.pickerValueToCharacterColor(value: customViewModel.pickerValue)
+                        DispatchQueue.main.async {
+                            withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
+                                isBlurEffectPlayed = true
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                withAnimation(.easeInOut(duration: 0.4).repeatCount(1, autoreverses: true)) {
-                                    isBlurEffectPlayed = false
-                                }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            withAnimation(.easeInOut(duration: 0.4).repeatCount(1, autoreverses: true)) {
+                                isBlurEffectPlayed = false
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                withAnimation(.easeIn(duration: 0.1)) {
-                                    isStamped = true
-                                }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation(.easeIn(duration: 0.1)) {
+                                isStamped = true
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                withAnimation(.linear.speed(1.5).repeatCount(1, autoreverses: true)) {
-                                    isShutterEffectPlayed = true
-                                }
-                                characterModel.currentIsSmiling = eyeViewController.eyeMyViewModel.isSmiling
-                                characterModel.currentIsBlinkingLeft = eyeViewController.eyeMyViewModel.isBlinkingLeft
-                                characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
-                                characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
-                                characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
-//                                customViewModel.currentCharacterColor = [0,1,0]
-                                environmentModel.getCurrentEnvironment()
-                                characterModel.getCurrentCharacter()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation(.linear.speed(1.5).repeatCount(1, autoreverses: true)) {
+                                isShutterEffectPlayed = true
                             }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation(.spring(response: 0.5, dampingFraction: 0.3).speed(1)) {
-                                    isScaleEffectPlayed = true
-                                }
-                            }
+                            characterModel.currentIsSmiling = eyeViewController.eyeMyViewModel.isSmiling
+                            characterModel.currentIsBlinkingLeft = eyeViewController.eyeMyViewModel.isBlinkingLeft
+                            characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
+                            characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
+                            characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
+                            //                                customViewModel.currentCharacterColor = [0,1,0]
                             
+                            characterModel.getCurrentCharacter()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.3).speed(1)) {
+                                isScaleEffectPlayed = true
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation(.easeInOut(duration: 1.2)) {
+                                isColorPickerAppeared = true
+                            }
+                        }
+                        
+                    }) {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.warmBlack)
+                            .frame(height: 56)
+                            .overlay(
+                                Text("눈도장 찍기")
+                                    .foregroundColor(.white)
+                                    .fontWeight(.semibold)
+                                    .padding()
+                            )
+                    }
+                } else {
+                    HStack {
+                        // 다시찍기 버튼
+                        Button (action: {
+                            isStamped = false
+                            isScaleEffectPlayed = false
+                            isBlurEffectPlayed = false
+                            isShutterEffectPlayed = false
+                            isColorPickerAppeared = false
                         }) {
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.warmBlack)
                                 .frame(height: 56)
                                 .overlay(
-                                    Text("눈도장 찍기")
+                                    Text("다시 찍기")
                                         .foregroundColor(.white)
                                         .fontWeight(.semibold)
                                         .padding()
                                 )
                         }
-                    } else {
-                        HStack {
-                            // 다시찍기 버튼
-                            Button (action: {
-                                isStamped = false
-                                isScaleEffectPlayed = false
-                                isBlurEffectPlayed = false
-                                isShutterEffectPlayed = false
-                            }) {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.warmBlack)
-                                    .frame(height: 56)
-                                    .overlay(
-                                        Text("다시 찍기")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.semibold)
-                                            .padding()
-                                    )
-                            }
-                            // 시작하기 버튼
-                            Button (action: {
-                                viewRouter.currentView = .apt
-                                attendanceModel.uploadAttendanceRecord()
-//                                attendanceCompletedViewModel.saveAttendanceRecord(record: regenAttendanceRecord())
-//                                attendanceCompletedViewModel.updateUserLastActiveDate()
-                            }) {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.warmBlack)
-                                    .frame(height: 56)
-                                    .overlay(
-                                        Text("시작하기")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.semibold)
-                                            .padding()
-                                    )
-                            }
-                        }//HStack
-                    }
-                }//VStack
-            }//GeometryReader
-            .padding(24)
-        }//ZStack
-    }
-    
-//    func regenAttendanceRecord() -> AttendanceRecord {
-//
-//        firestoreManager.syncDB()
-//        // Get the emptyRooms document
-////        let emptyRoomsRef = db.collection("User").document("emptyRooms")
-////        emptyRoomsRef.getDocument { (document, error) in
-//
-//        let userId = currentUser?.uid ?? ""
-//        let weatherCondition = weatherViewModel.currentWeather
-//        let eyeDirection = [savedFaceOrientation.x, savedFaceOrientation.y, savedFaceOrientation.z]
-//
-//        return AttendanceRecord(userId: userId, date: Date(), weatherCondition: weatherCondition, eyeDirection: eyeDirection)
-//    }
+                        // 시작하기 버튼
+                        Button (action: {
+                            viewRouter.currentView = .apt
+                            attendanceModel.uploadAttendanceRecord()
+                            //                                attendanceModel.uploadAttendanceRecord()
+                            //                                attendanceCompletedViewModel.updateUserLastActiveDate()
+                        }) {
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color.warmBlack)
+                                .frame(height: 56)
+                                .overlay(
+                                    Text("시작하기")
+                                        .foregroundColor(.white)
+                                        .fontWeight(.semibold)
+                                        .padding()
+                                )
+                        }
+                    }//HStack
+                }
+            }//VStack
+        }//GeometryReader
+        .padding(24)
+    }//ZStack
+    //        .onAppear {
+    //            //테스트용 날씨 보기위해 임시로 아래 함수만 실행
+    //            environmentModel.getCurrentRawEnvironment()
+    //            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
+    //            environmentModel.getCurrentEnvironment()
+    //        }
 }
 
 struct AttendanceView_Previews: PreviewProvider {
     static var previews: some View {
         let newAttendanceRecord = AttendanceRecord(
-                 userId: "",
-                 date: Date(),
-                 rawIsSmiling: false,
-                 rawIsBlinkingLeft: true,
-                 rawIsBlinkingRight: false,
-                 rawLookAtPoint: [0, 0, 0],
-                 rawFaceOrientation: [0, 0, 0],
-                 rawCharacterColor: [0, 0, 0],
-                 rawWeather: "clear",
-                 rawTime: Date(),
-                 rawSunriseTime: Date(),
-                 rawSunsetTime: Date()
-             )
+             userId: "",
+             date: Date(),
+             rawIsSmiling: false,
+             rawIsBlinkingLeft: true,
+             rawIsBlinkingRight: false,
+             rawLookAtPoint: [0, 0, 0],
+             rawFaceOrientation: [0, 0, 0],
+             rawCharacterColor: [0, 0, 0],
+             rawWeather: "clear",
+             rawTime: Date(),
+             rawSunriseTime: Date(),
+             rawSunsetTime: Date()
+         )
         AttendanceView()
             .environmentObject(ViewRouter())
             .environmentObject(AttendanceModel(newAttendanceRecord: newAttendanceRecord))

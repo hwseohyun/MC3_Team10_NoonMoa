@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		8A229FFF2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */; };
+		8A2724E62A7905E100A8D970 /* cloudyD.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724DE2A7905E000A8D970 /* cloudyD.json */; };
+		8A2724E72A7905E100A8D970 /* rainyD.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724DF2A7905E000A8D970 /* rainyD.json */; };
+		8A2724E82A7905E100A8D970 /* snowyDN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E02A7905E000A8D970 /* snowyDN.json */; };
+		8A2724E92A7905E100A8D970 /* thunderDN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E12A7905E000A8D970 /* thunderDN.json */; };
+		8A2724EA2A7905E100A8D970 /* clearN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E22A7905E000A8D970 /* clearN.json */; };
+		8A2724EB2A7905E100A8D970 /* clearD.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E32A7905E000A8D970 /* clearD.json */; };
+		8A2724EC2A7905E100A8D970 /* rainyN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E42A7905E100A8D970 /* rainyN.json */; };
+		8A2724ED2A7905E100A8D970 /* cloudyN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E52A7905E100A8D970 /* cloudyN.json */; };
+		8A2724EF2A79200D00A8D970 /* CharacterColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2724EE2A79200D00A8D970 /* CharacterColorPickerView.swift */; };
+		8A7FF49A2A77A8470075BA78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */; };
 		8A7FF4A02A77ABEC0075BA78 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */; };
 		8A7FF4A22A77ABF90075BA78 /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */; };
 		8A7FF4A42A77AC070075BA78 /* AttendanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */; };
@@ -15,6 +25,9 @@
 		8A7FF4AE2A77ACAC0075BA78 /* SceneBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */; };
 		8A84C29F2A6ED2DF001A9094 /* SceneMyEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */; };
 		8A84C2A12A6ED2E9001A9094 /* SceneNeighborEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */; };
+		8A9910822A789F8F0083602F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910812A789F8F0083602F /* WeatherModel.swift */; };
+		8A9910842A78A03B0083602F /* WeatherTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910832A78A03B0083602F /* WeatherTestView.swift */; };
+		8A9910892A78B4300083602F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910882A78B4300083602F /* LocationManager.swift */; };
 		8AD2303D2A699F4C00C967B5 /* SceneButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230352A699F4C00C967B5 /* SceneButtons.swift */; };
 		8AD2303E2A699F4C00C967B5 /* SceneApt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230362A699F4C00C967B5 /* SceneApt.swift */; };
 		8AD2303F2A699F4C00C967B5 /* FunctionTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230372A699F4C00C967B5 /* FunctionTestView.swift */; };
@@ -25,16 +38,10 @@
 		8AD2ECC22A6E163E0063D9ED /* EyeMyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD2ECBF2A6E163E0063D9ED /* EyeMyViewModel.swift */; };
 		8AD2ECC32A6E163E0063D9ED /* EyeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD2ECC02A6E163E0063D9ED /* EyeView.swift */; };
 		8AD2ECC42A6E163E0063D9ED /* EyeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD2ECC12A6E163E0063D9ED /* EyeViewController.swift */; };
+		8ADF14492A7974BA00A09057 /* ParticleEffectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADF14482A7974BA00A09057 /* ParticleEffectViewModel.swift */; };
+		8ADF144B2A79764E00A09057 /* ParticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADF144A2A79764E00A09057 /* ParticleView.swift */; };
 		DA904E332A6A361700CC14D9 /* StampLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904E312A6A361700CC14D9 /* StampLargeView.swift */; };
 		DA904E342A6A361700CC14D9 /* StampButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904E322A6A361700CC14D9 /* StampButtonView.swift */; };
-		DAEE7E052A719E5500D7FACA /* cloudyN.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7DFD2A719E5400D7FACA /* cloudyN.json */; };
-		DAEE7E062A719E5500D7FACA /* clearD.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7DFE2A719E5400D7FACA /* clearD.json */; };
-		DAEE7E072A719E5500D7FACA /* clearN.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7DFF2A719E5400D7FACA /* clearN.json */; };
-		DAEE7E082A719E5500D7FACA /* snowyDN.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7E002A719E5500D7FACA /* snowyDN.json */; };
-		DAEE7E092A719E5500D7FACA /* cloudyD.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7E012A719E5500D7FACA /* cloudyD.json */; };
-		DAEE7E0A2A719E5500D7FACA /* thunderDN.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7E022A719E5500D7FACA /* thunderDN.json */; };
-		DAEE7E0B2A719E5500D7FACA /* rainyN.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7E032A719E5500D7FACA /* rainyN.json */; };
-		DAEE7E0C2A719E5500D7FACA /* rainyD.json in Resources */ = {isa = PBXBuildFile; fileRef = DAEE7E042A719E5500D7FACA /* rainyD.json */; };
 		DAEE7E102A719F8800D7FACA /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAEE7E0F2A719F8800D7FACA /* Lottie */; };
 		E3025D7A2A702C15000BB6E9 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3025D792A702C15000BB6E9 /* LaunchScreenView.swift */; };
 		E32E3E182A6951B600B865E8 /* NoonMoaAptApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32E3E172A6951B600B865E8 /* NoonMoaAptApp.swift */; };
@@ -101,6 +108,15 @@
 
 /* Begin PBXFileReference section */
 		8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeNeighborViewModel.swift; sourceTree = "<group>"; };
+		8A2724DE2A7905E000A8D970 /* cloudyD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudyD.json; sourceTree = "<group>"; };
+		8A2724DF2A7905E000A8D970 /* rainyD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainyD.json; sourceTree = "<group>"; };
+		8A2724E02A7905E000A8D970 /* snowyDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snowyDN.json; sourceTree = "<group>"; };
+		8A2724E12A7905E000A8D970 /* thunderDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thunderDN.json; sourceTree = "<group>"; };
+		8A2724E22A7905E000A8D970 /* clearN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clearN.json; sourceTree = "<group>"; };
+		8A2724E32A7905E000A8D970 /* clearD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clearD.json; sourceTree = "<group>"; };
+		8A2724E42A7905E100A8D970 /* rainyN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainyN.json; sourceTree = "<group>"; };
+		8A2724E52A7905E100A8D970 /* cloudyN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudyN.json; sourceTree = "<group>"; };
+		8A2724EE2A79200D00A8D970 /* CharacterColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterColorPickerView.swift; sourceTree = "<group>"; };
 		8A6FB9EA2A70FC18009827C1 /* NoonMoaApt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoonMoaApt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
@@ -109,6 +125,12 @@
 		8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBroadcast.swift; sourceTree = "<group>"; };
 		8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneMyEye.swift; sourceTree = "<group>"; };
 		8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneNeighborEye.swift; sourceTree = "<group>"; };
+		8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptTests.xctest; path = "/Users/seohyunhwang/Desktop/애플아카데미/MC3/NoonMoa/build/Debug-iphoneos/NoonMoaAptTests.xctest"; sourceTree = "<absolute>"; };
+		8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptUITests.xctest; path = "/Users/seohyunhwang/Desktop/애플아카데미/MC3/NoonMoa/build/Debug-iphoneos/NoonMoaAptUITests.xctest"; sourceTree = "<absolute>"; };
+		8A9910812A789F8F0083602F /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		8A9910832A78A03B0083602F /* WeatherTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTestView.swift; sourceTree = "<group>"; };
+		8A9910852A78A3A20083602F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8A9910882A78B4300083602F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8AD230352A699F4C00C967B5 /* SceneButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneButtons.swift; sourceTree = "<group>"; };
 		8AD230362A699F4C00C967B5 /* SceneApt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneApt.swift; sourceTree = "<group>"; };
 		8AD230372A699F4C00C967B5 /* FunctionTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionTestView.swift; sourceTree = "<group>"; };
@@ -119,16 +141,10 @@
 		8AD2ECBF2A6E163E0063D9ED /* EyeMyViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeMyViewModel.swift; sourceTree = "<group>"; };
 		8AD2ECC02A6E163E0063D9ED /* EyeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeView.swift; sourceTree = "<group>"; };
 		8AD2ECC12A6E163E0063D9ED /* EyeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeViewController.swift; sourceTree = "<group>"; };
+		8ADF14482A7974BA00A09057 /* ParticleEffectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectViewModel.swift; sourceTree = "<group>"; };
+		8ADF144A2A79764E00A09057 /* ParticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleView.swift; sourceTree = "<group>"; };
 		DA904E312A6A361700CC14D9 /* StampLargeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampLargeView.swift; sourceTree = "<group>"; };
 		DA904E322A6A361700CC14D9 /* StampButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampButtonView.swift; sourceTree = "<group>"; };
-		DAEE7DFD2A719E5400D7FACA /* cloudyN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudyN.json; sourceTree = "<group>"; };
-		DAEE7DFE2A719E5400D7FACA /* clearD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clearD.json; sourceTree = "<group>"; };
-		DAEE7DFF2A719E5400D7FACA /* clearN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clearN.json; sourceTree = "<group>"; };
-		DAEE7E002A719E5500D7FACA /* snowyDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snowyDN.json; sourceTree = "<group>"; };
-		DAEE7E012A719E5500D7FACA /* cloudyD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudyD.json; sourceTree = "<group>"; };
-		DAEE7E022A719E5500D7FACA /* thunderDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thunderDN.json; sourceTree = "<group>"; };
-		DAEE7E032A719E5500D7FACA /* rainyN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainyN.json; sourceTree = "<group>"; };
-		DAEE7E042A719E5500D7FACA /* rainyD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainyD.json; sourceTree = "<group>"; };
 		E3025D792A702C15000BB6E9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		E32E3E172A6951B600B865E8 /* NoonMoaAptApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoonMoaAptApp.swift; sourceTree = "<group>"; };
 		E32E3E1E2A6951B700B865E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -205,6 +221,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A2724DD2A78E3E000A8D970 /* WeatherKit */ = {
+			isa = PBXGroup;
+			children = (
+				8A9910812A789F8F0083602F /* WeatherModel.swift */,
+				8A9910882A78B4300083602F /* LocationManager.swift */,
+				8A9910832A78A03B0083602F /* WeatherTestView.swift */,
+			);
+			path = WeatherKit;
+			sourceTree = "<group>";
+		};
 		8A7FF49B2A77A9DA0075BA78 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +238,7 @@
 				E32E3E542A6951CE00B865E8 /* LoginViewModel.swift */,
 				8A7FF4A52A77AC1A0075BA78 /* CustomViewModel.swift */,
 				8AD2ECC12A6E163E0063D9ED /* EyeViewController.swift */,
+				8ADF14482A7974BA00A09057 /* ParticleEffectViewModel.swift */,
 				8AD2ECBF2A6E163E0063D9ED /* EyeMyViewModel.swift */,
 				8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */,
 			);
@@ -243,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				E32E3E4B2A6951CE00B865E8 /* AttendanceView.swift */,
+				8A2724EE2A79200D00A8D970 /* CharacterColorPickerView.swift */,
 			);
 			path = AttendanceView;
 			sourceTree = "<group>";
@@ -268,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				F4A568B22A6A36B3004BD316 /* LottieView.swift */,
+				8ADF144A2A79764E00A09057 /* ParticleView.swift */,
 				8AD2ECC02A6E163E0063D9ED /* EyeView.swift */,
 				DA904E312A6A361700CC14D9 /* StampLargeView.swift */,
 				DA904E322A6A361700CC14D9 /* StampButtonView.swift */,
@@ -278,14 +307,14 @@
 		DAEE7E0D2A719E5E00D7FACA /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
-				DAEE7DFE2A719E5400D7FACA /* clearD.json */,
-				DAEE7DFF2A719E5400D7FACA /* clearN.json */,
-				DAEE7E012A719E5500D7FACA /* cloudyD.json */,
-				DAEE7DFD2A719E5400D7FACA /* cloudyN.json */,
-				DAEE7E042A719E5500D7FACA /* rainyD.json */,
-				DAEE7E032A719E5500D7FACA /* rainyN.json */,
-				DAEE7E002A719E5500D7FACA /* snowyDN.json */,
-				DAEE7E022A719E5500D7FACA /* thunderDN.json */,
+				8A2724E32A7905E000A8D970 /* clearD.json */,
+				8A2724E22A7905E000A8D970 /* clearN.json */,
+				8A2724DE2A7905E000A8D970 /* cloudyD.json */,
+				8A2724E52A7905E100A8D970 /* cloudyN.json */,
+				8A2724DF2A7905E000A8D970 /* rainyD.json */,
+				8A2724E42A7905E100A8D970 /* rainyN.json */,
+				8A2724E02A7905E000A8D970 /* snowyDN.json */,
+				8A2724E12A7905E000A8D970 /* thunderDN.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -295,13 +324,13 @@
 			children = (
 				E3D0F78B2A789AAF004EEF98 /* GoogleService-Info.plist */,
 				E32E3E162A6951B600B865E8 /* NoonMoaApt */,
-				8A6FB9EA2A70FC18009827C1 /* NoonMoaApt.app */,
 			);
 			sourceTree = "<group>";
 		};
 		E32E3E162A6951B600B865E8 /* NoonMoaApt */ = {
 			isa = PBXGroup;
 			children = (
+				8A9910852A78A3A20083602F /* Info.plist */,
 				E3F739382A6A575F00E5F291 /* Assets.xcassets */,
 				E3F739152A6A540000E5F291 /* README.md */,
 				E3CBB3E52A69730700195326 /* Extension */,
@@ -341,6 +370,7 @@
 		E32E3E512A6951CE00B865E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8A2724DD2A78E3E000A8D970 /* WeatherKit */,
 				E3F739162A6A540000E5F291 /* Calendar */,
 				E35DC8802A6EEB3300990AB6 /* MidnightUpdaterController.swift */,
 				E32E3E522A6951CE00B865E8 /* CalendarSingleController.swift */,
@@ -502,17 +532,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAEE7E092A719E5500D7FACA /* cloudyD.json in Resources */,
-				DAEE7E0A2A719E5500D7FACA /* thunderDN.json in Resources */,
-				DAEE7E0B2A719E5500D7FACA /* rainyN.json in Resources */,
-				DAEE7E062A719E5500D7FACA /* clearD.json in Resources */,
+				8A2724EA2A7905E100A8D970 /* clearN.json in Resources */,
+				8A2724E62A7905E100A8D970 /* cloudyD.json in Resources */,
+				8A2724EC2A7905E100A8D970 /* rainyN.json in Resources */,
 				E3F739392A6A575F00E5F291 /* Assets.xcassets in Resources */,
+				8A2724E72A7905E100A8D970 /* rainyD.json in Resources */,
+				8A2724ED2A7905E100A8D970 /* cloudyN.json in Resources */,
 				E32E3E1F2A6951B700B865E8 /* Preview Assets.xcassets in Resources */,
-				DAEE7E052A719E5500D7FACA /* cloudyN.json in Resources */,
-				DAEE7E072A719E5500D7FACA /* clearN.json in Resources */,
-				E3D0F78C2A789AAF004EEF98 /* GoogleService-Info.plist in Resources */,
 				DAEE7E082A719E5500D7FACA /* snowyDN.json in Resources */,
-				DAEE7E0C2A719E5500D7FACA /* rainyD.json in Resources */,
+				8A7FF49A2A77A8470075BA78 /* GoogleService-Info.plist in Resources */,
+				8A2724EB2A7905E100A8D970 /* clearD.json in Resources */,
+				8A2724E92A7905E100A8D970 /* thunderDN.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,10 +567,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A2724EF2A79200D00A8D970 /* CharacterColorPickerView.swift in Sources */,
 				E338B7E72A6CB54D00944E62 /* PushNotiController.swift in Sources */,
 				E3F7392D2A6A540000E5F291 /* DayView.swift in Sources */,
 				8AD230432A699F4C00C967B5 /* SceneInactiveEye.swift in Sources */,
 				E3F739262A6A540000E5F291 /* CalendarDayView.swift in Sources */,
+				8ADF14492A7974BA00A09057 /* ParticleEffectViewModel.swift in Sources */,
 				8AD2ECC22A6E163E0063D9ED /* EyeMyViewModel.swift in Sources */,
 				E3F739232A6A540000E5F291 /* Struct.swift in Sources */,
 				DA904E332A6A361700CC14D9 /* StampLargeView.swift in Sources */,
@@ -555,6 +587,7 @@
 				E32E3E652A6951CE00B865E8 /* AttendanceView.swift in Sources */,
 				8AD230442A699F4C00C967B5 /* SceneBackground.swift in Sources */,
 				8A7FF4AE2A77ACAC0075BA78 /* SceneBroadcast.swift in Sources */,
+				8A9910822A789F8F0083602F /* WeatherModel.swift in Sources */,
 				8AD2303F2A699F4C00C967B5 /* FunctionTestView.swift in Sources */,
 				8AD230402A699F4C00C967B5 /* SceneRoom.swift in Sources */,
 				E32E3E662A6951CE00B865E8 /* LoginView.swift in Sources */,
@@ -562,10 +595,13 @@
 				E32E3E692A6951CE00B865E8 /* CalendarSingleView.swift in Sources */,
 				E32E3E6A2A6951CE00B865E8 /* MainView.swift in Sources */,
 				E3F739292A6A540000E5F291 /* InfinitePagerView.swift in Sources */,
+				8A9910892A78B4300083602F /* LocationManager.swift in Sources */,
 				F4A568B12A6A36AC004BD316 /* OnboardingView.swift in Sources */,
 				E32E3E672A6951CE00B865E8 /* AptView.swift in Sources */,
 				8A229FFF2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift in Sources */,
+				8A9910842A78A03B0083602F /* WeatherTestView.swift in Sources */,
 				8A84C2A12A6ED2E9001A9094 /* SceneNeighborEye.swift in Sources */,
+				8ADF144B2A79764E00A09057 /* ParticleView.swift in Sources */,
 				E3F739282A6A540000E5F291 /* MonthView.swift in Sources */,
 				E3F739272A6A540000E5F291 /* CalendarController.swift in Sources */,
 				E32E3E182A6951B600B865E8 /* NoonMoaAptApp.swift in Sources */,
@@ -741,14 +777,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NoonMoaApt/NoonMoaApt.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoonMoaApt/Preview Content\"";
 				DEVELOPMENT_TEAM = 8H4K6TKQBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = NoonMoaApt/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use the front camera to capture the position of your face.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app access your location data to tell you the weather condition";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -762,6 +800,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NoonMoaApt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -774,14 +813,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NoonMoaApt/NoonMoaApt.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoonMoaApt/Preview Content\"";
 				DEVELOPMENT_TEAM = 8H4K6TKQBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = NoonMoaApt/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use the front camera to capture the position of your face.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app access your location data to tell you the weather condition";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -795,6 +836,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NoonMoaApt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

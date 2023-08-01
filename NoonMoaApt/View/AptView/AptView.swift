@@ -19,10 +19,10 @@ struct AptView: View {
     @EnvironmentObject var eyeViewController: EyeViewController
     @EnvironmentObject var customViewModel: CustomViewModel
 
-
     @State private var users: [[User]] = User.UTData
     @State private var buttonText: String = ""
     @State private var isCalendarOpen: Bool = false
+    @State private var announcement: Bool = false
     
     //아파트 등장 애니메이션
     @State private var isAptEffectPlayed: Bool = false
@@ -160,6 +160,23 @@ struct AptView: View {
             // 상단 캘린더 & 설정 버튼
             GeometryReader { proxy in
                 HStack (spacing: 16) {
+                    Button {
+                        
+                    } label: {
+                        if announcement {
+                            Image("announcementOn")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: proxy.size.width * 0.08)
+                        } else {
+                            Image("announcementOff")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: proxy.size.width * 0.08)
+                        }
+                    }
+
+                    
                     Spacer()
                     
                     Button { // 캘린더 버튼
@@ -195,11 +212,16 @@ struct AptView: View {
                             .frame(width: proxy.size.width * 0.08)
                     }
                 }
-                .padding(.trailing, proxy.size.width * 0.06)
+                .padding(.horizontal, proxy.size.width * 0.06)
             }
         }//ZStack
         .onAppear {
-//            aptModel.fetchCurrentUserApt()
+                //Test용, 날씨 보기위해 임시로 아래 함수만 실행
+            environmentModel.getCurrentRawEnvironment()
+            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
+                environmentModel.getCurrentEnvironment()
+            
+            aptModel.fetchCurrentUserApt()
             if let user = Auth.auth().currentUser {
                 firestoreManager.syncDB()
                 let userRef = db.collection("User").document(user.uid)
@@ -219,6 +241,13 @@ struct AptView: View {
             }
             
             attendanceModel.downloadAttendanceRecords(for: Date())
+        }
+        //Test용
+        .onChange(of: environmentModel.currentWeather) { _ in
+            environmentModel.getCurrentEnvironment()
+        }
+        .onChange(of: environmentModel.currentTime) { _ in
+            environmentModel.getCurrentEnvironment()
         }
     
     }

@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import WeatherKit
 import Firebase
 import FirebaseFirestore
 import FirebaseCore
@@ -88,8 +89,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        setUpPushNotifications(application: application)
         
+        setUpPushNotifications(application: application)
+                
         // 자정이 되면 모든 user의 userState를 .sleep으로 변경
         midnightUpdater = MidnightUpdater()
         timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in

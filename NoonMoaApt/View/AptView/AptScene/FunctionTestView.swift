@@ -23,6 +23,8 @@ struct FunctionTestView: View {
                     let array = ["sunrise", "morning", "afternoon", "sunset", "evening", "night"]
                     indexTime = (indexTime + 7) % 6
                     environmentModel.currentTime = array[indexTime]
+                    print(indexTime)
+                    print(environmentModel.currentTime)
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -38,6 +40,8 @@ struct FunctionTestView: View {
                     let array = ["clear", "cloudy", "rainy", "snowy"]
                     indexWeather = (indexWeather + 5) % 4
                     environmentModel.currentWeather = array[indexWeather]
+                    print(indexWeather)
+                    print(environmentModel.currentWeather)
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)

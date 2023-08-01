@@ -18,7 +18,7 @@ struct MainView: View {
     @StateObject var calendarSingleController: CalendarSingleController
     @StateObject var loginViewModel: LoginViewModel
     @StateObject var eyeViewController: EyeViewController
-
+    
     var body: some View {
         
         switch viewRouter.currentView {
