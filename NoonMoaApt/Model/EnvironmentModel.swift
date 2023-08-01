@@ -10,7 +10,7 @@ import SwiftUI
 
 class EnvironmentModel: ObservableObject {
     
-    //rawData to be uploaded to the server
+    //rawData to be uploaded e server
     var rawWeather: String = ""
     var rawTime: Date = Date()
     var rawSunriseTime: Date = Date()
@@ -104,6 +104,7 @@ class EnvironmentModel: ObservableObject {
     
     //앱을 시작할 때 실행시키고, 달력을 켰을 때 접근한다.
     func fetchRecordedEnvironment(record: AttendanceRecord)  {
+        print("EnvironmentModel | fetchRecordedEnvironment arrived")
         saveRecordedRawEnvironmentToEnvironmentModel(record: record)
         convertRawDataToEnvironment(isInputCurrentData: false, weather: recordedRawWeather, time: recordedRawTime, sunrise: recordedRawSunriseTime, sunset: recordedRawSunsetTime)
         convertEnvironmentToViewData(isInputCurrentData: false, weather: recordedWeather, time: recordedTime, isThunder: recordedIsThunder)
@@ -111,6 +112,7 @@ class EnvironmentModel: ObservableObject {
     
     // 저장된 recordedRaw... 변수를 받아와서 EnvironmentModel을 업데이트
     func saveRecordedRawEnvironmentToEnvironmentModel(record: AttendanceRecord) {
+        print("EnvironmentModel | saveRecordedRawEnvironmentToEnvironmentModel arrived")
         recordedRawWeather = record.rawWeather
         recordedRawSunriseTime = record.rawSunriseTime
         recordedRawSunsetTime = record.rawSunsetTime

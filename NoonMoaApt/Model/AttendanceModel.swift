@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 import FirebaseAuth
 
 struct AttendanceRecord: Codable, Identifiable {
-
+    
     @DocumentID var id: String? // = UUID().uuidString <- 이 부분 제거
     var userId: String
     var date: Date
@@ -36,7 +36,7 @@ class AttendanceModel: ObservableObject {
     private var characterModel: CharacterModel = CharacterModel()
     private var environmentModel: EnvironmentModel = EnvironmentModel()
     
-//    @Published var newAttendanceRecord: AttendanceRecord? = nil //^^ @Published가 필요성 고민 중...
+    //    @Published var newAttendanceRecord: AttendanceRecord? = nil //^^ @Published가 필요성 고민 중...
     var newAttendanceRecord: AttendanceRecord? = nil
     
     init(newAttendanceRecord: AttendanceRecord) {
@@ -71,6 +71,15 @@ class AttendanceModel: ObservableObject {
         ]
     }
     
+    func changeDateToString(date: Date) -> String {
+        let nowDate = date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: newAttendanceRecord?.date ?? nowDate)
+        
+        return dateString
+    }
+    
     
     // 출석도장 찍거나 설정창에서 바꿀 때
     func uploadAttendanceRecord() {
@@ -87,9 +96,7 @@ class AttendanceModel: ObservableObject {
         // let timestamp = Timestamp(date: newAttendanceRecord?.date ?? nowDate)
         
         let nowDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.string(from: newAttendanceRecord?.date ?? nowDate)
+        let dateString = changeDateToString(date: nowDate)
         
         newAttendanceRecord?.userId = currentUser.uid
         newAttendanceRecord?.date = nowDate
@@ -99,17 +106,17 @@ class AttendanceModel: ObservableObject {
         characterModel.getCurrentCharacter()
         characterModel.saveRawCharacterToAttendanceModel(newAttendanceRecord: &newAttendanceRecord)
         print("newAttendanceRecord: \(String(describing: newAttendanceRecord))")
-    
+        
         // 마지막으로 Firebase에 Date를 key 값으로 사용하여, userId를 포함한 newAttendanceRecord를 기록한다!!!
         // Example of saving the newAttendanceRecord to Firebase:
         
-        // Convert AttendanceRecord to a dictionary
+        // Convert AttendanceRecord to a dictionary"
         guard let newRecord = newAttendanceRecord else {
             print("No new attendance record to save.")
             return
         }
         let recordData = attendanceRecordToDictionary(newRecord)
-
+        
         
         // Save the attendance record to Firebase
         db.collection("User").document(currentUser.uid).collection("attendanceRecords").document(dateString).setData(recordData) { error in
@@ -121,127 +128,144 @@ class AttendanceModel: ObservableObject {
         }
     }
     
-//    // 앱이 켜질 때 다운로드
-//    func downloadAttendanceRecords(for date: Date) {
-//        let attendanceRecords = fetchAttendanceRecords()//추후 반복문 실행 시 밖으로 꺼낼 것
-//        if let record = attendanceRecords[key] {
+    // 앱이 켜질 때 다운로드
+    func downloadAttendanceRecords(for date: Date) {
+        let attendanceRecords = fetchAttendanceRecords(date: date)//추후 반복문 실행 시 밖으로 꺼낼 것
+        print("AttedanceModel | downloadAttendanceRecords | attendanceRecords : \(attendanceRecords)")
+        
+        // fetchAttendanceRecords 메서드 안의 completion 안으로 옮겼다. 실행 순서를 보장하려고.
+//        let dateString = changeDateToString(date: date)
+//        print("AttedanceModel | downloadAttendanceRecords | dateString : \(dateString)")
+        
+//        if let record = attendanceRecords[dateString] {
 //            environmentModel.fetchRecordedEnvironment(record: record)
 //            characterModel.fetchRecordedCharacter(record: record)
 //        }
-//    }
+    }
     
-//    // 앱이 켜질 때 다운로드
-//    func downloadAttendanceRecords(for date: Date) {
-//        guard let currentUser = Auth.auth().currentUser else {
-//            print("No current user")
-//            return
-//        }
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        let dateString = dateFormatter.string(from: date)
-//
-//        db.collection("User").document(currentUser.uid).collection("attendanceRecords").document(dateString).getDocument { (document, error) in
-//            if let error = error {
-//                print("Error fetching attendance record for date \(dateString): \(error.localizedDescription)")
-//                return
-//            }
-//
-//            if let document = document, document.exists {
-//                do {
-//                    if let record = try document.data(as: AttendanceRecord?.self) {
-//                        self.environmentModel.fetchRecordedEnvironment(record: record)
-//                        self.characterModel.fetchRecordedCharacter(record: record)
-//                    }
-//                } catch let error {
-//                    print("Error decoding attendance record for date \(dateString): \(error.localizedDescription)")
-//                }
-//            } else {
-//                print("No attendance record found for date \(dateString).")
-//            }
-//        }
-//    }
-
-    
-//        func fetchAttendanceRecords() -> [Date: AttendanceRecord] {
-////             Fetch attendance records from Firebase and return them as [Date: AttendanceRecord]
-////             Example of fetching from Firebase and converting to the desired dictionary format:
-////             var records = [Date: AttendanceRecord]()
-////             ... Fetch records from Firebase ...
-//             for record in fetchedRecords {
-//                 records[record.rawTime] = record
-//             }
-//             return records
-//                    return [:] // Placeholder: Replace this with the actual fetched records
-//        }
-    
-//    func fetchAttendanceRecords() {
-//        guard let currentUser = Auth.auth().currentUser else {
-//            print("No current user")
-//            return
-//        }
-//
-//        db.collection("User").document(currentUser.uid).collection("attendanceRecords")
-//            .order(by: "date", descending: true)
-//            .getDocuments { (querySnapshot, error) in
-//                if let error = error {
-//                    print("Error fetching attendance records: \(error.localizedDescription)")
-//                    return
-//                }
-//
-//                guard let documents = querySnapshot?.documents else {
-//                    print("No attendance records found.")
-//                    return
-//                }
-//
-//                var fetchedRecords: [AttendanceRecord] = []
-//                for document in documents {
-//                    do {
-//                        if let record = try document.data(as: AttendanceRecord?.self) {
-//                            fetchedRecords.append(record)
-//                        }
-//                    } catch let error {
-//                        print("Error decoding attendance record: \(error.localizedDescription)")
-//                    }
-//                }
-//
-//                DispatchQueue.main.async {
-//                    self.attendanceRecords = fetchedRecords
-//                }
-//            }
-//        }
+    //    // 앱이 켜질 때 다운로드
+    //    func downloadAttendanceRecords(for date: Date) {
+    //        guard let currentUser = Auth.auth().currentUser else {
+    //            print("No current user")
+    //            return
+    //        }
+    //
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = "yyyy-MM-dd"
+    //        let dateString = dateFormatter.string(from: date)
+    //
+    //        db.collection("User").document(currentUser.uid).collection("attendanceRecords").document(dateString).getDocument { (document, error) in
+    //            if let error = error {
+    //                print("Error fetching attendance record for date \(dateString): \(error.localizedDescription)")
+    //                return
+    //            }
+    //
+    //            if let document = document, document.exists {
+    //                do {
+    //                    if let record = try document.data(as: AttendanceRecord?.self) {
+    //                        self.environmentModel.fetchRecordedEnvironment(record: record)
+    //                        self.characterModel.fetchRecordedCharacter(record: record)
+    //                    }
+    //                } catch let error {
+    //                    print("Error decoding attendance record for date \(dateString): \(error.localizedDescription)")
+    //                }
+    //            } else {
+    //                print("No attendance record found for date \(dateString).")
+    //            }
+    //        }
+    //    }
     
     
-//        // Example of saving the attendance record to Firebase
-//        func saveAttendanceRecordToFirebase(record: AttendanceRecord) {
-////             ... Save the record to Firebase ...
-//             Firestore.firestore().collection("attendanceRecords").addDocument(from: record) { error in
-//                if let error = error {
-//                    print("Error adding document: \(error)")
-//                } else {
-//                    print("Document added with ID: \(record.id ?? "")")
-//                }
-//             }
-//        }
+    //        func fetchAttendanceRecords() -> [Date: AttendanceRecord] {
+    ////             Fetch attendance records from Firebase and return them as [Date: AttendanceRecord]
+    ////             Example of fetching from Firebase and converting to the desired dictionary format:
+    ////             var records = [Date: AttendanceRecord]()
+    ////             ... Fetch records from Firebase ...
+    //             for record in fetchedRecords {
+    //                 records[record.rawTime] = record
+    //             }
+    //             return records
+    //                    return [:] // Placeholder: Replace this with the actual fetched records
+    //        }
     
-//    // Save an attendance record to Firebase for the current user
-//    func saveAttendanceRecordToFirebase(record: AttendanceRecord) {
-//
-//        guard let currentUser = Auth.auth().currentUser else {
-//            print("No current user")
-//            return
-//        }
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        let dateString = dateFormatter.string(from: record.date)
-//
-//        do {
-//            try db.collection("User").document(currentUser.uid).collection("attendanceRecords").document(dateString).setData(from: record)
-//            print("Attendance record saved for date: \(dateString)")
-//        } catch let error {
-//            print("Error saving attendance record: \(error.localizedDescription)")
-//        }
-//    }
+    func fetchAttendanceRecords(date: Date) -> [String: AttendanceRecord]  {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("No current user")
+            return [:]
+        }
+        var fetchedRecords: [String: AttendanceRecord] = [:]
+        
+        db.collection("User").document(currentUser.uid).collection("attendanceRecords")
+            .order(by: "date", descending: true)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error fetching attendance records: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("No attendance records found.")
+                    return
+                }
+                
+                print("AttendanceModel | fetchAttedanceRecords | documents: \(documents.count)")
+                
+                for document in documents {
+                    print("AttendanceModel | fetchAttedanceRecords | document: \(document.data()["rawWeather"] as? String ?? "")")
+                    do {
+                        // 여기서 record의 if let 풀어버렸다
+                        let record = try document.data(as: AttendanceRecord.self)
+                        let dateString = self.changeDateToString(date: record.date)
+                        fetchedRecords[dateString] = record
+                    } catch let error {
+                        print("Error decoding attendance record: \(error.localizedDescription)")
+                    }
+                }
+                
+                let dateString = self.changeDateToString(date: date)
+                print("AttedanceModel | downloadAttendanceRecords | dateString : \(dateString)")
+                
+                if let record = fetchedRecords[dateString] {
+                    print("AttedanceModel | downloadAttendanceRecords | record: \(record)")
+                    self.environmentModel.fetchRecordedEnvironment(record: record)
+                    self.characterModel.fetchRecordedCharacter(record: record)
+                }
+            }
+        
+        return fetchedRecords
+    }
+    
+    
+    //        // Example of saving the attendance record to Firebase
+    //        func saveAttendanceRecordToFirebase(record: AttendanceRecord) {
+    ////             ... Save the record to Firebase ...
+    //             Firestore.firestore().collection("attendanceRecords").addDocument(from: record) { error in
+    //                if let error = error {
+    //                    print("Error adding document: \(error)")
+    //                } else {
+    //                    print("Document added with ID: \(record.id ?? "")")
+    //                }
+    //             }
+    //        }
+    
+    //    // Save an attendance record to Firebase for the current user
+    //    func saveAttendanceRecordToFirebase(record: AttendanceRecord) {
+    //
+    //        guard let currentUser = Auth.auth().currentUser else {
+    //            print("No current user")
+    //            return
+    //        }
+    //
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = "yyyy-MM-dd"
+    //        let dateString = dateFormatter.string(from: record.date)
+    //
+    //        do {
+    //            try db.collection("User").document(currentUser.uid).collection("attendanceRecords").document(dateString).setData(from: record)
+    //            print("Attendance record saved for date: \(dateString)")
+    //        } catch let error {
+    //            print("Error saving attendance record: \(error.localizedDescription)")
+    //        }
+    //    }
     
 }

@@ -199,7 +199,7 @@ struct AptView: View {
             }
         }//ZStack
         .onAppear {
-            aptModel.fetchCurrentUserApt()
+//            aptModel.fetchCurrentUserApt()
             if let user = Auth.auth().currentUser {
                 firestoreManager.syncDB()
                 let userRef = db.collection("User").document(user.uid)
@@ -217,6 +217,8 @@ struct AptView: View {
                     }
                 }
             }
+            
+            attendanceModel.downloadAttendanceRecords(for: Date())
         }
     
     }
