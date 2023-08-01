@@ -13,8 +13,23 @@ class EnvironmentModel: ObservableObject {
     //rawData to be uploaded to the server
     var rawWeather: String = ""
     var rawTime: Date = Date()
-    var rawSunriseTime: Date = Date()
-    var rawSunsetTime: Date = Date()
+    var rawSunriseTime: Date {
+        // Calculate and return the sunrise time (e.g., 7:28 PM)
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.hour = 05
+        dateComponents.minute = 30
+        return calendar.date(bySettingHour: dateComponents.hour!, minute: dateComponents.minute!, second: 0, of: Date())!
+    }
+    var rawSunsetTime: Date {
+        // Calculate and return the sunrise time (e.g., 7:28 PM)
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.hour = 16
+        dateComponents.minute = 28
+        return calendar.date(bySettingHour: dateComponents.hour!, minute: dateComponents.minute!, second: 0, of: Date())!
+    }
+
     
     //rawData -> currentEnvironmentData
     @Published var currentWeather: String = "clear"
@@ -26,7 +41,11 @@ class EnvironmentModel: ObservableObject {
     @Published var currentLottieImageName: String = Lottie.clearMorning
     @Published var currentColorOfSky: LinearGradient = LinearGradient.sky.clearMorning
     @Published var currentColorOfGround: LinearGradient = LinearGradient.ground.clearMorning
-    @Published var currentBroadcastText: String = Text.broadcast.clearMorning
+    @Published var currentBroadcastAttendanceIncompleteTitle: String = Text.broadcast.attendanceIncompleteTitle.clearMorning
+    @Published var currentBroadcastAttendanceIncompleteBody: String = Text.broadcast.attendanceIncompleteBody.clearMorning
+    @Published var currentBroadcastAttendanceCompletedTitle: String = Text.broadcast.attendanceCompletedTitle.clearMorning
+    @Published var currentBroadcastAttendanceCompletedBody: String = Text.broadcast.attendanceCompletedBody.clearMorning
+    @Published var currentBroadcastAnnounce: String = (Text.broadcast.announce.randomElement() ?? "")
     @Published var currentStampLargeSkyImage: Image = Image.assets.stampLarge.clearMorning
     @Published var currentStampSmallSkyImage: Image = Image.assets.stampSmall.clearMorning
     @Published var currentStampBorderColor: Color = Color.stampBorder.clearMorning
@@ -47,7 +66,6 @@ class EnvironmentModel: ObservableObject {
     var recordedLottieImageName: String = Lottie.clearMorning
     var recordedColorOfSky: LinearGradient = LinearGradient.sky.clearMorning
     var recordedColorOfGround: LinearGradient = LinearGradient.ground.clearMorning
-    var recordedBroadcastText: String = Text.broadcast.clearMorning
     var recordedStampLargeSkyImage: Image = Image.assets.stampLarge.clearMorning
     var recordedStampSmallSkyImage: Image = Image.assets.stampSmall.clearMorning
     var recordedStampBorderColor: Color = Color.stampBorder.clearMorning
@@ -56,20 +74,20 @@ class EnvironmentModel: ObservableObject {
    
     //앱을 시작할 때 실행시키며, 10분단위로 실행시킨다. 이 모델을 따르는 뷰는 자동으로 업데이트 된다.
     func getCurrentEnvironment() {
-        getCurrentRawEnvironment()
-        convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
+//        getCurrentRawEnvironment()
+//        convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
         convertEnvironmentToViewData(isInputCurrentData: true, weather: currentWeather, time: currentTime, isThunder: currentIsThunder)
         print("weather: \(currentWeather)")
         print("time: \(rawTime)")
         print("time: \(currentTime)")
-
+        print("lottie: \(currentLottieImageName)")
     }
     
     func getCurrentRawEnvironment() {
         //웨더킷?
-            rawWeather = "11"
-            rawSunriseTime = Date()
-            rawSunsetTime = Date()
+            rawWeather = "2"
+//            rawSunriseTime = Date()
+//            rawSunsetTime = Date()
             rawTime = Date()
     }
     
@@ -126,12 +144,12 @@ class EnvironmentModel: ObservableObject {
         let sunrise = getHourFromDate(time: sunrise)
         let sunset = getHourFromDate(time: sunset)
         switch t {
-//        case let t where t == sunrise: environmentTime = "sunrise"
-//        case let t where t == sunset: environmentTime = "sunset"
+        case let t where t == sunrise: environmentTime = "sunrise"
+        case let t where t == sunset: environmentTime = "sunset"
         case let t where (t >= 22) || (t >= 0 && t < 6): environmentTime = "night"
         case let t where t >= 6 && t < 12: environmentTime = "morning"
-        case let t where t >= 12 && t < 18: environmentTime = "afternoon"
-        case let t where t >= 18 && t < 22: environmentTime = "evening"
+        case let t where t >= 12 && t < 19: environmentTime = "afternoon"
+        case let t where t >= 19 && t < 22: environmentTime = "evening"
         default: environmentTime = ""
         }
         if isInputCurrentData {
@@ -162,16 +180,24 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.clearSunrise,
                             "colorOfSky": LinearGradient.sky.clearSunrise,
                             "colorOfGround": LinearGradient.ground.clearSunrise,
-                            "broadcastText": Text.broadcast.clearSunrise,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.clearSunrise,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.clearSunrise,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.clearSunrise,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.clearSunrise,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.clearSunrise,
                             "stampSmallSkyImage": Image.assets.stampSmall.clearSunrise,
                             "stampBorderColor": Color.stampBorder.clearSunrise]
-                
+           
             case "morning":
                 viewData = ["lottieImageName": Lottie.clearMorning,
                             "colorOfSky": LinearGradient.sky.clearMorning,
                             "colorOfGround": LinearGradient.ground.clearMorning,
-                            "broadcastText": Text.broadcast.clearMorning,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.clearMorning,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.clearMorning,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.clearMorning,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.clearMorning,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.clearMorning,
                             "stampSmallSkyImage": Image.assets.stampSmall.clearMorning,
                             "stampBorderColor": Color.stampBorder.clearMorning]
@@ -180,7 +206,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.clearAfternoon,
                             "colorOfSky": LinearGradient.sky.clearAfternoon,
                             "colorOfGround": LinearGradient.ground.clearAfternoon,
-                            "broadcastText": Text.broadcast.clearAfternoon,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.clearAfternoon,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.clearAfternoon,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.clearAfternoon,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.clearAfternoon,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.clearAfternoon,
                             "stampSmallSkyImage": Image.assets.stampSmall.clearAfternoon,
                             "stampBorderColor": Color.stampBorder.clearAfternoon]
@@ -189,7 +219,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.clearSunset,
                             "colorOfSky": LinearGradient.sky.clearSunset,
                             "colorOfGround": LinearGradient.ground.clearSunset,
-                            "broadcastText": Text.broadcast.clearSunset,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.clearSunset,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.clearSunset,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.clearSunset,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.clearSunset,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.clearSunset,
                             "stampSmallSkyImage": Image.assets.stampSmall.clearSunset,
                             "stampBorderColor": Color.stampBorder.clearSunset]
@@ -198,7 +232,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.clearEvening,
                             "colorOfSky": LinearGradient.sky.clearEvening,
                             "colorOfGround": LinearGradient.ground.clearEvening,
-                            "broadcastText": Text.broadcast.clearEvening,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.clearEvening,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.clearEvening,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.clearEvening,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.clearEvening,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.clearEvening,
                             "stampSmallSkyImage": Image.assets.stampSmall.clearEvening,
                             "stampBorderColor": Color.stampBorder.clearEvening]
@@ -207,7 +245,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.clearNight,
                             "colorOfSky": LinearGradient.sky.clearNight,
                             "colorOfGround": LinearGradient.ground.clearNight,
-                            "broadcastText": Text.broadcast.clearNight,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.clearNight,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.clearNight,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.clearNight,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.clearNight,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.clearNight,
                             "stampSmallSkyImage": Image.assets.stampSmall.clearNight,
                             "stampBorderColor": Color.stampBorder.clearNight]
@@ -220,7 +262,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.cloudySunrise,
                             "colorOfSky": LinearGradient.sky.cloudySunrise,
                             "colorOfGround": LinearGradient.ground.cloudySunrise,
-                            "broadcastText": Text.broadcast.cloudySunrise,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.cloudySunrise,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.cloudySunrise,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.cloudySunrise,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.cloudySunrise,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.cloudySunrise,
                             "stampSmallSkyImage": Image.assets.stampSmall.cloudySunrise,
                             "stampBorderColor": Color.stampBorder.cloudySunrise]
@@ -229,7 +275,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.cloudyMorning,
                             "colorOfSky": LinearGradient.sky.cloudyMorning,
                             "colorOfGround": LinearGradient.ground.cloudyMorning,
-                            "broadcastText": Text.broadcast.cloudyMorning,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.cloudyMorning,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.cloudyMorning,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.cloudyMorning,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.cloudyMorning,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),
                             "stampLargeSkyImage": Image.assets.stampLarge.cloudyMorning,
                             "stampSmallSkyImage": Image.assets.stampSmall.cloudyMorning,
                             "stampBorderColor": Color.stampBorder.cloudyMorning]
@@ -238,8 +288,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.cloudyAfternoon,
                             "colorOfSky": LinearGradient.sky.cloudyAfternoon,
                             "colorOfGround": LinearGradient.ground.cloudyAfternoon,
-                            "broadcastText": Text.broadcast.cloudyAfternoon,
-                            "stampLargeSkyImage": Image.assets.stampLarge.cloudyAfternoon,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.cloudyAfternoon,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.cloudyAfternoon,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.cloudyAfternoon,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.cloudyAfternoon,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                                "stampLargeSkyImage": Image.assets.stampLarge.cloudyAfternoon,
                             "stampSmallSkyImage": Image.assets.stampSmall.cloudyAfternoon,
                             "stampBorderColor": Color.stampBorder.cloudyAfternoon]
                 
@@ -247,8 +300,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.cloudySunset,
                             "colorOfSky": LinearGradient.sky.cloudySunset,
                             "colorOfGround": LinearGradient.ground.cloudySunset,
-                            "broadcastText": Text.broadcast.cloudySunset,
-                            "stampLargeSkyImage": Image.assets.stampLarge.cloudySunset,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.cloudySunset,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.cloudySunset,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.cloudySunset,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.cloudySunset,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                                "stampLargeSkyImage": Image.assets.stampLarge.cloudySunset,
                             "stampSmallSkyImage": Image.assets.stampSmall.cloudySunset,
                             "stampBorderColor": Color.stampBorder.cloudySunset]
                 
@@ -256,8 +312,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.cloudyEvening,
                             "colorOfSky": LinearGradient.sky.cloudyEvening,
                             "colorOfGround": LinearGradient.ground.cloudyEvening,
-                            "broadcastText": Text.broadcast.cloudyEvening,
-                            "stampLargeSkyImage": Image.assets.stampLarge.cloudyEvening,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.cloudyEvening,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.cloudyEvening,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.cloudyEvening,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.cloudyEvening,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                                "stampLargeSkyImage": Image.assets.stampLarge.cloudyEvening,
                             "stampSmallSkyImage": Image.assets.stampSmall.cloudyEvening,
                             "stampBorderColor": Color.stampBorder.cloudyEvening]
                 
@@ -265,8 +324,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.cloudyNight,
                             "colorOfSky": LinearGradient.sky.cloudyNight,
                             "colorOfGround": LinearGradient.ground.cloudyNight,
-                            "broadcastText": Text.broadcast.cloudyNight,
-                            "stampLargeSkyImage": Image.assets.stampLarge.cloudyNight,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.cloudyNight,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.cloudyNight,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.cloudyNight,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.cloudyNight,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                                "stampLargeSkyImage": Image.assets.stampLarge.cloudyNight,
                             "stampSmallSkyImage": Image.assets.stampSmall.cloudyNight,
                             "stampBorderColor": Color.stampBorder.cloudyNight]
             default: viewData = [:]
@@ -278,8 +340,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.rainySunrise,
                             "colorOfSky": LinearGradient.sky.rainySunrise,
                             "colorOfGround": LinearGradient.ground.rainySunrise,
-                            "broadcastText": Text.broadcast.rainySunrise,
-                            "stampLargeSkyImage": Image.assets.stampLarge.rainySunrise,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.rainySunrise,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.rainySunrise,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.rainySunrise,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.rainySunrise,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                                "stampLargeSkyImage": Image.assets.stampLarge.rainySunrise,
                             "stampSmallSkyImage": Image.assets.stampSmall.rainySunrise,
                             "stampBorderColor": Color.stampBorder.rainySunrise]
                 
@@ -287,8 +352,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.rainyMorning,
                             "colorOfSky": LinearGradient.sky.rainyMorning,
                             "colorOfGround": LinearGradient.ground.rainyMorning,
-                            "broadcastText": Text.broadcast.rainyMorning,
-                            "stampLargeSkyImage": Image.assets.stampLarge.rainyMorning,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.rainyMorning,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.rainyMorning,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.rainyMorning,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.rainyMorning,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                       "stampLargeSkyImage": Image.assets.stampLarge.rainyMorning,
                             "stampSmallSkyImage": Image.assets.stampSmall.rainyMorning,
                             "stampBorderColor": Color.stampBorder.rainyMorning]
                 
@@ -296,8 +364,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.rainyAfternoon,
                             "colorOfSky": LinearGradient.sky.rainyAfternoon,
                             "colorOfGround": LinearGradient.ground.rainyAfternoon,
-                            "broadcastText": Text.broadcast.rainyAfternoon,
-                            "stampLargeSkyImage": Image.assets.stampLarge.rainyAfternoon,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.rainyAfternoon,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.rainyAfternoon,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.rainyAfternoon,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.rainyAfternoon,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                       "stampLargeSkyImage": Image.assets.stampLarge.rainyAfternoon,
                             "stampSmallSkyImage": Image.assets.stampSmall.rainyAfternoon,
                             "stampBorderColor": Color.stampBorder.rainyAfternoon]
                 
@@ -305,8 +376,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.rainySunset,
                             "colorOfSky": LinearGradient.sky.rainySunset,
                             "colorOfGround": LinearGradient.ground.rainySunset,
-                            "broadcastText": Text.broadcast.rainySunset,
-                            "stampLargeSkyImage": Image.assets.stampLarge.rainySunset,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.rainySunset,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.rainySunset,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.rainySunset,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.rainySunset,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                       "stampLargeSkyImage": Image.assets.stampLarge.rainySunset,
                             "stampSmallSkyImage": Image.assets.stampSmall.rainySunset,
                             "stampBorderColor": Color.stampBorder.rainySunset]
                 
@@ -314,8 +388,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.rainyEvening,
                             "colorOfSky": LinearGradient.sky.rainyEvening,
                             "colorOfGround": LinearGradient.ground.rainyEvening,
-                            "broadcastText": Text.broadcast.rainyEvening,
-                            "stampLargeSkyImage": Image.assets.stampLarge.rainyEvening,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.rainyEvening,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.rainyEvening,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.rainyEvening,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.rainyEvening,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                       "stampLargeSkyImage": Image.assets.stampLarge.rainyEvening,
                             "stampSmallSkyImage": Image.assets.stampSmall.rainyEvening,
                             "stampBorderColor": Color.stampBorder.rainyEvening]
                 
@@ -323,8 +400,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.rainyNight,
                             "colorOfSky": LinearGradient.sky.rainyNight,
                             "colorOfGround": LinearGradient.ground.rainyNight,
-                            "broadcastText": Text.broadcast.rainyNight,
-                            "stampLargeSkyImage": Image.assets.stampLarge.rainyNight,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.rainyNight,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.rainyNight,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.rainyNight,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.rainyNight,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                       "stampLargeSkyImage": Image.assets.stampLarge.rainyNight,
                             "stampSmallSkyImage": Image.assets.stampSmall.rainyNight,
                             "stampBorderColor": Color.stampBorder.rainyNight]
             default: viewData = [:]
@@ -336,8 +416,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.snowySunrise,
                             "colorOfSky": LinearGradient.sky.snowySunrise,
                             "colorOfGround": LinearGradient.ground.snowySunrise,
-                            "broadcastText": Text.broadcast.snowySunrise,
-                            "stampLargeSkyImage": Image.assets.stampLarge.snowySunrise,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.snowySunrise,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.snowySunrise,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.snowySunrise,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.snowySunrise,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                       "stampLargeSkyImage": Image.assets.stampLarge.snowySunrise,
                             "stampSmallSkyImage": Image.assets.stampSmall.snowySunrise,
                             "stampBorderColor": Color.stampBorder.snowySunrise]
                 
@@ -345,8 +428,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.snowyMorning,
                             "colorOfSky": LinearGradient.sky.snowyMorning,
                             "colorOfGround": LinearGradient.ground.snowyMorning,
-                            "broadcastText": Text.broadcast.snowyMorning,
-                            "stampLargeSkyImage": Image.assets.stampLarge.snowyMorning,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.snowyMorning,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.snowyMorning,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.snowyMorning,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.snowyMorning,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                      "stampLargeSkyImage": Image.assets.stampLarge.snowyMorning,
                             "stampSmallSkyImage": Image.assets.stampSmall.snowyMorning,
                             "stampBorderColor": Color.stampBorder.snowyMorning]
                 
@@ -354,8 +440,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.snowyAfternoon,
                             "colorOfSky": LinearGradient.sky.snowyAfternoon,
                             "colorOfGround": LinearGradient.ground.snowyAfternoon,
-                            "broadcastText": Text.broadcast.snowyAfternoon,
-                            "stampLargeSkyImage": Image.assets.stampLarge.snowyAfternoon,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.snowyAfternoon,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.snowyAfternoon,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.snowyAfternoon,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.snowyAfternoon,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                      "stampLargeSkyImage": Image.assets.stampLarge.snowyAfternoon,
                             "stampSmallSkyImage": Image.assets.stampSmall.snowyAfternoon,
                             "stampBorderColor": Color.stampBorder.snowyAfternoon]
                 
@@ -363,8 +452,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.snowySunset,
                             "colorOfSky": LinearGradient.sky.snowySunset,
                             "colorOfGround": LinearGradient.ground.snowySunset,
-                            "broadcastText": Text.broadcast.snowySunset,
-                            "stampLargeSkyImage": Image.assets.stampLarge.snowySunset,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.snowySunset,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.snowySunset,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.snowySunset,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.snowySunset,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                      "stampLargeSkyImage": Image.assets.stampLarge.snowySunset,
                             "stampSmallSkyImage": Image.assets.stampSmall.snowySunset,
                             "stampBorderColor": Color.stampBorder.snowySunset]
                 
@@ -372,8 +464,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.snowyEvening,
                             "colorOfSky": LinearGradient.sky.snowyEvening,
                             "colorOfGround": LinearGradient.ground.snowyEvening,
-                            "broadcastText": Text.broadcast.snowyEvening,
-                            "stampLargeSkyImage": Image.assets.stampLarge.snowyEvening,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.snowyEvening,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.snowyEvening,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.snowyEvening,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.snowyEvening,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                      "stampLargeSkyImage": Image.assets.stampLarge.snowyEvening,
                             "stampSmallSkyImage": Image.assets.stampSmall.snowyEvening,
                             "stampBorderColor": Color.stampBorder.snowyEvening]
                 
@@ -381,8 +476,11 @@ class EnvironmentModel: ObservableObject {
                 viewData = ["lottieImageName": Lottie.snowyNight,
                             "colorOfSky": LinearGradient.sky.snowyNight,
                             "colorOfGround": LinearGradient.ground.snowyNight,
-                            "broadcastText": Text.broadcast.snowyNight,
-                            "stampLargeSkyImage": Image.assets.stampLarge.snowyNight,
+                            "currentBroadcastAttendanceIncompleteTitle": Text.broadcast.attendanceIncompleteTitle.snowyNight,
+                            "currentBroadcastAttendanceIncompleteBody": Text.broadcast.attendanceIncompleteBody.snowyNight,
+                            "currentBroadcastAttendanceCompletedTitle": Text.broadcast.attendanceCompletedTitle.snowyNight,
+                            "currentBroadcastAttendanceCompletedBody": Text.broadcast.attendanceCompletedBody.snowyNight,
+                            "currentBroadcastAnnounce": (Text.broadcast.announce.randomElement() ?? ""),                                      "stampLargeSkyImage": Image.assets.stampLarge.snowyNight,
                             "stampSmallSkyImage": Image.assets.stampSmall.snowyNight,
                             "stampBorderColor": Color.stampBorder.snowyNight]
             default: viewData = [:]
@@ -394,8 +492,11 @@ class EnvironmentModel: ObservableObject {
             currentLottieImageName = viewData["lottieImageName"] as! String
             currentColorOfSky = viewData["colorOfSky"] as! LinearGradient
             currentColorOfGround = viewData["colorOfGround"] as! LinearGradient
-            currentBroadcastText = viewData["broadcastText"] as! String
-            
+            currentBroadcastAttendanceIncompleteTitle = viewData["currentBroadcastAttendanceIncompleteTitle"] as! String
+            currentBroadcastAttendanceIncompleteBody = viewData["currentBroadcastAttendanceIncompleteBody"] as! String
+            currentBroadcastAttendanceCompletedTitle = viewData["currentBroadcastAttendanceCompletedTitle"] as! String
+            currentBroadcastAttendanceCompletedBody = viewData["currentBroadcastAttendanceCompletedBody"] as! String
+            currentBroadcastAnnounce = viewData["currentBroadcastAnnounce"] as! String
             currentStampLargeSkyImage = viewData["stampLargeSkyImage"] as! Image
             currentStampSmallSkyImage = viewData["stampSmallSkyImage"] as! Image
             currentStampBorderColor = viewData["stampBorderColor"] as! Color
@@ -403,8 +504,6 @@ class EnvironmentModel: ObservableObject {
             recordedLottieImageName = viewData["recordedLottieImageName"] as! String
             recordedColorOfSky = viewData["recordedColorOfSky"] as! LinearGradient
             recordedColorOfGround = viewData["recordedColorOfGround"] as! LinearGradient
-            recordedBroadcastText = viewData["recordedBroadcastText"] as! String
-            
             recordedStampLargeSkyImage = viewData["recordedStampLargeSkyImageName"] as! Image
             recordedStampSmallSkyImage = viewData["recordedStampSmallSkyImageName"] as! Image
             recordedStampBorderColor = viewData["recordedStampBorderColor"] as! Color

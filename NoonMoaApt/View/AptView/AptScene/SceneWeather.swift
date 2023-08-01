@@ -10,11 +10,25 @@ import Lottie
 
 struct SceneWeather: View {
     @EnvironmentObject var environmentModel: EnvironmentModel
-    
+
     var body: some View {
-        LottieView(name: environmentModel.currentLottieImageName, animationSpeed: 1)
+        
+        //이렇게 분기처리한 이유: 로띠는 뷰를 다시 그려도 이전 재생중이던 애니메이션이 실행되어 업데이트가 되지 않았다.
+        switch environmentModel.currentWeather {
+        case "clear":
+            LottieView(name: Lottie.clearMorning, animationSpeed: 1)
                 .ignoresSafeArea()
-               
+        case "cloudy":
+            LottieView(name: Lottie.cloudyMorning, animationSpeed: 1)
+                .ignoresSafeArea()
+        case "rainy":
+            LottieView(name: Lottie.rainyMorning, animationSpeed: 1)
+                .ignoresSafeArea()
+        case "snowy":
+            LottieView(name: Lottie.snowyMorning, animationSpeed: 1)
+                .ignoresSafeArea()
+        default: EmptyView()
+        }
     }
 }
 
