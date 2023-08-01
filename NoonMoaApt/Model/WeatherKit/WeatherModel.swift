@@ -5,7 +5,7 @@ import WeatherKit
     @Published var weather: Weather?
     
     func getWeather(latitude: Double, longitude: Double) {
-        Task.init {
+        async {
             do {
                 weather = try await Task.detached(priority: .userInitiated) {
                     return try await WeatherService.shared.weather(for:.init(latitude: latitude, longitude: longitude))
