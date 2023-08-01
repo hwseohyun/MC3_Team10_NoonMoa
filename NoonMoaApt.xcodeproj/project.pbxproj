@@ -16,6 +16,9 @@
 		8A7FF4AE2A77ACAC0075BA78 /* SceneBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */; };
 		8A84C29F2A6ED2DF001A9094 /* SceneMyEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */; };
 		8A84C2A12A6ED2E9001A9094 /* SceneNeighborEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */; };
+		8A9910822A789F8F0083602F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910812A789F8F0083602F /* WeatherModel.swift */; };
+		8A9910842A78A03B0083602F /* WeatherTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910832A78A03B0083602F /* WeatherTestView.swift */; };
+		8A9910892A78B4300083602F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910882A78B4300083602F /* LocationManager.swift */; };
 		8AD2303D2A699F4C00C967B5 /* SceneButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230352A699F4C00C967B5 /* SceneButtons.swift */; };
 		8AD2303E2A699F4C00C967B5 /* SceneApt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230362A699F4C00C967B5 /* SceneApt.swift */; };
 		8AD2303F2A699F4C00C967B5 /* FunctionTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230372A699F4C00C967B5 /* FunctionTestView.swift */; };
@@ -108,10 +111,14 @@
 		8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceModel.swift; sourceTree = "<group>"; };
 		8A7FF4A52A77AC1A0075BA78 /* CustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModel.swift; sourceTree = "<group>"; };
 		8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBroadcast.swift; sourceTree = "<group>"; };
-		8A7FF4B32A7812E10075BA78 /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptTests.xctest; path = "/Users/oreobro/Documents/AppleDeveloperAcademy/NoonMoaApt/build/Debug-iphoneos/NoonMoaAptTests.xctest"; sourceTree = "<absolute>"; };
-		8A7FF4B42A7812E10075BA78 /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptUITests.xctest; path = "/Users/oreobro/Documents/AppleDeveloperAcademy/NoonMoaApt/build/Debug-iphoneos/NoonMoaAptUITests.xctest"; sourceTree = "<absolute>"; };
 		8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneMyEye.swift; sourceTree = "<group>"; };
 		8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneNeighborEye.swift; sourceTree = "<group>"; };
+		8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A9910812A789F8F0083602F /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		8A9910832A78A03B0083602F /* WeatherTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTestView.swift; sourceTree = "<group>"; };
+		8A9910852A78A3A20083602F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8A9910882A78B4300083602F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8AD230352A699F4C00C967B5 /* SceneButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneButtons.swift; sourceTree = "<group>"; };
 		8AD230362A699F4C00C967B5 /* SceneApt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneApt.swift; sourceTree = "<group>"; };
 		8AD230372A699F4C00C967B5 /* FunctionTestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionTestView.swift; sourceTree = "<group>"; };
@@ -205,6 +212,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A2724DD2A78E3E000A8D970 /* WeatherKit */ = {
+			isa = PBXGroup;
+			children = (
+				8A9910812A789F8F0083602F /* WeatherModel.swift */,
+				8A9910882A78B4300083602F /* LocationManager.swift */,
+				8A9910832A78A03B0083602F /* WeatherTestView.swift */,
+			);
+			path = WeatherKit;
+			sourceTree = "<group>";
+		};
 		8A7FF49B2A77A9DA0075BA78 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,12 +312,15 @@
 			children = (
 				E32E3E162A6951B600B865E8 /* NoonMoaApt */,
 				8A6FB9EA2A70FC18009827C1 /* NoonMoaApt.app */,
+				8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */,
+				8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
 		E32E3E162A6951B600B865E8 /* NoonMoaApt */ = {
 			isa = PBXGroup;
 			children = (
+				8A9910852A78A3A20083602F /* Info.plist */,
 				8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */,
 				E3F739382A6A575F00E5F291 /* Assets.xcassets */,
 				E3F739152A6A540000E5F291 /* README.md */,
@@ -341,6 +361,7 @@
 		E32E3E512A6951CE00B865E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8A2724DD2A78E3E000A8D970 /* WeatherKit */,
 				E3F739162A6A540000E5F291 /* Calendar */,
 				E35DC8802A6EEB3300990AB6 /* MidnightUpdaterController.swift */,
 				E32E3E522A6951CE00B865E8 /* CalendarSingleController.swift */,
@@ -428,7 +449,7 @@
 			);
 			name = NoonMoaAptTests;
 			productName = NoonMoaAptTests;
-			productReference = 8A7FF4B32A7812E10075BA78 /* NoonMoaAptTests.xctest */;
+			productReference = 8A99107F2A788A350083602F /* NoonMoaAptTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E32E3E2D2A6951B700B865E8 /* NoonMoaAptUITests */ = {
@@ -446,7 +467,7 @@
 			);
 			name = NoonMoaAptUITests;
 			productName = NoonMoaAptUITests;
-			productReference = 8A7FF4B42A7812E10075BA78 /* NoonMoaAptUITests.xctest */;
+			productReference = 8A9910802A788A350083602F /* NoonMoaAptUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -555,6 +576,7 @@
 				E32E3E652A6951CE00B865E8 /* AttendanceView.swift in Sources */,
 				8AD230442A699F4C00C967B5 /* SceneBackground.swift in Sources */,
 				8A7FF4AE2A77ACAC0075BA78 /* SceneBroadcast.swift in Sources */,
+				8A9910822A789F8F0083602F /* WeatherModel.swift in Sources */,
 				8AD2303F2A699F4C00C967B5 /* FunctionTestView.swift in Sources */,
 				8AD230402A699F4C00C967B5 /* SceneRoom.swift in Sources */,
 				E32E3E662A6951CE00B865E8 /* LoginView.swift in Sources */,
@@ -562,9 +584,11 @@
 				E32E3E692A6951CE00B865E8 /* CalendarSingleView.swift in Sources */,
 				E32E3E6A2A6951CE00B865E8 /* MainView.swift in Sources */,
 				E3F739292A6A540000E5F291 /* InfinitePagerView.swift in Sources */,
+				8A9910892A78B4300083602F /* LocationManager.swift in Sources */,
 				F4A568B12A6A36AC004BD316 /* OnboardingView.swift in Sources */,
 				E32E3E672A6951CE00B865E8 /* AptView.swift in Sources */,
 				8A229FFF2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift in Sources */,
+				8A9910842A78A03B0083602F /* WeatherTestView.swift in Sources */,
 				8A84C2A12A6ED2E9001A9094 /* SceneNeighborEye.swift in Sources */,
 				E3F739282A6A540000E5F291 /* MonthView.swift in Sources */,
 				E3F739272A6A540000E5F291 /* CalendarController.swift in Sources */,
@@ -741,14 +765,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NoonMoaApt/NoonMoaApt.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoonMoaApt/Preview Content\"";
 				DEVELOPMENT_TEAM = 8H4K6TKQBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = NoonMoaApt/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use the front camera to capture the position of your face.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app access your location data to tell you the weather condition";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -762,6 +788,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NoonMoaApt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -774,14 +801,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NoonMoaApt/NoonMoaApt.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoonMoaApt/Preview Content\"";
 				DEVELOPMENT_TEAM = 8H4K6TKQBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = NoonMoaApt/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use the front camera to capture the position of your face.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app access your location data to tell you the weather condition";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -795,6 +824,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = NoonMoaApt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
