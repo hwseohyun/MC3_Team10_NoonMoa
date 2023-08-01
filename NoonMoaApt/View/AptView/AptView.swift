@@ -18,7 +18,6 @@ struct AptView: View {
     @EnvironmentObject var eyeViewController: EyeViewController
     @EnvironmentObject var customViewModel: CustomViewModel
 
-
     @State private var users: [[User]] = User.UTData
     @State private var buttonText: String = ""
     @State private var isCalendarOpen: Bool = false
@@ -198,6 +197,11 @@ struct AptView: View {
             }
         }//ZStack
         .onAppear {
+                //Test용, 날씨 보기위해 임시로 아래 함수만 실행
+            environmentModel.getCurrentRawEnvironment()
+            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
+                environmentModel.getCurrentEnvironment()
+            
             aptModel.fetchCurrentUserApt()
             if let user = Auth.auth().currentUser {
                 firestoreManager.syncDB()
@@ -216,6 +220,13 @@ struct AptView: View {
                     }
                 }
             }
+        }
+        //Test용
+        .onChange(of: environmentModel.currentWeather) { _ in
+            environmentModel.getCurrentEnvironment()
+        }
+        .onChange(of: environmentModel.currentTime) { _ in
+            environmentModel.getCurrentEnvironment()
         }
     
     }

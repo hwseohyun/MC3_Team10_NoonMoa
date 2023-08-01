@@ -39,19 +39,19 @@ struct AttendanceView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             if !isStamped {
-                                Text("좋은 아침이에요!")
+                                Text(environmentModel.currentBroadcastAttendanceIncompleteTitle)
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .padding(.bottom, 4)
-                                Text("매일 눈을 뜬다는 건 멋진 일이예요.\n오늘의 시작을 기록해주세요.")
+                                Text(environmentModel.currentBroadcastAttendanceIncompleteBody)
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             } else {
-                                Text("오늘은 날씨가 꽤나 맑군요")
+                                Text(environmentModel.currentBroadcastAttendanceCompletedTitle)
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .padding(.bottom, 4)
-                                Text("오늘 하루도 상쾌하길 바라요!")
+                                Text(environmentModel.currentBroadcastAttendanceCompletedBody)
                                     .font(.title3)
                                     .fontWeight(.semibold)
                             }
@@ -119,7 +119,7 @@ struct AttendanceView: View {
                                 characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
                                 characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
 //                                customViewModel.currentCharacterColor = [0,1,0]
-                                environmentModel.getCurrentEnvironment()
+                            
                                 characterModel.getCurrentCharacter()
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -180,6 +180,12 @@ struct AttendanceView: View {
             }//GeometryReader
             .padding(24)
         }//ZStack
+//        .onAppear {
+//            //테스트용 날씨 보기위해 임시로 아래 함수만 실행
+//            environmentModel.getCurrentRawEnvironment()
+//            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
+//            environmentModel.getCurrentEnvironment()
+//        }
     }
 }
 

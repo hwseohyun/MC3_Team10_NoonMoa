@@ -20,10 +20,11 @@ struct SceneBroadcast: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 56)
                 Text(displayedText)
-                    .foregroundColor(.white)
-                    .font(.title3)
+                    .foregroundColor(.black)
+                    .opacity(0.7)
+                    .font(.body)
                     .bold()
-                    .shadow(color: .gray, radius: 6, x: 0, y: 4)
+                    .shadow(color: .white, radius: 6, x: 0, y: 0)
                 Spacer()
             }
             Spacer()
@@ -32,7 +33,7 @@ struct SceneBroadcast: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 displayedText = ""
-                fullText = environmentModel.currentBroadcastText
+                fullText = environmentModel.currentBroadcastAnnounce
                 startTyping()
             }
         }
