@@ -10,6 +10,7 @@ import SwiftUI
 struct SceneNeighborEye: View {
     @Binding var roomUser: User
     @State private var eyeNeighborModel = EyeNeighborViewModel()
+    @State private var isInactiveOrSleep = false
     
     var body: some View {
         EyeView(isSmiling: eyeNeighborModel.isSmiling,
@@ -18,7 +19,7 @@ struct SceneNeighborEye: View {
                 lookAtPoint: eyeNeighborModel.lookAtPoint,
                 faceOrientation: eyeNeighborModel.faceOrientation,
                 bodyColor: eyeNeighborModel.bodyColor,
-                eyeColor: eyeNeighborModel.eyeColor, cheekColor: eyeNeighborModel.cheekColor)
+                eyeColor: eyeNeighborModel.eyeColor, cheekColor: eyeNeighborModel.cheekColor, isInactiveOrSleep: isInactiveOrSleep)
         .onAppear {
             eyeNeighborModel.update(roomUser: roomUser)
             //이웃 눈의 랜덤한 움직임 함수 실행

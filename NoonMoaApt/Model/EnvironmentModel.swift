@@ -102,13 +102,13 @@ class EnvironmentModel: ObservableObject {
     
     func saveRawEnvironmentToAttendanceModel(newAttendanceRecord: inout AttendanceRecord?) {
         // Update recorded environment-related data properties in newAttendanceRecord with the raw environment data from EnvironmentModel
-        if newAttendanceRecord == nil {
-            rawWeather = "11"
-            rawSunriseTime = Date()
-            rawSunsetTime = Date()
-            rawTime = Date()
-            return
-        }
+//        if newAttendanceRecord == nil {
+//            rawWeather = "11"
+//            rawSunriseTime = Date()
+//            rawSunsetTime = Date()
+//            rawTime = Date()
+//            return
+//        }
         newAttendanceRecord?.rawWeather = rawWeather
         newAttendanceRecord?.rawTime = rawTime
         newAttendanceRecord?.rawSunriseTime = rawSunriseTime

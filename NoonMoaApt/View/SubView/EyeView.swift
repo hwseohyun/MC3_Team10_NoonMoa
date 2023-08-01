@@ -11,6 +11,7 @@ struct EyeView: View {
     var bodyColor: LinearGradient
     var eyeColor: LinearGradient
     var cheekColor: LinearGradient
+    var isInactiveOrSleep: Bool
     
     var body: some View {
         ZStack {
@@ -142,6 +143,14 @@ struct EyeView: View {
                                     .offset(x: eyeOffsetX, y: eyeOffsetY)
                             }
                         )
+                        .overlay(
+                            //inactive 할 때 어두워지는 효과
+                            Ellipse()
+                                .fill(Color.black)
+                                .opacity(0.2)
+                                .frame(width: bodyWidth, height: bodyHeight)
+                                .opacity(isInactiveOrSleep ? 1 : 0)
+                        )
                         .clipShape(Ellipse())
                     //몸통 테두리
                         .overlay(
@@ -167,7 +176,7 @@ struct TestView: View {
                 isBlinkingLeft: eyeViewController.eyeMyViewModel.isBlinkingLeft,
                 isBlinkingRight: eyeViewController.eyeMyViewModel.isBlinkingRight,
                 lookAtPoint: eyeViewController.eyeMyViewModel.lookAtPoint,
-                faceOrientation: eyeViewController.eyeMyViewModel.faceOrientation, bodyColor: customViewModel.currentBodyColor, eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor)
+                faceOrientation: eyeViewController.eyeMyViewModel.faceOrientation, bodyColor: customViewModel.currentBodyColor, eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor, isInactiveOrSleep: false)
     }
 }
 

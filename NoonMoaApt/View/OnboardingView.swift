@@ -33,7 +33,7 @@ struct OnboardingTabView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 250, height: 300)
-                
+            
             //띄우기
             Spacer()
                 .frame(height: 90)
@@ -70,13 +70,13 @@ struct OnboardingView: View {
         
         NavigationView{
             ZStack{
-            
+                
                 //배경색
                 LinearGradient.sky.clearMorning.opacity(0.3)
                 
                 VStack{
-                        //화면 가장 위에서부터 띄우기
-                        Spacer()
+                    //화면 가장 위에서부터 띄우기
+                    Spacer()
                         .frame(height: 30)
                     
                     //SKIP 버튼을 위한 HStack
@@ -119,29 +119,29 @@ struct OnboardingView: View {
                         }
                     })
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) //기본 인덱스 도트 없애기
-                   
+                    
                     
                     //커스텀 인덱스 도트
-                                    HStack {
-                                            //현재 탭 위치 보여주는 방식
-                                        ForEach(OnboardingData.datalist) { viewData in
-                                            
-                                            if viewData.id == currentTab {
-                                                Rectangle()
-                                                    .frame(width: 10, height: 10)
-                                                    .cornerRadius(10)
-                                                    .foregroundColor(.gray)
-                                            }
-                                            //나머지 탭 보여주는 방식
-                                            else {
-                                                Circle()
-                                                    .frame(width: 10, height: 10)
-                                                    .opacity(0.3) //흐린 회색
-                                                    .foregroundColor(.gray)
-                                            }
-                                        }
-                                    }
-                                    .padding(.top, -30)
+                    HStack {
+                        //현재 탭 위치 보여주는 방식
+                        ForEach(OnboardingData.datalist) { viewData in
+                            
+                            if viewData.id == currentTab {
+                                Rectangle()
+                                    .frame(width: 10, height: 10)
+                                    .cornerRadius(10)
+                                    .foregroundColor(.gray)
+                            }
+                            //나머지 탭 보여주는 방식
+                            else {
+                                Circle()
+                                    .frame(width: 10, height: 10)
+                                    .opacity(0.3) //흐린 회색
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    .padding(.top, -30)
                     
                     Spacer()
                         .frame(height: 75)
@@ -152,13 +152,13 @@ struct OnboardingView: View {
                         Button(action: {
                             self.currentTab += 1
                         }, label: {
-                            Text("다음")
-                                .font(.system(size: 20, weight: .semibold))
-                                .foregroundColor(.white)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 13)
-                                        .foregroundColor(Color.gray)
-                                        .frame(width: 345, height: 56)
+                            RoundedRectangle(cornerRadius: 13)
+                                .foregroundColor(Color.gray)
+                                .frame(width: 345, height: 56)
+                                .overlay(
+                                    Text("다음")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(.white)
                                 )
                         })
                     }
@@ -168,13 +168,13 @@ struct OnboardingView: View {
                             isOnboardingDone = true
                             viewRouter.nextView = .login
                         } label: {
-                            Text("시작하기")
-                                .font(.system(size: 20, weight: .semibold))
-                                .foregroundColor(.white)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 13)
-                                        .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-                                        .frame(width: 345, height: 56)
+                            RoundedRectangle(cornerRadius: 13)
+                                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                                .frame(width: 345, height: 56)
+                                .overlay(
+                                    Text("시작하기")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(.white)
                                 )
                         }
                     }

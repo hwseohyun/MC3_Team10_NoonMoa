@@ -19,7 +19,7 @@ struct SceneMyEye: View {
                 lookAtPoint: eyeViewController.eyeMyViewModel.lookAtPoint,
                 faceOrientation: eyeViewController.eyeMyViewModel.faceOrientation,
                 bodyColor: customViewModel.currentBodyColor,
-                eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor)
+                eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor, isInactiveOrSleep: false)
     }
 }
 
