@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseMessaging
 import AuthenticationServices
+import FirebaseAuth
 
 
 @main
@@ -32,7 +33,7 @@ struct NoonMoaAptApp: App {
         rawCharacterColor: [0, 0, 0],
         rawWeather: "clear",
         rawTime: Date(),
-        rawtSunriseTime: Date(),
+        rawSunriseTime: Date(),
         rawSunsetTime: Date()
     )
     

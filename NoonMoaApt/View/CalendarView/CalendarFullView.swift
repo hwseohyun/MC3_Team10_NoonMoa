@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftUICalendar
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 class CalendarFullViewModel: ObservableObject {
     @Published var attendanceRecords: [AttendanceRecord] = []

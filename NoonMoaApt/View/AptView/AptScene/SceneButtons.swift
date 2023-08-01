@@ -97,7 +97,7 @@ struct SceneButtons: View {
                         }
                     }//VStack
                     
-                    Button(action: {
+                    Button(action: { 
                         lastWakenTimeToggle = false
                         buttonText = "\(roomUser.roomId ?? "")\n시간 종료"
                     }) {

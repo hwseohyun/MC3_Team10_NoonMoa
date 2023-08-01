@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct AttendanceView: View {
     private let currentUser = Auth.auth().currentUser
@@ -161,13 +162,9 @@ struct AttendanceView: View {
                             // 시작하기 버튼
                             Button (action: {
                                 viewRouter.currentView = .apt
-<<<<<<< HEAD:NoonMoaApt/View/AttendanceView/AttendanceView.swift
-//                                attendanceModel.uploadAttendanceRecord()
+                                attendanceModel.uploadAttendanceRecord()
+//                                attendanceCompletedViewModel.saveAttendanceRecord(record: regenAttendanceRecord())
 //                                attendanceCompletedViewModel.updateUserLastActiveDate()
-=======
-                                attendanceCompletedViewModel.saveAttendanceRecord(record: regenAttendanceRecord())
-                                attendanceCompletedViewModel.updateUserLastActiveDate()
->>>>>>> 50c2ff1 (Feat/#15 lastActiveDate 저장되지 않는 에러 수정):NoonMoaApt/View/AttendanceView.swift
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
@@ -186,22 +183,20 @@ struct AttendanceView: View {
             .padding(24)
         }//ZStack
     }
-<<<<<<< HEAD:NoonMoaApt/View/AttendanceView/AttendanceView.swift
-=======
-    func regenAttendanceRecord() -> AttendanceRecord {
-        
-        firestoreManager.syncDB()
-        // Get the emptyRooms document
-//        let emptyRoomsRef = db.collection("User").document("emptyRooms")
-//        emptyRoomsRef.getDocument { (document, error) in
-            
-        let userId = currentUser?.uid ?? ""
-        let weatherCondition = weatherViewModel.currentWeather
-        let eyeDirection = [savedFaceOrientation.x, savedFaceOrientation.y, savedFaceOrientation.z]
-        
-        return AttendanceRecord(userId: userId, date: Date(), weatherCondition: weatherCondition, eyeDirection: eyeDirection)
-    }
->>>>>>> 50c2ff1 (Feat/#15 lastActiveDate 저장되지 않는 에러 수정):NoonMoaApt/View/AttendanceView.swift
+    
+//    func regenAttendanceRecord() -> AttendanceRecord {
+//
+//        firestoreManager.syncDB()
+//        // Get the emptyRooms document
+////        let emptyRoomsRef = db.collection("User").document("emptyRooms")
+////        emptyRoomsRef.getDocument { (document, error) in
+//
+//        let userId = currentUser?.uid ?? ""
+//        let weatherCondition = weatherViewModel.currentWeather
+//        let eyeDirection = [savedFaceOrientation.x, savedFaceOrientation.y, savedFaceOrientation.z]
+//
+//        return AttendanceRecord(userId: userId, date: Date(), weatherCondition: weatherCondition, eyeDirection: eyeDirection)
+//    }
 }
 
 struct AttendanceView_Previews: PreviewProvider {
@@ -217,7 +212,7 @@ struct AttendanceView_Previews: PreviewProvider {
                  rawCharacterColor: [0, 0, 0],
                  rawWeather: "clear",
                  rawTime: Date(),
-                 rawtSunriseTime: Date(),
+                 rawSunriseTime: Date(),
                  rawSunsetTime: Date()
              )
         AttendanceView()

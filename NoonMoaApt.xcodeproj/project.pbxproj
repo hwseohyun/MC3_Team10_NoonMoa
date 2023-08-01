@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8A229FFF2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */; };
-		8A7FF49A2A77A8470075BA78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */; };
 		8A7FF4A02A77ABEC0075BA78 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */; };
 		8A7FF4A22A77ABF90075BA78 /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */; };
 		8A7FF4A42A77AC070075BA78 /* AttendanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */; };
@@ -65,6 +64,7 @@
 		E338B7E72A6CB54D00944E62 /* PushNotiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E338B7E62A6CB54D00944E62 /* PushNotiController.swift */; };
 		E35DC8812A6EEB3300990AB6 /* MidnightUpdaterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35DC8802A6EEB3300990AB6 /* MidnightUpdaterController.swift */; };
 		E3A82DB22A716E1400B1EB95 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A82DB12A716E1400B1EB95 /* FirestoreManager.swift */; };
+		E3D0F78C2A789AAF004EEF98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3D0F78B2A789AAF004EEF98 /* GoogleService-Info.plist */; };
 		E3F739232A6A540000E5F291 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7391D2A6A540000E5F291 /* Struct.swift */; };
 		E3F739242A6A540000E5F291 /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F739212A6A540000E5F291 /* CalendarMonthView.swift */; };
 		E3F739252A6A540000E5F291 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F7391A2A6A540000E5F291 /* Global.swift */; };
@@ -102,14 +102,11 @@
 /* Begin PBXFileReference section */
 		8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeNeighborViewModel.swift; sourceTree = "<group>"; };
 		8A6FB9EA2A70FC18009827C1 /* NoonMoaApt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoonMoaApt.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceModel.swift; sourceTree = "<group>"; };
 		8A7FF4A52A77AC1A0075BA78 /* CustomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModel.swift; sourceTree = "<group>"; };
 		8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBroadcast.swift; sourceTree = "<group>"; };
-		8A7FF4B32A7812E10075BA78 /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptTests.xctest; path = "/Users/oreobro/Documents/AppleDeveloperAcademy/NoonMoaApt/build/Debug-iphoneos/NoonMoaAptTests.xctest"; sourceTree = "<absolute>"; };
-		8A7FF4B42A7812E10075BA78 /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptUITests.xctest; path = "/Users/oreobro/Documents/AppleDeveloperAcademy/NoonMoaApt/build/Debug-iphoneos/NoonMoaAptUITests.xctest"; sourceTree = "<absolute>"; };
 		8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneMyEye.swift; sourceTree = "<group>"; };
 		8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneNeighborEye.swift; sourceTree = "<group>"; };
 		8AD230352A699F4C00C967B5 /* SceneButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneButtons.swift; sourceTree = "<group>"; };
@@ -151,6 +148,9 @@
 		E35DC8802A6EEB3300990AB6 /* MidnightUpdaterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidnightUpdaterController.swift; sourceTree = "<group>"; };
 		E3A82DB12A716E1400B1EB95 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		E3CBB3CB2A6967AA00195326 /* NoonMoaApt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoonMoaApt.entitlements; sourceTree = "<group>"; };
+		E3D0F7872A789319004EEF98 /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptTests.xctest; path = "/Users/kimpepe/Desktop/ADA/MC3/build/Debug-iphoneos/NoonMoaAptTests.xctest"; sourceTree = "<absolute>"; };
+		E3D0F7882A789319004EEF98 /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = NoonMoaAptUITests.xctest; path = "/Users/kimpepe/Desktop/ADA/MC3/build/Debug-iphoneos/NoonMoaAptUITests.xctest"; sourceTree = "<absolute>"; };
+		E3D0F78B2A789AAF004EEF98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3F739152A6A540000E5F291 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E3F739172A6A540000E5F291 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		E3F739182A6A540000E5F291 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
@@ -293,6 +293,7 @@
 		E32E3E0B2A6951B600B865E8 = {
 			isa = PBXGroup;
 			children = (
+				E3D0F78B2A789AAF004EEF98 /* GoogleService-Info.plist */,
 				E32E3E162A6951B600B865E8 /* NoonMoaApt */,
 				8A6FB9EA2A70FC18009827C1 /* NoonMoaApt.app */,
 			);
@@ -301,7 +302,6 @@
 		E32E3E162A6951B600B865E8 /* NoonMoaApt */ = {
 			isa = PBXGroup;
 			children = (
-				8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */,
 				E3F739382A6A575F00E5F291 /* Assets.xcassets */,
 				E3F739152A6A540000E5F291 /* README.md */,
 				E3CBB3E52A69730700195326 /* Extension */,
@@ -428,7 +428,7 @@
 			);
 			name = NoonMoaAptTests;
 			productName = NoonMoaAptTests;
-			productReference = 8A7FF4B32A7812E10075BA78 /* NoonMoaAptTests.xctest */;
+			productReference = E3D0F7872A789319004EEF98 /* NoonMoaAptTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E32E3E2D2A6951B700B865E8 /* NoonMoaAptUITests */ = {
@@ -446,7 +446,7 @@
 			);
 			name = NoonMoaAptUITests;
 			productName = NoonMoaAptUITests;
-			productReference = 8A7FF4B42A7812E10075BA78 /* NoonMoaAptUITests.xctest */;
+			productReference = E3D0F7882A789319004EEF98 /* NoonMoaAptUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -510,7 +510,7 @@
 				E32E3E1F2A6951B700B865E8 /* Preview Assets.xcassets in Resources */,
 				DAEE7E052A719E5500D7FACA /* cloudyN.json in Resources */,
 				DAEE7E072A719E5500D7FACA /* clearN.json in Resources */,
-				8A7FF49A2A77A8470075BA78 /* GoogleService-Info.plist in Resources */,
+				E3D0F78C2A789AAF004EEF98 /* GoogleService-Info.plist in Resources */,
 				DAEE7E082A719E5500D7FACA /* snowyDN.json in Resources */,
 				DAEE7E0C2A719E5500D7FACA /* rainyD.json in Resources */,
 			);
