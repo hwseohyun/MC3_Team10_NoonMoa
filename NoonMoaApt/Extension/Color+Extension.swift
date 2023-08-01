@@ -152,12 +152,20 @@ extension Image {
     struct assets {
         static let apartment = Image("Apartment")
         
+        struct buttons {
+            static let calendarSelected = Image("Button_CalendarSelected")
+            static let calendarUnSelected = Image("Button_CalendarUnSelected")
+            static let settingSelected = Image("Button_settingSelected")
+            static let settingUnSelected = Image("Button_settingUnSelected")
+        }
+        
         struct room {
             static let vacant = Image("Room_vacant")
             static let dark = Image("Room_dark")
             static let light = Image("Room_light")
             static let blind = Image("Room_blind")
             static let blindUp = Image("Room_blindUp")
+            static let windowBorder = Image("Room_windowBorder")
         }
         
         struct stampLarge {

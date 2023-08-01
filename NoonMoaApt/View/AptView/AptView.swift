@@ -190,12 +190,12 @@ struct AptView: View {
                         }
                     } label: {
                         if isCalendarOpen {
-                            Image("calendar_selected")
+                            Image.assets.buttons.calendarSelected
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: proxy.size.width * 0.08)
                         } else {
-                            Image("calendar_unselected")
+                            Image.assets.buttons.calendarUnSelected
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: proxy.size.width * 0.08)
@@ -205,7 +205,7 @@ struct AptView: View {
                     Button { // 설정 버튼
                         
                     } label: {
-                        Image("settings_unselected")
+                        Image.assets.buttons.settingUnSelected
                             .resizable()
                             .scaledToFit()
                             .frame(width: proxy.size.width * 0.08)
