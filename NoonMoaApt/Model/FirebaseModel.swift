@@ -70,14 +70,14 @@ struct AttendanceSheet: Codable, Identifiable {
 struct Room: Codable, Identifiable {
     @DocumentID var id: String?
     var aptId: String
-    var number: Int
     var userId: String // References to User document IDs
+    var number: Int
     
     init(id: String?, aptId: String?, number: Int?, userId: String?) {
         self.id = id
         self.aptId = aptId ?? ""
-        self.number = number ?? 0
         self.userId = userId ?? ""
+        self.number = number ?? 0
     }
 }
 
@@ -89,13 +89,11 @@ extension Room {
 
 struct Apt: Codable, Identifiable {
     @DocumentID var id: String?
-    var number: Int
     var rooms: [String] // References to Room document IDs
     var roomCount: Int // Total number of rooms
     
-    init(id: String?, number: Int?, rooms: [String]?, roomCount: Int?) {
+    init(id: String?, rooms: [String]?, roomCount: Int?) {
         self.id = id
-        self.number = number ?? 0
         self.rooms = rooms ?? []
         self.roomCount = roomCount ?? 0
     }
@@ -174,33 +172,33 @@ enum WeatherCondition: String, Codable {
 extension User {
     static let sampleData: [[User]] =
     [
-        [User(id: "AAAA", roomId: "1", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "a",requestedBy: []),
-         User(id: "BBBB", roomId: "2", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "b",requestedBy: []),
-         User(id: "CCCC", roomId: "3", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "c",requestedBy: [])],
-        [User(id: "DDDD", roomId: "4", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "d",requestedBy: []),
-         User(id: "EEEE", roomId: "5", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "e",requestedBy: []),
-         User(id: "FFFF", roomId: "6", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "f",requestedBy: [])],
-        [User(id: "GGGG", roomId: "7", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "g",requestedBy: []),
-         User(id: "HHHH", roomId: "8", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "h",requestedBy: []),
-         User(id: "IIII", roomId: "9", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "i",requestedBy: [])],
-        [User(id: "JJJJ", roomId: "10", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "j",requestedBy: []),
-         User(id: "KKKK", roomId: "11", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "k",requestedBy: []),
-         User(id: "LLLL", roomId: "12", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "l",requestedBy: [])]
+        [User(roomId: "1", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "a",requestedBy: []),
+         User(roomId: "2", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "b",requestedBy: []),
+         User(roomId: "3", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "c",requestedBy: [])],
+        [User(roomId: "4", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "d",requestedBy: []),
+         User(roomId: "5", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "e",requestedBy: []),
+         User(roomId: "6", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "f",requestedBy: [])],
+        [User(roomId: "7", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "g",requestedBy: []),
+         User(roomId: "8", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "h",requestedBy: []),
+         User(roomId: "9", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "i",requestedBy: [])],
+        [User(roomId: "10", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "j",requestedBy: []),
+         User(roomId: "11", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "k",requestedBy: []),
+         User(roomId: "12", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "l",requestedBy: [])]
     ]
 
     static let UTData: [[User]] =
     [
-        [User(id: "ae2Nnjfb8HOYCfIDUxHFd1BLEVp1", roomId: "1", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "a",requestedBy: []),
-         User(id: "R1AB9xbuLCNvk15ld0fOonnhtXU2", roomId: "2", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "b",requestedBy: []),
-         User(id: "CCCC", roomId: "3", aptId: "1", userState: "vacant", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "c",requestedBy: [])],
-        [User(id: "84Y7IK4GM8YUKfbFryVrVFdLZhV2", roomId: "4", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "d",requestedBy: []),
-         User(id: "KK", roomId: "5", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "e",requestedBy: []),
-         User(id: "HH", roomId: "6", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "f",requestedBy: [])],
-        [User(id: "GGGG", roomId: "7", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "g",requestedBy: []),
-         User(id: "HHHH", roomId: "8", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "h",requestedBy: []),
-         User(id: "kjqfHwbsOFSoA9Zed7a6JuR1yGS2", roomId: "9", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "i",requestedBy: [])],
-        [User(id: "JJJJ", roomId: "10", aptId: "1", userState: "vacant", lastActiveDate: Date(), eyeColor: "eyePink", token: "j",requestedBy: []),
-         User(id: "KKKK", roomId: "11", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "k",requestedBy: []),
-         User(id: "LLLL", roomId: "12", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "l",requestedBy: [])]
+        [User(roomId: "1", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "a",requestedBy: []),
+         User(roomId: "2", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "b",requestedBy: []),
+         User(roomId: "3", aptId: "1", userState: "vacant", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "c",requestedBy: [])],
+        [User(roomId: "4", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "d",requestedBy: []),
+         User(roomId: "5", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "e",requestedBy: []),
+         User(roomId: "6", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "f",requestedBy: [])],
+        [User(roomId: "7", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeYellow", token: "g",requestedBy: []),
+         User(roomId: "8", aptId: "1", userState: "sleep", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "h",requestedBy: []),
+         User(roomId: "9", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyePink", token: "i",requestedBy: [])],
+        [User(roomId: "10", aptId: "1", userState: "vacant", lastActiveDate: Date(), eyeColor: "eyePink", token: "j",requestedBy: []),
+         User(roomId: "11", aptId: "1", userState: "active", lastActiveDate: Date(), eyeColor: "eyeBlue", token: "k",requestedBy: []),
+         User(roomId: "12", aptId: "1", userState: "inactive", lastActiveDate: Date(), eyeColor: "eyeCyan", token: "l",requestedBy: [])]
     ]
 }

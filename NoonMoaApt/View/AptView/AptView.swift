@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct AptView: View {
     @EnvironmentObject var viewRouter: ViewRouter
@@ -238,6 +239,8 @@ struct AptView: View {
                     }
                 }
             }
+            
+            attendanceModel.downloadAttendanceRecords(for: Date())
         }
         //Test용
         .onChange(of: environmentModel.currentWeather) { _ in
@@ -264,7 +267,7 @@ struct AptView_Previews: PreviewProvider {
                  rawCharacterColor: [0, 0, 0],
                  rawWeather: "clear",
                  rawTime: Date(),
-                 rawtSunriseTime: Date(),
+                 rawSunriseTime: Date(),
                  rawSunsetTime: Date()
              )
         

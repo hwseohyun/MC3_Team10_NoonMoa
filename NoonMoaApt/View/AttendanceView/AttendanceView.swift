@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct AttendanceView: View {
     private let currentUser = Auth.auth().currentUser
@@ -179,6 +180,7 @@ struct AttendanceView: View {
                         // 시작하기 버튼
                         Button (action: {
                             viewRouter.currentView = .apt
+                            attendanceModel.uploadAttendanceRecord()
                             //                                attendanceModel.uploadAttendanceRecord()
                             //                                attendanceCompletedViewModel.updateUserLastActiveDate()
                         }) {
@@ -205,24 +207,23 @@ struct AttendanceView: View {
     //            environmentModel.getCurrentEnvironment()
     //        }
 }
-}
 
 struct AttendanceView_Previews: PreviewProvider {
     static var previews: some View {
         let newAttendanceRecord = AttendanceRecord(
-            userId: "",
-            date: Date(),
-            rawIsSmiling: false,
-            rawIsBlinkingLeft: true,
-            rawIsBlinkingRight: false,
-            rawLookAtPoint: [0, 0, 0],
-            rawFaceOrientation: [0, 0, 0],
-            rawCharacterColor: [0, 0, 0],
-            rawWeather: "clear",
-            rawTime: Date(),
-            rawtSunriseTime: Date(),
-            rawSunsetTime: Date()
-        )
+             userId: "",
+             date: Date(),
+             rawIsSmiling: false,
+             rawIsBlinkingLeft: true,
+             rawIsBlinkingRight: false,
+             rawLookAtPoint: [0, 0, 0],
+             rawFaceOrientation: [0, 0, 0],
+             rawCharacterColor: [0, 0, 0],
+             rawWeather: "clear",
+             rawTime: Date(),
+             rawSunriseTime: Date(),
+             rawSunsetTime: Date()
+         )
         AttendanceView()
             .environmentObject(ViewRouter())
             .environmentObject(AttendanceModel(newAttendanceRecord: newAttendanceRecord))

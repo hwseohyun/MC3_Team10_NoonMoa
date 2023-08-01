@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseCore
 import FirebaseMessaging
 import AuthenticationServices
+import FirebaseAuth
 
 
 @main
@@ -33,7 +34,7 @@ struct NoonMoaAptApp: App {
         rawCharacterColor: [0, 0, 0],
         rawWeather: "clear",
         rawTime: Date(),
-        rawtSunriseTime: Date(),
+        rawSunriseTime: Date(),
         rawSunsetTime: Date()
     )
     
@@ -127,7 +128,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         //        var pushNotiController = PushNotiController()
         //        pushNotiController.responsePushNotification()
         
-        Messaging.messaging().delegate = self
+//        Messaging.messaging().delegate = self
         
         // 자정이 되면 모든 user의 userState를 .sleep으로 변경
         midnightUpdater = MidnightUpdater()

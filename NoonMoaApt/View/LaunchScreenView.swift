@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct launchScreenView: View {
     @EnvironmentObject var viewRouter: ViewRouter
