@@ -10,14 +10,14 @@
 		8A229FFF2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */; };
 		8A2724E62A7905E100A8D970 /* cloudyD.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724DE2A7905E000A8D970 /* cloudyD.json */; };
 		8A2724E72A7905E100A8D970 /* rainyD.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724DF2A7905E000A8D970 /* rainyD.json */; };
-		8A2724E82A7905E100A8D970 /* snowyDN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E02A7905E000A8D970 /* snowyDN.json */; };
-		8A2724E92A7905E100A8D970 /* thunderDN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E12A7905E000A8D970 /* thunderDN.json */; };
 		8A2724EA2A7905E100A8D970 /* clearN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E22A7905E000A8D970 /* clearN.json */; };
 		8A2724EB2A7905E100A8D970 /* clearD.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E32A7905E000A8D970 /* clearD.json */; };
 		8A2724EC2A7905E100A8D970 /* rainyN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E42A7905E100A8D970 /* rainyN.json */; };
 		8A2724ED2A7905E100A8D970 /* cloudyN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A2724E52A7905E100A8D970 /* cloudyN.json */; };
 		8A2724EF2A79200D00A8D970 /* CharacterColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2724EE2A79200D00A8D970 /* CharacterColorPickerView.swift */; };
-		8A7FF49A2A77A8470075BA78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */; };
+		8A65D3F12A7A27B400CFB1B5 /* snowyDN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A65D3F02A7A27B400CFB1B5 /* snowyDN.json */; };
+		8A65D3F52A7A280600CFB1B5 /* thunderDN.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A65D3F42A7A280600CFB1B5 /* thunderDN.json */; };
+		8A7FF49A2A77A8470075BA78 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		8A7FF4A02A77ABEC0075BA78 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */; };
 		8A7FF4A22A77ABF90075BA78 /* EnvironmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */; };
 		8A7FF4A42A77AC070075BA78 /* AttendanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */; };
@@ -25,7 +25,7 @@
 		8A7FF4AE2A77ACAC0075BA78 /* SceneBroadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7FF4AD2A77ACAC0075BA78 /* SceneBroadcast.swift */; };
 		8A84C29F2A6ED2DF001A9094 /* SceneMyEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A84C29E2A6ED2DF001A9094 /* SceneMyEye.swift */; };
 		8A84C2A12A6ED2E9001A9094 /* SceneNeighborEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A84C2A02A6ED2E9001A9094 /* SceneNeighborEye.swift */; };
-		8A9910822A789F8F0083602F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910812A789F8F0083602F /* WeatherModel.swift */; };
+		8A9910822A789F8F0083602F /* WeatherKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910812A789F8F0083602F /* WeatherKitManager.swift */; };
 		8A9910842A78A03B0083602F /* WeatherTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910832A78A03B0083602F /* WeatherTestView.swift */; };
 		8A9910892A78B4300083602F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9910882A78B4300083602F /* LocationManager.swift */; };
 		8AD2303D2A699F4C00C967B5 /* SceneButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD230352A699F4C00C967B5 /* SceneButtons.swift */; };
@@ -40,6 +40,7 @@
 		8AD2ECC42A6E163E0063D9ED /* EyeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD2ECC12A6E163E0063D9ED /* EyeViewController.swift */; };
 		8ADF14492A7974BA00A09057 /* ParticleEffectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADF14482A7974BA00A09057 /* ParticleEffectViewModel.swift */; };
 		8ADF144B2A79764E00A09057 /* ParticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADF144A2A79764E00A09057 /* ParticleView.swift */; };
+		8ADF14512A79780E00A09057 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8ADF14502A79780E00A09057 /* GoogleService-Info.plist */; };
 		DA904E332A6A361700CC14D9 /* StampLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904E312A6A361700CC14D9 /* StampLargeView.swift */; };
 		DA904E342A6A361700CC14D9 /* StampButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904E322A6A361700CC14D9 /* StampButtonView.swift */; };
 		DAEE7E102A719F8800D7FACA /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAEE7E0F2A719F8800D7FACA /* Lottie */; };
@@ -109,14 +110,14 @@
 		8A229FFE2A70AA6D00E0FD97 /* EyeNeighborViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeNeighborViewModel.swift; sourceTree = "<group>"; };
 		8A2724DE2A7905E000A8D970 /* cloudyD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudyD.json; sourceTree = "<group>"; };
 		8A2724DF2A7905E000A8D970 /* rainyD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainyD.json; sourceTree = "<group>"; };
-		8A2724E02A7905E000A8D970 /* snowyDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snowyDN.json; sourceTree = "<group>"; };
-		8A2724E12A7905E000A8D970 /* thunderDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thunderDN.json; sourceTree = "<group>"; };
 		8A2724E22A7905E000A8D970 /* clearN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clearN.json; sourceTree = "<group>"; };
 		8A2724E32A7905E000A8D970 /* clearD.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = clearD.json; sourceTree = "<group>"; };
 		8A2724E42A7905E100A8D970 /* rainyN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rainyN.json; sourceTree = "<group>"; };
 		8A2724E52A7905E100A8D970 /* cloudyN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cloudyN.json; sourceTree = "<group>"; };
 		8A2724EE2A79200D00A8D970 /* CharacterColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterColorPickerView.swift; sourceTree = "<group>"; };
 		8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8A65D3F02A7A27B400CFB1B5 /* snowyDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snowyDN.json; sourceTree = "<group>"; };
+		8A65D3F42A7A280600CFB1B5 /* thunderDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = thunderDN.json; path = ../../../../../../Downloads/lottie_json/thunderDN.json; sourceTree = "<group>"; };
 		8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceModel.swift; sourceTree = "<group>"; };
@@ -162,6 +163,8 @@
 		E32E3E5A2A6951CE00B865E8 /* AptModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AptModel.swift; sourceTree = "<group>"; };
 		E338B7E62A6CB54D00944E62 /* PushNotiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotiController.swift; sourceTree = "<group>"; };
 		E35DC8802A6EEB3300990AB6 /* MidnightUpdaterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidnightUpdaterController.swift; sourceTree = "<group>"; };
+		E36CCC5A2A79DBBC00113922 /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E36CCC5B2A79DBBC00113922 /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A82DB12A716E1400B1EB95 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		E3CBB3CB2A6967AA00195326 /* NoonMoaApt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoonMoaApt.entitlements; sourceTree = "<group>"; };
 		E3F739152A6A540000E5F291 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -221,7 +224,7 @@
 		8A2724DD2A78E3E000A8D970 /* WeatherKit */ = {
 			isa = PBXGroup;
 			children = (
-				8A9910812A789F8F0083602F /* WeatherModel.swift */,
+				8A9910812A789F8F0083602F /* WeatherKitManager.swift */,
 				8A9910882A78B4300083602F /* LocationManager.swift */,
 				8A9910832A78A03B0083602F /* WeatherTestView.swift */,
 			);
@@ -318,8 +321,8 @@
 				8A2724E52A7905E100A8D970 /* cloudyN.json */,
 				8A2724DF2A7905E000A8D970 /* rainyD.json */,
 				8A2724E42A7905E100A8D970 /* rainyN.json */,
-				8A2724E02A7905E000A8D970 /* snowyDN.json */,
-				8A2724E12A7905E000A8D970 /* thunderDN.json */,
+				8A65D3F02A7A27B400CFB1B5 /* snowyDN.json */,
+				8A65D3F42A7A280600CFB1B5 /* thunderDN.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 		E32E3E162A6951B600B865E8 /* NoonMoaApt */ = {
 			isa = PBXGroup;
 			children = (
+				E3D909D82A79F366009E776A /* NoonMoaAptDebug.entitlements */,
 				8A9910852A78A3A20083602F /* Info.plist */,
 				E3F739382A6A575F00E5F291 /* Assets.xcassets */,
 				E3F739152A6A540000E5F291 /* README.md */,
@@ -384,12 +388,12 @@
 				E32E3E522A6951CE00B865E8 /* CalendarSingleController.swift */,
 				E32E3E552A6951CE00B865E8 /* FirebaseModel.swift */,
 				E32E3E562A6951CE00B865E8 /* DummyData.swift */,
-				E338B7E62A6CB54D00944E62 /* PushNotiController.swift */,
 				E3A82DB12A716E1400B1EB95 /* FirestoreManager.swift */,
 				8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */,
 				8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */,
 				8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */,
 				E32E3E5A2A6951CE00B865E8 /* AptModel.swift */,
+				E338B7E62A6CB54D00944E62 /* PushNotiController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -545,12 +549,13 @@
 				8A2724EC2A7905E100A8D970 /* rainyN.json in Resources */,
 				E3F739392A6A575F00E5F291 /* Assets.xcassets in Resources */,
 				8A2724E72A7905E100A8D970 /* rainyD.json in Resources */,
+				8ADF14512A79780E00A09057 /* GoogleService-Info.plist in Resources */,
 				8A2724ED2A7905E100A8D970 /* cloudyN.json in Resources */,
 				E32E3E1F2A6951B700B865E8 /* Preview Assets.xcassets in Resources */,
-				8A2724E82A7905E100A8D970 /* snowyDN.json in Resources */,
-				8A7FF49A2A77A8470075BA78 /* GoogleService-Info.plist in Resources */,
+				8A7FF49A2A77A8470075BA78 /* (null) in Resources */,
 				8A2724EB2A7905E100A8D970 /* clearD.json in Resources */,
-				8A2724E92A7905E100A8D970 /* thunderDN.json in Resources */,
+				8A65D3F52A7A280600CFB1B5 /* thunderDN.json in Resources */,
+				8A65D3F12A7A27B400CFB1B5 /* snowyDN.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +600,7 @@
 				E32E3E652A6951CE00B865E8 /* AttendanceView.swift in Sources */,
 				8AD230442A699F4C00C967B5 /* SceneBackground.swift in Sources */,
 				8A7FF4AE2A77ACAC0075BA78 /* SceneBroadcast.swift in Sources */,
-				8A9910822A789F8F0083602F /* WeatherModel.swift in Sources */,
+				8A9910822A789F8F0083602F /* WeatherKitManager.swift in Sources */,
 				8AD2303F2A699F4C00C967B5 /* FunctionTestView.swift in Sources */,
 				8AD230402A699F4C00C967B5 /* SceneRoom.swift in Sources */,
 				E32E3E662A6951CE00B865E8 /* LoginView.swift in Sources */,
@@ -697,6 +702,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -757,6 +763,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -787,10 +794,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = NoonMoaApt/NoonMoaApt.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoonMoaApt/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H4K6TKQBU;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8H4K6TKQBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoonMoaApt/Info.plist;
@@ -810,6 +819,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = NoonMoaApt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TAEHYUN KIM";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -824,10 +834,12 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = NoonMoaApt/NoonMoaApt.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"NoonMoaApt/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H4K6TKQBU;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 8H4K6TKQBU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NoonMoaApt/Info.plist;
@@ -847,6 +859,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = NoonMoaApt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TAEHYUN KIM";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

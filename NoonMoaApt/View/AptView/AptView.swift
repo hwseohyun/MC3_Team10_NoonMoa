@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct AptView: View {
     @EnvironmentObject var viewRouter: ViewRouter
@@ -15,8 +16,10 @@ struct AptView: View {
     @EnvironmentObject var attendanceModel: AttendanceModel
     @EnvironmentObject var characterModel: CharacterModel
     @EnvironmentObject var environmentModel: EnvironmentModel
-    @EnvironmentObject var eyeViewController: EyeViewController
+//    @StateObject var eyeViewController: EyeViewController
     @EnvironmentObject var customViewModel: CustomViewModel
+    @EnvironmentObject var weatherKitManager: WeatherKitManager
+    @EnvironmentObject var locationManger: LocationManager
 
     @State private var users: [[User]] = User.UTData
     @State private var buttonText: String = ""
@@ -54,7 +57,7 @@ struct AptView: View {
                                 HStack(spacing: 12) {
                                     ForEach(users[rowIndex].indices, id: \.self) { userIndex in
                                         SceneRoom(roomUser: $users[rowIndex][userIndex])
-                                            .environmentObject(eyeViewController)
+//                                            .environmentObject(eyeViewController)
                                             .environmentObject(customViewModel)
                                             .frame(width: (geo.size.width - 48) / 3, height: ((geo.size.width - 48) / 3) / 1.2)
                                     }
@@ -91,9 +94,8 @@ struct AptView: View {
                         VStack(spacing: 16) {
                             ForEach(users.indices, id: \.self) { rowIndex in
                                 HStack(spacing: 12) {
-                                    ForEach(users[rowIndex].indices, id: \.self) { userIndex in
-                                        
-                                        SceneButtons(roomUser: $users[rowIndex][userIndex], buttonText: $buttonText).environmentObject(eyeViewController)
+                                    ForEach(users[rowIndex].indices, id: \.self) { userIndex in                            
+                                        SceneButtons(roomUser: $users[rowIndex][userIndex], buttonText: $buttonText)
                                             .frame(width: (geo.size.width - 48) / 3, height: ((geo.size.width - 48) / 3) / 1.2)
                                         //방 이미지 자체의 비율 1:1.2 통한 높이 산정
                                     }
@@ -113,6 +115,8 @@ struct AptView: View {
             FunctionTestView(buttonText: $buttonText)
                 .environmentObject(viewRouter)
                 .environmentObject(environmentModel)
+                .environmentObject(weatherKitManager)
+
             
             
             //임시코드
@@ -190,12 +194,12 @@ struct AptView: View {
                         }
                     } label: {
                         if isCalendarOpen {
-                            Image("calendar_selected")
+                            Image.assets.buttons.calendarSelected
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: proxy.size.width * 0.08)
                         } else {
-                            Image("calendar_unselected")
+                            Image.assets.buttons.calendarUnSelected
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: proxy.size.width * 0.08)
@@ -205,7 +209,7 @@ struct AptView: View {
                     Button { // 설정 버튼
                         
                     } label: {
-                        Image("settings_unselected")
+                        Image.assets.buttons.settingUnSelected
                             .resizable()
                             .scaledToFit()
                             .frame(width: proxy.size.width * 0.08)
@@ -216,36 +220,42 @@ struct AptView: View {
         }//ZStack
         .onAppear {
                 //Test용, 날씨 보기위해 임시로 아래 함수만 실행
-            environmentModel.getCurrentRawEnvironment()
-            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
-                environmentModel.getCurrentEnvironment()
+//            environmentModel.getCurrentRawEnvironment()
+//            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
             
+            // 현재 날씨 데이터 받아오기
+            environmentModel.getCurrentEnvironment()
+            
+            // 현재 아파트 정보 받아오기
             aptModel.fetchCurrentUserApt()
-            if let user = Auth.auth().currentUser {
-                firestoreManager.syncDB()
-                let userRef = db.collection("User").document(user.uid)
-                
-                userRef.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        if let userData = document.data(), let userState = userData["userState"] as? String {
-                            print("AppDelegate | handleSceneActive | userState: \(userState)")
-                            self.db.collection("User").document(user.uid).updateData([
-                                "userState": UserState.active.rawValue
-                            ])
-                        }
-                    } else {
-                        print("No user is signed in.")
-                    }
-                }
-            }
+            
+//            if let user = Auth.auth().currentUser {
+//                firestoreManager.syncDB()
+//                let userRef = db.collection("User").document(user.uid)
+//
+//                userRef.getDocument { (document, error) in
+//                    if let document = document, document.exists {
+//                        if let userData = document.data(), let userState = userData["userState"] as? String {
+//                            print("AppDelegate | handleSceneActive | userState: \(userState)")
+//                            self.db.collection("User").document(user.uid).updateData([
+//                                "userState": UserState.active.rawValue
+//                            ])
+//                        }
+//                    } else {
+//                        print("No user is signed in.")
+//                    }
+//                }
+//            }
+            
+            attendanceModel.downloadAttendanceRecords(for: Date())
         }
         //Test용
-        .onChange(of: environmentModel.currentWeather) { _ in
-            environmentModel.getCurrentEnvironment()
-        }
-        .onChange(of: environmentModel.currentTime) { _ in
-            environmentModel.getCurrentEnvironment()
-        }
+//        .onChange(of: environmentModel.currentWeather) { _ in
+//            environmentModel.getCurrentEnvironment()
+//        }
+//        .onChange(of: environmentModel.currentTime) { _ in
+//            environmentModel.getCurrentEnvironment()
+//        }
     
     }
 
@@ -264,7 +274,7 @@ struct AptView_Previews: PreviewProvider {
                  rawCharacterColor: [0, 0, 0],
                  rawWeather: "clear",
                  rawTime: Date(),
-                 rawtSunriseTime: Date(),
+                 rawSunriseTime: Date(),
                  rawSunsetTime: Date()
              )
         
@@ -274,7 +284,6 @@ struct AptView_Previews: PreviewProvider {
             .environmentObject(AttendanceModel(newAttendanceRecord: newAttendanceRecord))
             .environmentObject(CharacterModel())
             .environmentObject(EnvironmentModel())
-            .environmentObject(EyeViewController())
         
     }
 }
