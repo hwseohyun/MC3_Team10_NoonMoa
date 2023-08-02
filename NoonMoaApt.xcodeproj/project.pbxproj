@@ -117,7 +117,7 @@
 		8A2724EE2A79200D00A8D970 /* CharacterColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterColorPickerView.swift; sourceTree = "<group>"; };
 		8A7FF4992A77A8470075BA78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8A65D3F02A7A27B400CFB1B5 /* snowyDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = snowyDN.json; sourceTree = "<group>"; };
-		8A65D3F42A7A280600CFB1B5 /* thunderDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = thunderDN.json; path = ../../../../../../Downloads/lottie_json/thunderDN.json; sourceTree = "<group>"; };
+		8A65D3F42A7A280600CFB1B5 /* thunderDN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = thunderDN.json; sourceTree = "<group>"; };
 		8A7FF49F2A77ABEC0075BA78 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
 		8A7FF4A12A77ABF90075BA78 /* EnvironmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentModel.swift; sourceTree = "<group>"; };
 		8A7FF4A32A77AC070075BA78 /* AttendanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceModel.swift; sourceTree = "<group>"; };
@@ -163,10 +163,9 @@
 		E32E3E5A2A6951CE00B865E8 /* AptModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AptModel.swift; sourceTree = "<group>"; };
 		E338B7E62A6CB54D00944E62 /* PushNotiController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotiController.swift; sourceTree = "<group>"; };
 		E35DC8802A6EEB3300990AB6 /* MidnightUpdaterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidnightUpdaterController.swift; sourceTree = "<group>"; };
-		E36CCC5A2A79DBBC00113922 /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E36CCC5B2A79DBBC00113922 /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A82DB12A716E1400B1EB95 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		E3CBB3CB2A6967AA00195326 /* NoonMoaApt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoonMoaApt.entitlements; sourceTree = "<group>"; };
+		E3F2C0662A7A4BAA00506103 /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F739152A6A540000E5F291 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E3F739172A6A540000E5F291 /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		E3F739182A6A540000E5F291 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
@@ -341,7 +340,6 @@
 		E32E3E162A6951B600B865E8 /* NoonMoaApt */ = {
 			isa = PBXGroup;
 			children = (
-				E3D909D82A79F366009E776A /* NoonMoaAptDebug.entitlements */,
 				8A9910852A78A3A20083602F /* Info.plist */,
 				E3F739382A6A575F00E5F291 /* Assets.xcassets */,
 				E3F739152A6A540000E5F291 /* README.md */,
