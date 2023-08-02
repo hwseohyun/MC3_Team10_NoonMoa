@@ -11,6 +11,7 @@ import Firebase
 import FirebaseFirestore
 import CryptoKit
 import AuthenticationServices
+import FirebaseAuth
 
 class LoginViewModel: ObservableObject {
     
@@ -20,7 +21,7 @@ class LoginViewModel: ObservableObject {
     private var db: Firestore {
         firestoreManager.db
     }
-    private let dummyData = DummyData()
+//    private let dummyData = DummyData()
     
     @Published var nonce = ""
     @Published var fcmToken: String = ""
@@ -82,6 +83,7 @@ class LoginViewModel: ObservableObject {
                 // Now update the user in Firestore
                 if let authResult = result {
                     
+                    print("LoginViewModel | authenticate | authResult.user.uid \(authResult.user.uid)")
                     let userDocumentRef = self.db.collection("User").document(authResult.user.uid)
                             
                     userDocumentRef.getDocument { (document, error) in
@@ -96,6 +98,7 @@ class LoginViewModel: ObservableObject {
                             } else if let token = token {
                                 print("FCM registration token: \(token)")
                                 self.fcmToken = token // save the new token to the user
+                                print("LoginViewModel | authenticate | self.token: \(self.fcmToken)")
                             }
                         }
                         
@@ -262,7 +265,7 @@ class LoginViewModel: ObservableObject {
                                     // Check if we need to create a new apt
                                     if roomCount % 12 == 1 {
                                         aptCount += 1
-                                        let newApt = Apt(id: "\(aptCount)", number: aptCount, rooms: [room.id!], roomCount: 1)
+                                        let newApt = Apt(id: "\(aptCount)", rooms: [room.id!], roomCount: 1)
 
                                         // Update the room with the new apt id
                                         if let aptId = newApt.id {
@@ -275,7 +278,6 @@ class LoginViewModel: ObservableObject {
                                         // Add the new apt to the Apt collection
                                         let newAptData: [String: Any] = [
                                             "id": newApt.id ?? "",
-                                            "number": newApt.number,
                                             "rooms": newApt.rooms,
                                             "roomCount": newApt.roomCount,
                                             "aptUsers": [user.id!] // Add the user to the new apt
@@ -286,8 +288,8 @@ class LoginViewModel: ObservableObject {
                                         // Update the global apt counter
                                         aptCounterRef.setData(["count": aptCount], merge: true)
                                         
-                                        // Create dummy data for the new apt
-                                        self.dummyData.createDummyData(aptId: newApt.id!)
+//                                        // Create dummy data for the new apt
+//                                        self.dummyData.createDummyData(aptId: newApt.id!)
                                         
                                     } else {
                                         // Update the user with the current apt id
@@ -316,7 +318,6 @@ class LoginViewModel: ObservableObject {
                                     let newRoomData: [String: Any] = [
                                         "id": room.id ?? "",
                                         "aptId": room.aptId,
-                                        "number": room.number,
                                         "userId": room.userId
                                     ]
                                     self.db.collection("Room").document(room.id!).setData(newRoomData)

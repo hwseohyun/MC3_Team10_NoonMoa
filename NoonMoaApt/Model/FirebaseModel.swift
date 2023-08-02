@@ -38,7 +38,7 @@ extension User {
               let requestedBy = dictionary["requestedBy"] as? [String]
         else { return nil }
 
-//        self.id = dictionary["id"] as? String
+        self.id = dictionary["id"] as? String
         self.roomId = dictionary["roomId"] as? String
         self.aptId = dictionary["aptId"] as? String
         self.userState = userState
@@ -70,14 +70,14 @@ struct AttendanceSheet: Codable, Identifiable {
 struct Room: Codable, Identifiable {
     @DocumentID var id: String?
     var aptId: String
-    var number: Int
     var userId: String // References to User document IDs
+    var number: Int
     
     init(id: String?, aptId: String?, number: Int?, userId: String?) {
         self.id = id
         self.aptId = aptId ?? ""
-        self.number = number ?? 0
         self.userId = userId ?? ""
+        self.number = number ?? 0
     }
 }
 
@@ -89,13 +89,11 @@ extension Room {
 
 struct Apt: Codable, Identifiable {
     @DocumentID var id: String?
-    var number: Int
     var rooms: [String] // References to Room document IDs
     var roomCount: Int // Total number of rooms
     
-    init(id: String?, number: Int?, rooms: [String]?, roomCount: Int?) {
+    init(id: String?, rooms: [String]?, roomCount: Int?) {
         self.id = id
-        self.number = number ?? 0
         self.rooms = rooms ?? []
         self.roomCount = roomCount ?? 0
     }

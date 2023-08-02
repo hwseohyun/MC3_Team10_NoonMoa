@@ -9,8 +9,6 @@ import SwiftUI
 
 struct SceneButtons: View {
 
-    @EnvironmentObject var eyeViewController: EyeViewController
-
     @Binding var roomUser: User
     @Binding var buttonText: String
     
@@ -97,7 +95,7 @@ struct SceneButtons: View {
                         }
                     }//VStack
                     
-                    Button(action: {
+                    Button(action: { 
                         lastWakenTimeToggle = false
                         buttonText = "\(roomUser.roomId ?? "")\n시간 종료"
                     }) {
@@ -111,10 +109,11 @@ struct SceneButtons: View {
                 Button(action: {
                     buttonText = "\(roomUser.roomId ?? "")\nactive"
                     DispatchQueue.main.async {
+                        print("SceneButtons | roomUser \(roomUser)")
                         pushNotiController.requestPushNotification(to: roomUser.id!)
                     }
                     if roomUser.roomId == "5" {
-                        eyeViewController.resetFaceAnchor()
+//                        eyeViewController.resetFaceAnchor()
                     }
                 }) {
                     Color.clear

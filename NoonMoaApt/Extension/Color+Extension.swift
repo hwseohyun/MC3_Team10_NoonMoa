@@ -22,6 +22,7 @@ extension Color {
     static let userYellow = Color(hex: 0xD4DA97)
     static let userCyan = Color(hex: 0x8BB2B2)
     static let userBlue = Color(hex: 0x8A8DC5)
+    static let announcementGray = Color(hex:0x5F5F5F)
    
     struct stampBorder {
         static let clearSunrise = Color(hex: 0xABD5ED)
@@ -152,12 +153,20 @@ extension Image {
     struct assets {
         static let apartment = Image("Apartment")
         
+        struct buttons {
+            static let calendarSelected = Image("Button_CalendarSelected")
+            static let calendarUnSelected = Image("Button_CalendarUnselected")
+            static let settingSelected = Image("Button_settingSelected")
+            static let settingUnSelected = Image("Button_settingUnselected")
+        }
+        
         struct room {
             static let vacant = Image("Room_vacant")
             static let dark = Image("Room_dark")
             static let light = Image("Room_light")
             static let blind = Image("Room_blind")
             static let blindUp = Image("Room_blindUp")
+            static let windowBorder = Image("Room_windowBorder")
         }
         
         struct stampLarge {

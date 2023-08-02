@@ -21,7 +21,7 @@ struct SceneInactiveEye: View {
                 faceOrientation: SIMD3<Float>(0.0, 0.0, 0.0),
                 bodyColor: eyeNeighborViewModel.bodyColor,
                 eyeColor: eyeNeighborViewModel.eyeColor,
-                cheekColor: eyeNeighborViewModel.cheekColor)
+                cheekColor: eyeNeighborViewModel.cheekColor, isInactiveOrSleep: roomUser.userState == "inactive" || roomUser.userState == "sleep")
         .onAppear {
             eyeNeighborViewModel.update(roomUser: roomUser)
         }

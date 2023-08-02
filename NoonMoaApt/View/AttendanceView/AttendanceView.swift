@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct AttendanceView: View {
     private let currentUser = Auth.auth().currentUser
@@ -17,7 +18,7 @@ struct AttendanceView: View {
     @EnvironmentObject var environmentModel: EnvironmentModel
     @EnvironmentObject var characterModel: CharacterModel
     @EnvironmentObject var customViewModel: CustomViewModel
-    @EnvironmentObject var eyeViewController: EyeViewController
+    @StateObject var eyeViewController: EyeViewController
     
     @State private var isStamped: Bool = false
     @State private var isScaleEffectPlayed: Bool = false
@@ -92,121 +93,70 @@ struct AttendanceView: View {
                 
                 VStack(alignment: .leading) {
                     
-                Spacer()
+                    Spacer()
                     
-                //컬러피커
-                CharacterColorPickerView()
-                    .frame(height: 50)
-                    .scaleEffect(0.9)
-                    .opacity(isColorPickerAppeared ? 1 : 0)
-                    .padding(.bottom, 64)
-                
-                if !isStamped {
-                    // 눈도장 찍기 버튼
-                    Button (action: {
-                        //사용자 색상 최초 지정(default값)
-                        customViewModel.pickerValueToCharacterColor(value: customViewModel.pickerValue)
-                        DispatchQueue.main.async {
-                            withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
-                                isBlurEffectPlayed = true
+                    //컬러피커
+                    CharacterColorPickerView()
+                        .frame(height: 50)
+                        .scaleEffect(0.9)
+                        .opacity(isColorPickerAppeared ? 1 : 0)
+                        .padding(.bottom, 64)
+                    
+                    if !isStamped {
+                        // 눈도장 찍기 버튼
+                        Button (action: {
+                            //사용자 색상 최초 지정(default값)
+                            customViewModel.pickerValueToCharacterColor(value: customViewModel.pickerValue)
+                            DispatchQueue.main.async {
+                                withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
+                                    isBlurEffectPlayed = true
+                                }
                             }
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                            withAnimation(.easeInOut(duration: 0.4).repeatCount(1, autoreverses: true)) {
-                                isBlurEffectPlayed = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                withAnimation(.easeInOut(duration: 0.4).repeatCount(1, autoreverses: true)) {
+                                    isBlurEffectPlayed = false
+                                }
                             }
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation(.easeIn(duration: 0.1)) {
-                                isStamped = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation(.easeIn(duration: 0.1)) {
+                                    isStamped = true
+                                }
                             }
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation(.linear.speed(1.5).repeatCount(1, autoreverses: true)) {
-                                isShutterEffectPlayed = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation(.linear.speed(1.5).repeatCount(1, autoreverses: true)) {
+                                    isShutterEffectPlayed = true
+                                }
+                                characterModel.currentIsSmiling = eyeViewController.eyeMyViewModel.isSmiling
+                                characterModel.currentIsBlinkingLeft = eyeViewController.eyeMyViewModel.isBlinkingLeft
+                                characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
+                                characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
+                                characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
+                                //                                customViewModel.currentCharacterColor = [0,1,0]
+                                
+                                characterModel.getCurrentCharacter()
                             }
-                            characterModel.currentIsSmiling = eyeViewController.eyeMyViewModel.isSmiling
-                            characterModel.currentIsBlinkingLeft = eyeViewController.eyeMyViewModel.isBlinkingLeft
-                            characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
-                            characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
-                            characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
-                            //                                customViewModel.currentCharacterColor = [0,1,0]
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation(.spring(response: 0.5, dampingFraction: 0.3).speed(1)) {
+                                    isScaleEffectPlayed = true
+                                }
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation(.easeInOut(duration: 1.2)) {
+                                    isColorPickerAppeared = true
+                                }
+                            }
                             
-                            characterModel.getCurrentCharacter()
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation(.spring(response: 0.5, dampingFraction: 0.3).speed(1)) {
-                                isScaleEffectPlayed = true
-                            }
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation(.easeInOut(duration: 1.2)) {
-                                isColorPickerAppeared = true
-                            }
-                        }
-                        
-                    }) {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.warmBlack)
-                            .frame(height: 56)
-                            .overlay(
-                                Text("눈도장 찍기")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.semibold)
-                                    .padding()
-                            )
-                    }
-                } else {
-                    HStack {
-                        // 다시찍기 버튼
-                        Button (action: {
-                            isStamped = false
-                            isScaleEffectPlayed = false
-                            isBlurEffectPlayed = false
-                            isShutterEffectPlayed = false
-                            isColorPickerAppeared = false
                         }) {
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.warmBlack)
                                 .frame(height: 56)
                                 .overlay(
-                                    Text("다시 찍기")
+                                    Text("눈도장 찍기")
                                         .foregroundColor(.white)
                                         .fontWeight(.semibold)
                                         .padding()
                                 )
                         }
-<<<<<<< HEAD:NoonMoaApt/View/AttendanceView/AttendanceView.swift
-                        // 시작하기 버튼
-                        Button (action: {
-                            viewRouter.currentView = .apt
-                            //                                attendanceModel.uploadAttendanceRecord()
-                            //                                attendanceCompletedViewModel.updateUserLastActiveDate()
-                        }) {
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(Color.warmBlack)
-                                .frame(height: 56)
-                                .overlay(
-                                    Text("시작하기")
-                                        .foregroundColor(.white)
-                                        .fontWeight(.semibold)
-                                        .padding()
-                                )
-                        }
-                    }//HStack
-                }
-            }//VStack
-        }//GeometryReader
-        .padding(24)
-    }//ZStack
-    //        .onAppear {
-    //            //테스트용 날씨 보기위해 임시로 아래 함수만 실행
-    //            environmentModel.getCurrentRawEnvironment()
-    //            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
-    //            environmentModel.getCurrentEnvironment()
-    //        }
-}
-=======
                     } else {
                         HStack {
                             // 다시찍기 버튼
@@ -215,6 +165,7 @@ struct AttendanceView: View {
                                 isScaleEffectPlayed = false
                                 isBlurEffectPlayed = false
                                 isShutterEffectPlayed = false
+                                isColorPickerAppeared = false
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
@@ -228,10 +179,10 @@ struct AttendanceView: View {
                             }
                             // 시작하기 버튼
                             Button (action: {
-                                //TODO: AttendanceCompleteViewModel에 정보를 저장합니다.
                                 viewRouter.currentView = .apt
-                                attendanceCompletedViewModel.saveAttendanceRecord(record: regenAttendanceRecord())
-                                attendanceCompletedViewModel.updateUserLastActiveDate()
+                                attendanceModel.uploadAttendanceRecord()
+                                //                                attendanceModel.uploadAttendanceRecord()
+                                //                                attendanceCompletedViewModel.updateUserLastActiveDate()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
@@ -249,43 +200,35 @@ struct AttendanceView: View {
             }//GeometryReader
             .padding(24)
         }//ZStack
+        //        .onAppear {
+        //            //테스트용 날씨 보기위해 임시로 아래 함수만 실행
+        //            environmentModel.getCurrentRawEnvironment()
+        //            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
+        //            environmentModel.getCurrentEnvironment()
+        //        }
     }
-    func regenAttendanceRecord() -> AttendanceRecord {
-        
-        firestoreManager.syncDB()
-        // Get the emptyRooms document
-//        let emptyRoomsRef = db.collection("User").document("emptyRooms")
-//        emptyRoomsRef.getDocument { (document, error) in
-            
-        let userId = currentUser?.uid ?? ""
-        let weatherCondition = weatherViewModel.currentWeather
-        let eyeDirection = [savedFaceOrientation.x, savedFaceOrientation.y, savedFaceOrientation.z]
-        
-        return AttendanceRecord(userId: userId, date: Date(), weatherCondition: weatherCondition, eyeDirection: eyeDirection)
-    }
->>>>>>> dev:NoonMoaApt/View/AttendanceView.swift
-}
-
-struct AttendanceView_Previews: PreviewProvider {
-    static var previews: some View {
-        let newAttendanceRecord = AttendanceRecord(
-            userId: "",
-            date: Date(),
-            rawIsSmiling: false,
-            rawIsBlinkingLeft: true,
-            rawIsBlinkingRight: false,
-            rawLookAtPoint: [0, 0, 0],
-            rawFaceOrientation: [0, 0, 0],
-            rawCharacterColor: [0, 0, 0],
-            rawWeather: "clear",
-            rawTime: Date(),
-            rawtSunriseTime: Date(),
-            rawSunsetTime: Date()
-        )
-        AttendanceView()
-            .environmentObject(ViewRouter())
-            .environmentObject(AttendanceModel(newAttendanceRecord: newAttendanceRecord))
-            .environmentObject(CustomViewModel())
-            .environmentObject(EyeViewController())
+    
+    struct AttendanceView_Previews: PreviewProvider {
+        static var previews: some View {
+            let newAttendanceRecord = AttendanceRecord(
+                userId: "",
+                date: Date(),
+                rawIsSmiling: false,
+                rawIsBlinkingLeft: true,
+                rawIsBlinkingRight: false,
+                rawLookAtPoint: [0, 0, 0],
+                rawFaceOrientation: [0, 0, 0],
+                rawCharacterColor: [0, 0, 0],
+                rawWeather: "clear",
+                rawTime: Date(),
+                rawSunriseTime: Date(),
+                rawSunsetTime: Date()
+            )
+            AttendanceView(eyeViewController: EyeViewController())
+                .environmentObject(ViewRouter())
+                .environmentObject(AttendanceModel(newAttendanceRecord: newAttendanceRecord))
+                .environmentObject(CustomViewModel())
+                .environmentObject(EyeViewController())
+        }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class CustomViewModel: ObservableObject {
-    @Published var pickerValue: Double = 0.4
+    @Published var pickerValue: Double = 0.25
     
     @Published var currentCharacterColor: Color = Color.userPink
     @Published var currentBodyColor: LinearGradient = LinearGradient.userPink

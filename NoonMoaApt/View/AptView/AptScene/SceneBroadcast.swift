@@ -20,11 +20,16 @@ struct SceneBroadcast: View {
             VStack(alignment: .leading) {
                 Spacer().frame(height: 56)
                 Text(displayedText)
-                    .foregroundColor(.black)
-                    .opacity(0.7)
+                    .foregroundColor(
+                        environmentModel.currentTime == "sunrise" ||
+                        environmentModel.currentTime == "morning" ||
+                        environmentModel.currentTime == "afternoon" ?
+                        .announcementGray :
+                        .white)
+                    .opacity(1.0)
                     .font(.body)
                     .bold()
-                    .shadow(color: .white, radius: 6, x: 0, y: 0)
+                    .shadow(color: .white.opacity(1), radius: 4, x: 0, y: 0)
                 Spacer()
             }
             Spacer()
