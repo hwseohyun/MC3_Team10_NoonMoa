@@ -109,7 +109,8 @@ struct SceneButtons: View {
                 Button(action: {
                     buttonText = "\(roomUser.roomId ?? "")\nactive"
                     DispatchQueue.main.async {
-                        pushNotiController.requestPushNotification(to: roomUser.id!)
+                        print("SceneButtons | roomUser \(roomUser)")
+                        pushNotiController.requestPushNotification(to: roomUser.roomId!)
                     }
                     if roomUser.roomId == "5" {
 //                        eyeViewController.resetFaceAnchor()
