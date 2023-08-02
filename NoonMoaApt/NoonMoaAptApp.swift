@@ -129,6 +129,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         var pushNotiController = PushNotiController()
+     
         pushNotiController.responsePushNotification()
     }
     

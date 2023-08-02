@@ -39,7 +39,7 @@ extension User {
               let requestedBy = dictionary["requestedBy"] as? [String]
         else { return nil }
 
-//        self.id = dictionary["id"] as? String
+        self.id = dictionary["id"] as? String
         self.roomId = dictionary["roomId"] as? String
         self.aptId = dictionary["aptId"] as? String
         self.userState = userState

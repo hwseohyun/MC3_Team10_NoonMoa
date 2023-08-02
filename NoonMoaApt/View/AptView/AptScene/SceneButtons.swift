@@ -111,7 +111,7 @@ struct SceneButtons: View {
                     buttonText = "\(roomUser.roomId ?? "")\nactive"
                     DispatchQueue.main.async {
                         print("SceneButtons | roomUser \(roomUser)")
-                        pushNotiController.requestPushNotification(to: roomUser.roomId!)
+                        pushNotiController.requestPushNotification(to: roomUser.id!)
                     }
                     //인터랙션 실행문
                     DispatchQueue.main.async {

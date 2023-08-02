@@ -86,7 +86,7 @@ class PushNotiController: ObservableObject {
                             "clicked": true])
                         
                         // Send push notification to targetUser
-                        self.sendPushNotification(userToken: targetUser.token, title: "10\(targetUser.roomId!)호 이웃이 똑똑 노크했어요.", content: "지금 일어나서 이웃에게 인사해 보세요.")
+                        self.sendPushNotification(userToken: targetUser.token, title: "10호 이웃이 똑똑 노크했어요.", content: "지금 일어나서 이웃에게 인사해 보세요.")
                         
                     } else {
                         // If targetUser is in 'Clicked' state, just update currentUser's 'requestedBy' list
@@ -123,7 +123,7 @@ class PushNotiController: ObservableObject {
                         let userRef = self.db.collection("User").document(userId)
                         userRef.getDocument { (doc, err) in
                             if let doc = doc, doc.exists, let data = doc.data(), let userToken = data["token"] as? String {
-                                self.sendPushNotification(userToken: userToken, title: "10\(user.roomId!)호 이웃이 깨어났어요.", content: "눈모아 아파트에서 이웃을 만나보세요.")
+                                self.sendPushNotification(userToken: userToken, title: "10\(user.roomId ?? "777")호 이웃이 깨어났어요.", content: "눈모아 아파트에서 이웃을 만나보세요.")
                             }
                         }
                     }
