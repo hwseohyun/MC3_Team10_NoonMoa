@@ -14,7 +14,7 @@ struct LoginView: View {
     @StateObject var loginData = LoginViewModel(viewRouter: ViewRouter())
     @AppStorage("isLogInDone") var isLogInDone: Bool = false
     //    @Binding var roomUser: User
-    @State private var eyeNeighborModel = EyeNeighborViewModel()
+    @State private var eyeNeighborViewModel = EyeNeighborViewModel()
     @State private var isBlinkingPlayed: Bool = false
     
     var body: some View {
@@ -27,7 +27,7 @@ struct LoginView: View {
                     faceOrientation: SIMD3<Float>(1.0, 0.0, 0.0),
                     bodyColor: LinearGradient.userBlue,
                     eyeColor: LinearGradient.eyeBlue,
-                    cheekColor: LinearGradient.cheekRed, isInactiveOrSleep: false)
+                    cheekColor: LinearGradient.cheekRed, isInactiveOrSleep: false, isJumping: false)
             .frame(width: 270, height: 270)
             .padding(.bottom, 24)
             .onAppear {
@@ -57,7 +57,7 @@ struct LoginView: View {
                 loginData.nonce = loginData.randomNonceString()
                 request.requestedScopes = [.email, .fullName]
                 request.nonce = loginData.sha256(loginData.nonce)
-                
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             } onCompletion: { (result) in
                 switch result {
                 case .success(let user):

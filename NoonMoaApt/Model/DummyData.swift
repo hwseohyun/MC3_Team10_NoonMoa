@@ -66,7 +66,7 @@
 //                            }
 //
 //                            let dummyUserId = UUID().uuidString
-//                            let dummyUser = User(id: dummyUserId, roomId: newRoomId, aptId: aptId, userState: UserState.sleep.rawValue, lastActiveDate: Date(), eyeColor: EyeColor.blue.rawValue, token: "", requestedBy: [])
+//                            let dummyUser = User(id: dummyUserId, roomId: newRoomId, aptId: aptId, userState: UserState.sleep.rawValue, lastActiveDate: Date(), characterColor: CharacterColor.blue.rawValue, token: "", requestedBy: [])
 //
 //                            do {
 //                                try self.db.collection("User").document(dummyUserId).setData(from: dummyUser)

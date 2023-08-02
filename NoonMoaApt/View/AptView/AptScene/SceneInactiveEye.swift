@@ -21,7 +21,7 @@ struct SceneInactiveEye: View {
                 faceOrientation: SIMD3<Float>(0.0, 0.0, 0.0),
                 bodyColor: eyeNeighborViewModel.bodyColor,
                 eyeColor: eyeNeighborViewModel.eyeColor,
-                cheekColor: eyeNeighborViewModel.cheekColor, isInactiveOrSleep: roomUser.userState == "inactive" || roomUser.userState == "sleep")
+                cheekColor: eyeNeighborViewModel.cheekColor, isInactiveOrSleep: roomUser.userState == "inactive" || roomUser.userState == "sleep", isJumping: false)
         .onAppear {
             eyeNeighborViewModel.update(roomUser: roomUser)
         }
@@ -29,7 +29,7 @@ struct SceneInactiveEye: View {
 }
 
 struct SceneInactiveEye_Previews: PreviewProvider {
-    @State static var roomUser: User = User.sampleData[0][0]
+    @State static var roomUser: User = User.UTData[0][0]
     
     static var previews: some View {
         SceneInactiveEye(roomUser: $roomUser)

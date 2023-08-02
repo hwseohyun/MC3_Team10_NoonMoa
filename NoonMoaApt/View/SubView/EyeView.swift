@@ -12,6 +12,7 @@ struct EyeView: View {
     var eyeColor: LinearGradient
     var cheekColor: LinearGradient
     var isInactiveOrSleep: Bool
+    var isJumping: Bool
     
     var body: some View {
         ZStack {
@@ -48,6 +49,9 @@ struct EyeView: View {
                         .frame(width: shadowWidth, height: shadowHeight)
                         .offset(y: bodyHeight / 2)
                         .opacity(0.4)
+                        .opacity(isJumping ? 0.5 : 1)
+                        .scaleEffect(isJumping ? 0.8 : 1)
+                        .offset(y: isJumping ? 6 : 0)
                     
                     //몸통
                     Ellipse()
@@ -91,7 +95,8 @@ struct EyeView: View {
                                     .overlay(
                                         //볼터치
                                         Ellipse()
-                                            .fill(cheekColor)                               .frame(width: eyeWidth * 0.8, height: eyeWidth * 0.3)
+                                            .fill(cheekColor)
+                                            .frame(width: eyeWidth * 0.8, height: eyeWidth * 0.3)
                                             .opacity(0.2)
                                             .offset(x: -(eyeWidth * 0.2), y: eyeHeight * 0.5)
                                             .opacity(isSmiling ? 1 : 0)
@@ -134,7 +139,8 @@ struct EyeView: View {
                                     .overlay(
                                         //볼터치
                                         Ellipse()
-                                            .fill(cheekColor)                               .frame(width: eyeWidth * 0.8, height: eyeWidth * 0.3)
+                                            .fill(cheekColor)
+                                            .frame(width: eyeWidth * 0.8, height: eyeWidth * 0.3)
                                             .frame(width: eyeWidth * 0.8, height: eyeWidth * 0.3)
                                             .opacity(0.2)
                                             .offset(x: (eyeWidth * 0.2), y: eyeHeight * 0.5)
@@ -157,6 +163,7 @@ struct EyeView: View {
                             Ellipse()
                                 .stroke(Color.black, lineWidth: 1)
                         )
+                        .offset(y: isJumping ? -10 : 0)
                 }
                 .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             }//GeometryReader
@@ -176,7 +183,7 @@ struct TestView: View {
                 isBlinkingLeft: eyeViewController.eyeMyViewModel.isBlinkingLeft,
                 isBlinkingRight: eyeViewController.eyeMyViewModel.isBlinkingRight,
                 lookAtPoint: eyeViewController.eyeMyViewModel.lookAtPoint,
-                faceOrientation: eyeViewController.eyeMyViewModel.faceOrientation, bodyColor: customViewModel.currentBodyColor, eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor, isInactiveOrSleep: false)
+                faceOrientation: eyeViewController.eyeMyViewModel.faceOrientation, bodyColor: customViewModel.currentBodyColor, eyeColor: customViewModel.currentEyeColor, cheekColor: customViewModel.currentCheekColor, isInactiveOrSleep: false, isJumping: false)
     }
 }
 

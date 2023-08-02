@@ -75,7 +75,7 @@ class EnvironmentModel: ObservableObject {
     
     //앱을 시작할 때 실행시키며, 10분단위로 실행시킨다. 이 모델을 따르는 뷰는 자동으로 업데이트 된다.
     func getCurrentEnvironment() {
-//        getCurrentRawEnvironment()
+
         convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
         convertEnvironmentToViewData(isInputCurrentData: true, weather: currentWeather, time: currentTime, isThunder: currentIsThunder)
     }
@@ -139,31 +139,47 @@ class EnvironmentModel: ObservableObject {
     
     // W[WeatherKit으로부터 받아온 raw data or 서버로부터 받아온 recordedRaw]를 Environment로 중간 변환
     func convertRawDataToEnvironment(isInputCurrentData: Bool, weather: String, time: Date, sunrise: Date, sunset: Date) {
+
+        
+    //
+    //    func getCurrentWeather() {
+    //       switch currentWeatherRaw {
+    //           case .clear, .hot, .mostlyClear:
+    //           currentWeather = WeatherViewModel.clear
+    //           case .blowingDust, .cloudy, .foggy, .haze, .hurricane, .mostlyCloudy, .partlyCloudy, .smoky:
+    //               currentWeather = WeatherViewModel.cloudy
+    //           case .rain, .heavyRain, .freezingRain, .sunShowers, .drizzle, .freezingDrizzle, .hail:
+    //               currentWeather = WeatherViewModel.rainy
+    //           case .blizzard, .snow, .sunFlurries, .heavySnow, .blowingSnow, .flurries, .sleet, .frigid, .wintryMix:
+    //               currentWeather = WeatherViewModel.snowy
+    //           case .breezy, .windy, .tropicalStorm:
+    //               currentWeather = WeatherViewModel.windy
+    //           case .isolatedThunderstorms, .scatteredThunderstorms, .strongStorms, .thunderstorms:
+    //               currentWeather = WeatherViewModel.thunder
+    //           @unknown default:
+    //               currentWeather = WeatherViewModel.clear
+    //       }
+    //   }
+
         
         let environmentWeather: String
         switch weather {
-        case "1", "2", "partlyCloudy": environmentWeather = "clear"
-        case "mostlyCloudy", "5", "6", "7": environmentWeather = "cloudy"
-        case "8", "9", "10": environmentWeather = "rainy"
-        case "11", "12", "13": environmentWeather = "snowy"
+        case "clear", "hot", "mostlyClear", "mostlyCloudy", "partlyCloudy" : environmentWeather = "clear"
+        case "blowingDust", "cloudy", "foggy", "haze", "hurricane", "smoky" : environmentWeather = "cloudy"
+        case "rain", "heavyRain", "freezingRain", "sunShowers", "drizzle", "freezingDrizzle", "hail" : environmentWeather = "rainy"
+        case "blizzard", "snow", "sunFlurries", "heavySnow", "blowingSnow", "flurries", "sleet", "frigid", "wintryMix": environmentWeather = "snowy"
         default: environmentWeather = "clear"
         }
         
         let environmentIsWind: Bool
         switch weather {
-        case "1", "2", "3": environmentIsWind = true
-        case "4", "5", "6", "7": environmentIsWind = false
-        case "8", "9", "10": environmentIsWind = false
-        case "11", "12", "13": environmentIsWind = false
+        case "blowingDust", "hurricane", "hail", "blizzard", "breezy", "windy", "tropicalStrom": environmentIsWind = true
         default: environmentIsWind = false
         }
         
         let environmentIsThunder: Bool
         switch weather {
-        case "1", "2", "3": environmentIsThunder = false
-        case "4", "5", "6", "7": environmentIsThunder = true
-        case "8", "9", "10": environmentIsThunder = false
-        case "11", "12", "13": environmentIsThunder = true
+        case "thunderstorms", "strongStorms", "isolatedThunderstorms", "scatteredThunderstorms": environmentIsThunder = true
         default: environmentIsThunder = false
         }
         

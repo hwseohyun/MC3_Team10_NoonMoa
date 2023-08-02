@@ -179,7 +179,7 @@ extension AptModel {
                     
                     if userId == "dummyUserId" {
                         print("ADD dummyUser from User.UTData[0][0]")
-                        userLayout[row][col] = User.UTData[0][0] // Assign dummy user
+                        userLayout[row][col] = User.UTData[row][col] // Assign dummy user
                     } else {
                         dispatchGroup.enter() // Enter the group before starting the async call
                         

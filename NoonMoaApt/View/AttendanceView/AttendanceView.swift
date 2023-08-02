@@ -18,6 +18,8 @@ struct AttendanceView: View {
     @EnvironmentObject var environmentModel: EnvironmentModel
     @EnvironmentObject var characterModel: CharacterModel
     @EnvironmentObject var customViewModel: CustomViewModel
+    @EnvironmentObject var weatherKitManager: WeatherKitManager
+    @EnvironmentObject var locationManager: LocationManager
     @StateObject var eyeViewController: EyeViewController
     
     @State private var isStamped: Bool = false
@@ -25,6 +27,7 @@ struct AttendanceView: View {
     @State private var isBlurEffectPlayed: Bool = false
     @State private var isShutterEffectPlayed: Bool = false
     @State private var isColorPickerAppeared: Bool = false
+    @State private var isStartButtonActive: Bool = false
     
     private var firestoreManager: FirestoreManager {
         FirestoreManager.shared
@@ -107,17 +110,26 @@ struct AttendanceView: View {
                         Button (action: {
                             //사용자 색상 최초 지정(default값)
                             customViewModel.pickerValueToCharacterColor(value: customViewModel.pickerValue)
+                            //날씨 받아오기
+                            weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                            environmentModel.rawWeather = weatherKitManager.condition
+                            environmentModel.getCurrentEnvironment()
+                            print("at attendanceView after stamped, weather:\(environmentModel.currentWeather)")
+                            print("at attendanceView after stamped, time:\(environmentModel.currentTime)")
                             DispatchQueue.main.async {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
                                     isBlurEffectPlayed = true
                                 }
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 withAnimation(.easeInOut(duration: 0.4).repeatCount(1, autoreverses: true)) {
                                     isBlurEffectPlayed = false
                                 }
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                 withAnimation(.easeIn(duration: 0.1)) {
                                     isStamped = true
                                 }
@@ -131,7 +143,6 @@ struct AttendanceView: View {
                                 characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
                                 characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
                                 characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
-                                //                                customViewModel.currentCharacterColor = [0,1,0]
                                 
                                 characterModel.getCurrentCharacter()
                             }
@@ -139,13 +150,16 @@ struct AttendanceView: View {
                                 withAnimation(.spring(response: 0.5, dampingFraction: 0.3).speed(1)) {
                                     isScaleEffectPlayed = true
                                 }
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation(.easeInOut(duration: 1.2)) {
+                                withAnimation(.easeInOut(duration: 1)) {
                                     isColorPickerAppeared = true
                                 }
                             }
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    isStartButtonActive = true
+                                }
+                            }
+                
                         }) {
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.warmBlack)
@@ -166,6 +180,8 @@ struct AttendanceView: View {
                                 isBlurEffectPlayed = false
                                 isShutterEffectPlayed = false
                                 isColorPickerAppeared = false
+                                isStartButtonActive = false
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
@@ -183,10 +199,12 @@ struct AttendanceView: View {
                                 attendanceModel.uploadAttendanceRecord()
                                 //                                attendanceModel.uploadAttendanceRecord()
                                 //                                attendanceCompletedViewModel.updateUserLastActiveDate()
+                                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
                                     .frame(height: 56)
+                                    .opacity(isStartButtonActive ? 1 : 0.3)
                                     .overlay(
                                         Text("시작하기")
                                             .foregroundColor(.white)
@@ -194,18 +212,22 @@ struct AttendanceView: View {
                                             .padding()
                                     )
                             }
+                            .disabled(!isStartButtonActive)
                         }//HStack
                     }
                 }//VStack
             }//GeometryReader
             .padding(24)
         }//ZStack
-        //        .onAppear {
-        //            //테스트용 날씨 보기위해 임시로 아래 함수만 실행
-        //            environmentModel.getCurrentRawEnvironment()
-        //            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
-        //            environmentModel.getCurrentEnvironment()
-        //        }
+                .onAppear {
+                    //테스트용 날씨 보기위해 임시로 아래 함수만 실행
+                    weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                    environmentModel.rawWeather = weatherKitManager.condition
+                    environmentModel.getCurrentEnvironment()
+                    print("at attendanceView, weather:\(environmentModel.currentWeather)")
+                    print("at attendanceView, time:\(environmentModel.currentTime)")
+
+                }
     }
     
     struct AttendanceView_Previews: PreviewProvider {
