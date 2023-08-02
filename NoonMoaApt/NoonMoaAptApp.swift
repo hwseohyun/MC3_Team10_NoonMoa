@@ -50,7 +50,9 @@ struct NoonMoaAptApp: App {
                      calendarFullViewModel: CalendarFullViewModel(),
                      calendarSingleController: CalendarSingleController(viewModel: CalendarFullViewModel()),
                      loginViewModel: LoginViewModel(viewRouter: ViewRouter()),
-                     eyeViewController: EyeViewController())
+                     weatherKitManager: WeatherKitManager(),
+                     locationManager: LocationManager()
+            )
             .environmentObject(delegate.viewRouter)
             .environmentObject(midnightUpdater) // Pass to view here
         }
@@ -91,7 +93,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         setUpPushNotifications(application: application)
-                
+        
         // 자정이 되면 모든 user의 userState를 .sleep으로 변경
         midnightUpdater = MidnightUpdater()
         timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
@@ -128,7 +130,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         //        var pushNotiController = PushNotiController()
         //        pushNotiController.responsePushNotification()
         
-//        Messaging.messaging().delegate = self
+        //        Messaging.messaging().delegate = self
         
         // 자정이 되면 모든 user의 userState를 .sleep으로 변경
         midnightUpdater = MidnightUpdater()

@@ -154,9 +154,9 @@ extension Image {
         
         struct buttons {
             static let calendarSelected = Image("Button_CalendarSelected")
-            static let calendarUnSelected = Image("Button_CalendarUnSelected")
+            static let calendarUnSelected = Image("Button_CalendarUnselected")
             static let settingSelected = Image("Button_settingSelected")
-            static let settingUnSelected = Image("Button_settingUnSelected")
+            static let settingUnSelected = Image("Button_settingUnselected")
         }
         
         struct room {

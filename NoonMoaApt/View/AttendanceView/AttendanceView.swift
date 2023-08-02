@@ -18,7 +18,7 @@ struct AttendanceView: View {
     @EnvironmentObject var environmentModel: EnvironmentModel
     @EnvironmentObject var characterModel: CharacterModel
     @EnvironmentObject var customViewModel: CustomViewModel
-    @EnvironmentObject var eyeViewController: EyeViewController
+    @StateObject var eyeViewController: EyeViewController
     
     @State private var isStamped: Bool = false
     @State private var isScaleEffectPlayed: Bool = false
@@ -224,7 +224,7 @@ struct AttendanceView: View {
                 rawSunriseTime: Date(),
                 rawSunsetTime: Date()
             )
-            AttendanceView()
+            AttendanceView(eyeViewController: EyeViewController())
                 .environmentObject(ViewRouter())
                 .environmentObject(AttendanceModel(newAttendanceRecord: newAttendanceRecord))
                 .environmentObject(CustomViewModel())

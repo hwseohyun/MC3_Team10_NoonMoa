@@ -35,9 +35,9 @@ struct SceneRoom: View {
                             
                 if roomUser.userState == "active" {
                     if roomUser.roomId == "5" {
-                        SceneMyEye()
-                            .environmentObject(eyeViewController)
-                            .environmentObject(customViewModel)
+//                        SceneMyEye()
+//                            .environmentObject(eyeViewController)
+//                            .environmentObject(customViewModel)
 
                     } else {
                         SceneNeighborEye(roomUser: $roomUser)

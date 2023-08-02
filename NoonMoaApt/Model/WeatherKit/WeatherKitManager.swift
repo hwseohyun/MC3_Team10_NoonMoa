@@ -8,6 +8,8 @@ import WeatherKit
         async {
             do {
                 weather = try await Task.detached(priority: .userInitiated) {
+                    print(latitude)
+                    print(longitude)
                     return try await WeatherService.shared.weather(for:.init(latitude: latitude, longitude: longitude))
                 }.value
             } catch {
@@ -24,5 +26,10 @@ import WeatherKit
         let temp = weather?.currentWeather.temperature
         let convertedTemp = temp?.converted(to: .celsius).description
         return convertedTemp ?? "Connecting to WeatherKit"
+    }
+    
+    var condition: String {
+        let condition = weather?.currentWeather.condition.rawValue
+        return condition ?? "Connecting to WeatherKit"
     }
 }
