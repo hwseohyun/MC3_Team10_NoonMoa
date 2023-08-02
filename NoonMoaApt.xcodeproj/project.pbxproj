@@ -42,6 +42,7 @@
 		8ADF144B2A79764E00A09057 /* ParticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADF144A2A79764E00A09057 /* ParticleView.swift */; };
 		8ADF14512A79780E00A09057 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		DA5563C02A7ADEF10066D589 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA5563BF2A7ADEF00066D589 /* GoogleService-Info.plist */; };
+		DA5563C22A7AF06B0066D589 /* Splash.json in Resources */ = {isa = PBXBuildFile; fileRef = DA5563C12A7AF06B0066D589 /* Splash.json */; };
 		DA904E332A6A361700CC14D9 /* StampLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904E312A6A361700CC14D9 /* StampLargeView.swift */; };
 		DA904E342A6A361700CC14D9 /* StampButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA904E322A6A361700CC14D9 /* StampButtonView.swift */; };
 		DAEE7E102A719F8800D7FACA /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DAEE7E0F2A719F8800D7FACA /* Lottie */; };
@@ -146,6 +147,7 @@
 		DA10AFFE2A79783E00D20C1C /* NoonMoaAptTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA10AFFF2A79783E00D20C1C /* NoonMoaAptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoonMoaAptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA5563BF2A7ADEF00066D589 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA5563C12A7AF06B0066D589 /* Splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Splash.json; path = "../../../../Image Assets/splash_lottie/Splash.json"; sourceTree = "<group>"; };
 		DA904E312A6A361700CC14D9 /* StampLargeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampLargeView.swift; sourceTree = "<group>"; };
 		DA904E322A6A361700CC14D9 /* StampButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StampButtonView.swift; sourceTree = "<group>"; };
 		E3025D792A702C15000BB6E9 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 		DAEE7E0D2A719E5E00D7FACA /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				DA5563C12A7AF06B0066D589 /* Splash.json */,
 				8A2724E32A7905E000A8D970 /* clearD.json */,
 				8A2724E22A7905E000A8D970 /* clearN.json */,
 				8A2724DE2A7905E000A8D970 /* cloudyD.json */,
@@ -548,6 +551,7 @@
 				8A2724EA2A7905E100A8D970 /* clearN.json in Resources */,
 				8A2724E62A7905E100A8D970 /* cloudyD.json in Resources */,
 				8A2724EC2A7905E100A8D970 /* rainyN.json in Resources */,
+				DA5563C22A7AF06B0066D589 /* Splash.json in Resources */,
 				E3F739392A6A575F00E5F291 /* Assets.xcassets in Resources */,
 				8A2724E72A7905E100A8D970 /* rainyD.json in Resources */,
 				8ADF14512A79780E00A09057 /* (null) in Resources */,
