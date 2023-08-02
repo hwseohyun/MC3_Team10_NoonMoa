@@ -90,6 +90,7 @@ struct OnboardingView: View {
                             Button(action: {
                                 //마지막 탭으로 이동
                                 self.currentTab = OnboardingData.datalist.count - 1
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             }, label: {
                                 Text("SKIP")
                                     .padding(.trailing, 30)
@@ -101,6 +102,7 @@ struct OnboardingView: View {
                         else {
                             Button(action: {
                                 self.currentTab = OnboardingData.datalist.count - 1
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             }, label: {
                                 Text("SKIP")
                                     .padding(.trailing, 30)
@@ -151,6 +153,7 @@ struct OnboardingView: View {
                     if currentTab < OnboardingData.datalist.count - 1 {
                         Button(action: {
                             self.currentTab += 1
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                         }, label: {
                             RoundedRectangle(cornerRadius: 13)
                                 .foregroundColor(Color.gray)
@@ -167,6 +170,7 @@ struct OnboardingView: View {
                         Button {
                             isOnboardingDone = true
                             viewRouter.nextView = .login
+                            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                         } label: {
                             RoundedRectangle(cornerRadius: 13)
                                 .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))

@@ -34,7 +34,7 @@ struct StampButtonView: View {
                     .resizable()
                     .scaledToFit()
                     .clipShape(RoundedRectangle(cornerRadius: 50))
-                EyeView(isSmiling: isSmiling, isBlinkingLeft: isBlinkingLeft, isBlinkingRight: isBlinkingRight, lookAtPoint: lookAtPoint, faceOrientation: faceOrientation, bodyColor: bodyColor, eyeColor: eyeColor, cheekColor: cheekColor, isInactiveOrSleep: false)
+                EyeView(isSmiling: isSmiling, isBlinkingLeft: isBlinkingLeft, isBlinkingRight: isBlinkingRight, lookAtPoint: lookAtPoint, faceOrientation: faceOrientation, bodyColor: bodyColor, eyeColor: eyeColor, cheekColor: cheekColor, isInactiveOrSleep: false, isJumping: false)
                     .frame(width: geo.size.width * 0.7)
                 Circle()
                     .strokeBorder(Color.black, lineWidth: 1)

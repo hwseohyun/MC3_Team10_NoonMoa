@@ -22,6 +22,11 @@ extension Color {
     static let userYellow = Color(hex: 0xD4DA97)
     static let userCyan = Color(hex: 0x8BB2B2)
     static let userBlue = Color(hex: 0x8A8DC5)
+    static let userThemeGreen1 = Color(hex: 0x58DA8C)
+    static let userThemeBlue1 = Color(hex: 0x7BC0FF)
+    static let userThemePink1 = Color(hex: 0xE56EC4)
+    static let userThemeYellow1 = Color(hex: 0xDAD56C)
+    
     static let announcementGray = Color(hex:0x5F5F5F)
    
     struct stampBorder {
@@ -156,14 +161,16 @@ extension Image {
         struct buttons {
             static let calendarSelected = Image("Button_CalendarSelected")
             static let calendarUnSelected = Image("Button_CalendarUnselected")
-            static let settingSelected = Image("Button_settingSelected")
-            static let settingUnSelected = Image("Button_settingUnselected")
+            static let settingSelected = Image("Button_SettingSelected")
+            static let settingUnSelected = Image("Button_SettingUnselected")
         }
         
         struct room {
             static let vacant = Image("Room_vacant")
             static let dark = Image("Room_dark")
             static let light = Image("Room_light")
+            static let white = Image("Room_white")
+            static let pink = Image("Room_pink")
             static let blind = Image("Room_blind")
             static let blindUp = Image("Room_blindUp")
             static let windowBorder = Image("Room_windowBorder")
@@ -412,3 +419,5 @@ extension Text {
                                "아,아 관리사무소에서 안내말씀 드리겠습니다.\n청결한 눈모아 아파트를 위해 각 세대에서는\n방청소에 신경 써주시길 바랍니다"]
     }
 }
+
+    

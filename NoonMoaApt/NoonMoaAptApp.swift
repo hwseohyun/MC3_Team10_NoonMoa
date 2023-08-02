@@ -21,6 +21,9 @@ struct NoonMoaAptApp: App {
     
     var viewRouter = ViewRouter()
     var midnightUpdater = MidnightUpdater()
+    var weatherKitManager = WeatherKitManager()
+    var locationManager = LocationManager()
+    var environmentModel = EnvironmentModel()
     
     // Initialize a sample AttendanceRecord
     let attendanceRecord = AttendanceRecord(
@@ -41,7 +44,7 @@ struct NoonMoaAptApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
+//            ParticleView()
             MainView(aptModel: AptModel(),
                      attendanceModel: AttendanceModel(newAttendanceRecord: attendanceRecord),
                      characterModel: CharacterModel(),

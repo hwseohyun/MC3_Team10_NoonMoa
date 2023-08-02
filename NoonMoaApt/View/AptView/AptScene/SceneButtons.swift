@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 struct SceneButtons: View {
-
+    
     @Binding var roomUser: User
     @Binding var buttonText: String
     
     @State private var lastActiveToggle: Bool = false
     @State private var lastWakenTimeToggle: Bool = false
+    @EnvironmentObject var customViewModel: CustomViewModel
     
     let pushNotiController = PushNotiController()
     
@@ -78,24 +82,24 @@ struct SceneButtons: View {
                         .opacity(0.3)
                     
                     VStack {
-                            Text("깨우는 중...")
-                                .foregroundColor(.white)
-                                .font(.caption)
-                                .bold()
+                        Text("깨우는 중...")
+                            .foregroundColor(.white)
+                            .font(.caption)
+                            .bold()
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
                                 .foregroundColor(.black)
                                 .opacity(0.5)
                                 .frame(width: 64, height: 8)
-
-                                RoundedRectangle(cornerRadius: 8)
-                                    .foregroundColor(.white)
-                                    .frame(width: 32, height: 8)
-                                    .offset(x: -16)
+                            
+                            RoundedRectangle(cornerRadius: 8)
+                                .foregroundColor(.white)
+                                .frame(width: 32, height: 8)
+                                .offset(x: -16)
                         }
                     }//VStack
                     
-                    Button(action: { 
+                    Button(action: {
                         lastWakenTimeToggle = false
                         buttonText = "\(roomUser.roomId ?? "")\n시간 종료"
                     }) {
@@ -108,40 +112,72 @@ struct SceneButtons: View {
             case "active":
                 Button(action: {
                     buttonText = "\(roomUser.roomId ?? "")\nactive"
+                    //TODO: 더미데이터일 경우 실행하지않기_임시로 분기처리
+                    if roomUser.token.count > 1 {
+                        DispatchQueue.main.async {
+                            print("SceneButtons | roomUser \(roomUser)")
+                            pushNotiController.requestPushNotification(to: roomUser.id!)
+                        }
+                    }
+                    //인터랙션 실행문
                     DispatchQueue.main.async {
-                        print("SceneButtons | roomUser \(roomUser)")
-                        pushNotiController.requestPushNotification(to: roomUser.id!)
+                        withAnimation(.easeOut(duration: 0.2)) {
+                            roomUser.isJumping = true
+                        }
                     }
-                    if roomUser.roomId == "5" {
-//                        eyeViewController.resetFaceAnchor()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        withAnimation(.easeIn(duration: 0.2)) {
+                            roomUser.isJumping = false
+                        }
                     }
+                    //인터랙션 실행문
+                    roomUser.clicked = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        roomUser.clicked = false
+                    }
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    
                 }) {
-                    Color.clear
-                        .cornerRadius(8)
+                    if roomUser.id == Auth.auth().currentUser?.uid {
+                        Color.clear
+                            .cornerRadius(8)
+                            .particleEffect(systemImage: "suit.heart.fill",
+                                            font: .title3,
+                                            status:  roomUser.clicked,
+                                            tint: customViewModel.currentCharacterColor)
+                    } else {
+                        Color.clear
+                            .cornerRadius(8)
+                            .particleEffect(systemImage: "suit.heart.fill",
+                                            font: .title3,
+                                            status: roomUser.clicked,
+                                            tint:   {switch roomUser.characterColor {
+                                            case "blue": return Color.userBlue
+                                            case "pink": return Color.userPink
+                                            case "cyan": return Color.userCyan
+                                            case "yellow": return Color.userYellow
+                                            default: return Color.userBlue
+                                            }//임시로 처리
+                            }()
+                        )
+                    }
                 }
-            case "inactive":
-                Button(action: {
-                    buttonText = "\(roomUser.roomId ?? "")\ninactive"
-                }) {
-                    Color.clear
-                        .cornerRadius(8)
+                case "inactive":
+                    Button(action: {
+                        buttonText = "\(roomUser.roomId ?? "")\ninactive"
+                    }) {
+                        Color.clear
+                            .cornerRadius(8)
+                    }
+                default :
+                    Button(action: {
+                        buttonText = "\(roomUser.roomId ?? "")\nvacant"
+                    }) {
+                        Color.clear
+                            .cornerRadius(8)
+                    }
                 }
-            default :
-                Button(action: {
-                    buttonText = "\(roomUser.roomId ?? "")\nvacant"
-                }) {
-                    Color.clear
-                        .cornerRadius(8)
-                }
-            }
-        }//ZStack
+            }//ZStack
+        }
     }
-}
-
-//struct SceneButtons_Previews: PreviewProvider {
-//    @State static var user: User = User.sampleData[1][1]
-//    @State static var buttonText: String = ""
-//    static var previews: some View {
-//        SceneButtons(roomUser: $user, buttonText: $buttonText)
-//    }
-//}
+    
