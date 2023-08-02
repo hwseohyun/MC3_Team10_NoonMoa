@@ -21,6 +21,9 @@ struct NoonMoaAptApp: App {
     
     var viewRouter = ViewRouter()
     var midnightUpdater = MidnightUpdater()
+    var weatherKitManager = WeatherKitManager()
+    var locationManager = LocationManager()
+    var environmentModel = EnvironmentModel()
     
     // Initialize a sample AttendanceRecord
     let attendanceRecord = AttendanceRecord(

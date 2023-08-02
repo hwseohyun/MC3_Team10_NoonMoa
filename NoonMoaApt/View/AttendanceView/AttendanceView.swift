@@ -18,6 +18,8 @@ struct AttendanceView: View {
     @EnvironmentObject var environmentModel: EnvironmentModel
     @EnvironmentObject var characterModel: CharacterModel
     @EnvironmentObject var customViewModel: CustomViewModel
+    @EnvironmentObject var weatherKitManager: WeatherKitManager
+    @EnvironmentObject var locationManager: LocationManager
     @StateObject var eyeViewController: EyeViewController
     
     @State private var isStamped: Bool = false
@@ -108,6 +110,12 @@ struct AttendanceView: View {
                         Button (action: {
                             //사용자 색상 최초 지정(default값)
                             customViewModel.pickerValueToCharacterColor(value: customViewModel.pickerValue)
+                            //날씨 받아오기
+                            weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                            environmentModel.rawWeather = weatherKitManager.condition
+                            environmentModel.getCurrentEnvironment()
+                            print("at attendanceView after stamped, weather:\(environmentModel.currentWeather)")
+                            print("at attendanceView after stamped, time:\(environmentModel.currentTime)")
                             DispatchQueue.main.async {
                                 UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
@@ -135,7 +143,6 @@ struct AttendanceView: View {
                                 characterModel.currentIsBlinkingRight = eyeViewController.eyeMyViewModel.isBlinkingRight
                                 characterModel.currentLookAtPoint = eyeViewController.eyeMyViewModel.lookAtPoint
                                 characterModel.currentFaceOrientation = eyeViewController.eyeMyViewModel.faceOrientation
-                                //                                customViewModel.currentCharacterColor = [0,1,0]
                                 
                                 characterModel.getCurrentCharacter()
                             }
@@ -212,12 +219,15 @@ struct AttendanceView: View {
             }//GeometryReader
             .padding(24)
         }//ZStack
-        //        .onAppear {
-        //            //테스트용 날씨 보기위해 임시로 아래 함수만 실행
-        //            environmentModel.getCurrentRawEnvironment()
-        //            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
-        //            environmentModel.getCurrentEnvironment()
-        //        }
+                .onAppear {
+                    //테스트용 날씨 보기위해 임시로 아래 함수만 실행
+                    weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                    environmentModel.rawWeather = weatherKitManager.condition
+                    environmentModel.getCurrentEnvironment()
+                    print("at attendanceView, weather:\(environmentModel.currentWeather)")
+                    print("at attendanceView, time:\(environmentModel.currentTime)")
+
+                }
     }
     
     struct AttendanceView_Previews: PreviewProvider {

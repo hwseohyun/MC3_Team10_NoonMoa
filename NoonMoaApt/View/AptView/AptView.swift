@@ -16,14 +16,14 @@ struct AptView: View {
     @EnvironmentObject var attendanceModel: AttendanceModel
     @EnvironmentObject var characterModel: CharacterModel
     @EnvironmentObject var environmentModel: EnvironmentModel
-    //    @StateObject var eyeViewController: EyeViewController
     @EnvironmentObject var customViewModel: CustomViewModel
     @EnvironmentObject var weatherKitManager: WeatherKitManager
-    @EnvironmentObject var locationManger: LocationManager
+    @EnvironmentObject var locationManager: LocationManager
     
     @State private var users: [[User]] = User.UTData
     @State private var buttonText: String = ""
     @State private var isCalendarOpen: Bool = false
+    @State private var isSettingOpen: Bool = false
     @State private var announcement: Bool = false
     
     //아파트 등장 애니메이션
@@ -118,8 +118,7 @@ struct AptView: View {
                 .environmentObject(viewRouter)
                 .environmentObject(environmentModel)
                 .environmentObject(weatherKitManager)
-            
-            
+                .opacity(isSettingOpen ? 1 : 0)
             
             //임시코드
             Image("CalendarMonth_Temp")
@@ -174,13 +173,9 @@ struct AptView: View {
                                 .scaledToFit()
                                 .frame(width: proxy.size.width * 0.08)
                         } else {
-                            Image("announcementOff")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: proxy.size.width * 0.08)
+                          
                         }
                     }
-                    
                     
                     Spacer()
                     
@@ -209,12 +204,20 @@ struct AptView: View {
                     }
                     
                     Button { // 설정 버튼
-                        
+                        isSettingOpen.toggle()
                     } label: {
-                        Image.assets.buttons.settingUnSelected
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: proxy.size.width * 0.08)
+                        if isSettingOpen {
+                            Image.assets.buttons.settingSelected
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: proxy.size.width * 0.08)
+                        } else {
+                            Image.assets.buttons.settingUnSelected
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: proxy.size.width * 0.08)
+                        }
+                            
                     }
                 }
                 .padding(.horizontal, proxy.size.width * 0.06)
@@ -222,45 +225,19 @@ struct AptView: View {
         }//ZStack
         .onAppear {
             // 현재 날씨 데이터 받아오기
+            weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+            environmentModel.rawWeather = weatherKitManager.condition
             environmentModel.getCurrentEnvironment()
-            
+            print("at aptView, weather:\(environmentModel.currentWeather)")
+            print("at aptView, time:\(environmentModel.currentTime)")
             // 현재 아파트 정보 받아오기
             aptModel.fetchCurrentUserApt()
-            
-            // Test용, 날씨 보기위해 임시로 아래 함수만 실행
-            // environmentModel.getCurrentRawEnvironment()
-            // environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
-            
-            //            if let user = Auth.auth().currentUser {
-            //                firestoreManager.syncDB()
-            //                let userRef = db.collection("User").document(user.uid)
-            //
-            //                userRef.getDocument { (document, error) in
-            //                    if let document = document, document.exists {
-            //                        if let userData = document.data(), let userState = userData["userState"] as? String {
-            //                            print("AppDelegate | handleSceneActive | userState: \(userState)")
-            //                            self.db.collection("User").document(user.uid).updateData([
-            //                                "userState": UserState.active.rawValue
-            //                            ])
-            //                        }
-            //                    } else {
-            //                        print("No user is signed in.")
-            //                    }
-            //                }
-            //            }
-            
+            Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { timer in
+                aptModel.fetchCurrentUserApt()
+            }
             attendanceModel.downloadAttendanceRecords(for: Date())
         }
-        //Test용
-        //        .onChange(of: environmentModel.currentWeather) { _ in
-        //            environmentModel.getCurrentEnvironment()
-        //        }
-        //        .onChange(of: environmentModel.currentTime) { _ in
-        //            environmentModel.getCurrentEnvironment()
-        //        }
-        
     }
-    
 }
 
 struct AptView_Previews: PreviewProvider {

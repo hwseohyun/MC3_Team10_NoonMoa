@@ -40,6 +40,6 @@ struct SceneNeighborEye: View {
 
 struct SceneNeighborEye_Previews: PreviewProvider {
     static var previews: some View {
-        SceneNeighborEye(roomUser: .constant(User.sampleData[0][1]), isJumping: false)
+        SceneNeighborEye(roomUser: .constant(User.UTData[0][1]), isJumping: false)
     }
 }

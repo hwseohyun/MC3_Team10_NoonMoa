@@ -17,10 +17,39 @@ struct FunctionTestView: View {
     @State private var indexWeather: Int = 0
     @Binding var buttonText: String
     
-    var body: some View { 
+    var body: some View {
         VStack(alignment: .leading) {
-            Spacer().frame(height: 48)
+            Spacer()
             HStack(spacing: 8) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.white)
+                    .frame(width: 80, height: 48)
+                    .overlay(
+                        Text(buttonText)
+                            .foregroundColor(.black)
+                            .font(.caption)
+                    )
+                    .opacity(0.3)
+                
+                Button(action: {
+                    weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                    environmentModel.rawWeather = weatherKitManager.condition
+                    environmentModel.getCurrentEnvironment()
+                    print(environmentModel.rawWeather)
+                    print(environmentModel.currentTime)
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                }) {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(.white)
+                        .frame(width: 80, height: 48)
+                        .overlay(
+                            Text("Get\nWeather")
+                                .foregroundColor(.black)
+                                .font(.caption)
+                        )
+                        .opacity(0.3)
+                }
+                
                 Button(action: {
                     let array = ["sunrise", "morning", "afternoon", "sunset", "evening", "night"]
                     indexTime = (indexTime + 7) % 6
@@ -38,7 +67,7 @@ struct FunctionTestView: View {
                                 .foregroundColor(.black)
                                 .font(.caption)
                         )
-                        .opacity(0.1)
+                        .opacity(0.3)
                 }
                 Button(action: {
                     let array = ["clear", "cloudy", "rainy", "snowy"]
@@ -56,20 +85,17 @@ struct FunctionTestView: View {
                                 .foregroundColor(.black)
                                 .font(.caption)
                         )
-                        .opacity(0.1)
+                        .opacity(0.3)
                 }
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(.white)
-                    .frame(width: 80, height: 48)
-                    .overlay(
-                        Text(buttonText)
-                            .foregroundColor(.black)
-                            .font(.caption)
-                    )
-                    .opacity(0.1)
+              
+            }
+            .padding(.horizontal)
+            
+            HStack(spacing: 8) {
+                
                 Button(action: {
-                    EyeViewController().resetFaceAnchor()
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+//                    EyeViewController().resetFaceAnchor()
+//                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -79,44 +105,19 @@ struct FunctionTestView: View {
                                 .foregroundColor(.black)
                                 .font(.caption)
                         )
-                        .opacity(0.1)
+                        .opacity(0.3)
                 }
-            }
-            .padding(.horizontal)
-            
-            HStack(spacing: 8) {
-                Button(action: {
-                    viewRouter.currentView = .attendance
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                }) {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(.white)
-                        .frame(width: 80, height: 48)
-                        .overlay(
-                            Text("Attendance\nView")
-                                .foregroundColor(.black)
-                                .font(.caption)
-                        )
-                        .opacity(0.1)
-                }
-                Button(action: {
-                    weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
-                        environmentModel.rawWeather = weatherKitManager.condition
-                    environmentModel.getCurrentEnvironment()
-                    print(environmentModel.rawWeather)
-                    print(environmentModel.currentTime)
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                }) {
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(.white)
-                        .frame(width: 80, height: 48)
-                        .overlay(
-                            Text("Get\nWeather")
-                                .foregroundColor(.black)
-                                .font(.caption)
-                        )
-                        .opacity(0.1)
-                }
+                
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.white)
+                    .frame(width: 80, height: 48)
+                    .overlay(
+                        Text(buttonText)
+                            .foregroundColor(.black)
+                            .font(.caption)
+                    )
+                    .opacity(0.3)
+                
                 Button(action: {
                     viewRouter.currentView = .onBoarding
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -129,11 +130,25 @@ struct FunctionTestView: View {
                                 .foregroundColor(.black)
                                 .font(.caption)
                         )
-                        .opacity(0.1)
+                        .opacity(0.3)
+                }
+                
+                Button(action: {
+                    viewRouter.currentView = .attendance
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                }) {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(.white)
+                        .frame(width: 80, height: 48)
+                        .overlay(
+                            Text("Attendance\nView")
+                                .foregroundColor(.black)
+                                .font(.caption)
+                        )
+                        .opacity(0.3)
                 }
             }
             .padding(.horizontal)
-            Spacer()
         }
     }
 }

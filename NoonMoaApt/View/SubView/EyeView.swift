@@ -49,6 +49,9 @@ struct EyeView: View {
                         .frame(width: shadowWidth, height: shadowHeight)
                         .offset(y: bodyHeight / 2)
                         .opacity(0.4)
+                        .opacity(isJumping ? 0.5 : 1)
+                        .scaleEffect(isJumping ? 0.8 : 1)
+                        .offset(y: isJumping ? 6 : 0)
                     
                     //몸통
                     Ellipse()

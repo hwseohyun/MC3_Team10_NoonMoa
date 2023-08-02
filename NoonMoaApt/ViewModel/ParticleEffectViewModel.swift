@@ -64,6 +64,7 @@ fileprivate struct ParticleModifier: ViewModifier {
                     if !bool {
                         particle.reset()
                     } else {
+                        DispatchQueue.main.async {
                             withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.5, blendDuration: 0.8)){
                                 particle.offsetY = -56
                             }
@@ -72,6 +73,7 @@ fileprivate struct ParticleModifier: ViewModifier {
                             }
                             withAnimation(.easeOut(duration: 0.2).delay(0.4)) {
                                 particle.opacity = 0
+                            }
                         }
                     }
                 }

@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 struct SceneButtons: View {
     
@@ -109,9 +112,12 @@ struct SceneButtons: View {
             case "active":
                 Button(action: {
                     buttonText = "\(roomUser.roomId ?? "")\nactive"
-                    DispatchQueue.main.async {
-                        print("SceneButtons | roomUser \(roomUser)")
-                        pushNotiController.requestPushNotification(to: roomUser.id!)
+                    //TODO: 더미데이터일 경우 실행하지않기_임시로 분기처리
+                    if roomUser.token.count > 1 {
+                        DispatchQueue.main.async {
+                            print("SceneButtons | roomUser \(roomUser)")
+                            pushNotiController.requestPushNotification(to: roomUser.id!)
+                        }
                     }
                     //인터랙션 실행문
                     DispatchQueue.main.async {
@@ -132,7 +138,7 @@ struct SceneButtons: View {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     
                 }) {
-                    if roomUser.roomId == "5" {
+                    if roomUser.id == Auth.auth().currentUser?.uid {
                         Color.clear
                             .cornerRadius(8)
                             .particleEffect(systemImage: "suit.heart.fill",
@@ -145,11 +151,11 @@ struct SceneButtons: View {
                             .particleEffect(systemImage: "suit.heart.fill",
                                             font: .title3,
                                             status: roomUser.clicked,
-                                            tint:   {switch roomUser.eyeColor {
-                                            case "eyeBlue": return Color.userBlue
-                                            case "eyePink": return Color.userPink
-                                            case "eyeCyan": return Color.userCyan
-                                            case "eyeYellow": return Color.userYellow
+                                            tint:   {switch roomUser.characterColor {
+                                            case "blue": return Color.userBlue
+                                            case "pink": return Color.userPink
+                                            case "cyan": return Color.userCyan
+                                            case "yellow": return Color.userYellow
                                             default: return Color.userBlue
                                             }//임시로 처리
                             }()

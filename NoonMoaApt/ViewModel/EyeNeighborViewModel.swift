@@ -19,20 +19,20 @@ struct EyeNeighborViewModel {
     var cheekColor: LinearGradient = .cheekRed
     
     mutating func update(roomUser: User) {
-        switch roomUser.eyeColor {
-        case "eyeBlue" :
+        switch roomUser.characterColor {
+        case "blue" :
             characterColor = .userBlue
             bodyColor = .userBlue
             eyeColor = .eyeBlue
-        case "eyeCyan" :
+        case "cyan" :
             characterColor = .userCyan
             bodyColor = .userCyan
             eyeColor = .eyeCyan
-        case "eyePink" :
+        case "pink" :
             characterColor = .userPink
             bodyColor = .userPink
             eyeColor = .eyePink
-        case "eyeYellow" :
+        case "yellow" :
             characterColor = .userYellow
             bodyColor = .userYellow
             eyeColor = .eyeYellow

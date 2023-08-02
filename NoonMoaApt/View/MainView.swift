@@ -46,7 +46,8 @@ struct MainView: View {
                 .environmentObject(environmentModel)
                 .environmentObject(characterModel)
                 .environmentObject(customViewModel)
-            
+                .environmentObject(weatherKitManager)
+                .environmentObject(locationManager)
         case .apt:
 //            WeatherTestView()
             AptView()

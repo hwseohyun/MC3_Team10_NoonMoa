@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 struct SceneRoom: View {
     @EnvironmentObject var eyeViewController: EyeViewController
@@ -22,9 +25,15 @@ struct SceneRoom: View {
                     .scaledToFit()
                 
                 if roomUser.userState == "active" {
-                    Image.assets.room.light
-                        .resizable()
-                        .scaledToFit()
+                    if roomUser.id == Auth.auth().currentUser?.uid {
+                        Image.assets.room.white
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Image.assets.room.light
+                            .resizable()
+                            .scaledToFit()
+                    }
                 } else if roomUser.userState == "inactive" || roomUser.userState == "sleep" {
                     Image.assets.room.dark
                         .resizable()
@@ -32,12 +41,10 @@ struct SceneRoom: View {
                 }
     
                 if roomUser.userState == "active" {
-                    if roomUser.roomId == "5" {
+                    if roomUser.id == Auth.auth().currentUser?.uid {
                         SceneMyEye(roomUser: $roomUser, isJumping: roomUser.isJumping)
                             .environmentObject(customViewModel)
 //                            .environmentObject(eyeViewController)
-//
-
                     } else {
                         SceneNeighborEye(roomUser: $roomUser, isJumping: roomUser.isJumping)
                     }
@@ -75,7 +82,7 @@ struct SceneRoom: View {
             }//ZStack
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: 2)
+                    .stroke(Color.black, lineWidth: roomUser.id == Auth.auth().currentUser?.uid ? 3 : 2)
                     .frame(width: geo.size.width, height: geo.size.width / 1.2)
             )
             .clipShape(
@@ -87,7 +94,7 @@ struct SceneRoom: View {
 }
 
 struct SceneRoom_Previews: PreviewProvider {
-    @State static var user: User = User.sampleData[1][0]
+    @State static var user: User = User.UTData[0][0]
     
     static var previews: some View {
         SceneRoom(roomUser: $user)

@@ -29,7 +29,7 @@ struct SceneInactiveEye: View {
 }
 
 struct SceneInactiveEye_Previews: PreviewProvider {
-    @State static var roomUser: User = User.sampleData[0][0]
+    @State static var roomUser: User = User.UTData[0][0]
     
     static var previews: some View {
         SceneInactiveEye(roomUser: $roomUser)

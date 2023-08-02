@@ -17,16 +17,16 @@ class CustomViewModel: ObservableObject {
     @Published var currentCheekColor: LinearGradient = LinearGradient.cheekRed
     
     //테마컬러 4개 넣으면 변수 자동 업데이트
-//    let color1: Color = Color.userBlue
-//    let color2: Color = Color.userPink
-//    let color3: Color = Color.userYellow
-//    let color4: Color = Color.userCyan
+    let color1: Color = Color.userBlue
+    let color2: Color = Color.userPink
+    let color3: Color = Color.userYellow
+    let color4: Color = Color.userCyan
 
         //Bright
-        let color1: Color = Color.userThemeGreen1
-        let color2: Color = Color.userThemeBlue1
-        let color3: Color = Color.userThemePink1
-        let color4: Color = Color.userThemeYellow1
+//        let color1: Color = Color.userThemeGreen1
+//        let color2: Color = Color.userThemeBlue1
+//        let color3: Color = Color.userThemePink1
+//        let color4: Color = Color.userThemeYellow1
     
     func pickerValueToCharacterColor(value: Double) {
         let (r1, g1, b1, _) = color1.rgba

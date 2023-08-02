@@ -136,14 +136,14 @@ extension AptModel {
             }
             
             // Check if "roomId" key exists in userDocument data
-            guard let userRoomId = userDocument.data()?["roomId"] as? Int else {
+            guard let userRoomId = userDocument.data()?["roomId"] as? String else {
                 print("User document missing roomId.")
                 return
             }
             print("AptModel | generateUserLayout | userRoomId: \(userRoomId)")
             
             // User의 현재 아파트에서 상대적인 순서 계산하기 -> 0 ~ 11
-            let currentUserIndex = userRoomId % 12 - 1
+            let currentUserIndex = (Int(userRoomId) ?? 0) % 12 - 1
             print("AptModel | generateUserLayout | currentUserIndex \(currentUserIndex)")
             
             let aptDocRef = self.db.collection("Apt").document(aptId)
@@ -179,7 +179,7 @@ extension AptModel {
                     
                     if userId == "dummyUserId" {
                         print("ADD dummyUser from User.UTData[0][0]")
-                        userLayout[row][col] = User.UTData[0][0] // Assign dummy user
+                        userLayout[row][col] = User.UTData[row][col] // Assign dummy user
                     } else {
                         dispatchGroup.enter() // Enter the group before starting the async call
                         
