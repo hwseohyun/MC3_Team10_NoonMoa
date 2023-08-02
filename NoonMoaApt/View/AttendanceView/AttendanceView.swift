@@ -176,6 +176,7 @@ struct AttendanceView: View {
                                         .padding()
                                 )
                         }
+<<<<<<< HEAD:NoonMoaApt/View/AttendanceView/AttendanceView.swift
                         // 시작하기 버튼
                         Button (action: {
                             viewRouter.currentView = .apt
@@ -205,6 +206,64 @@ struct AttendanceView: View {
     //            environmentModel.getCurrentEnvironment()
     //        }
 }
+=======
+                    } else {
+                        HStack {
+                            // 다시찍기 버튼
+                            Button (action: {
+                                isStamped = false
+                                isScaleEffectPlayed = false
+                                isBlurEffectPlayed = false
+                                isShutterEffectPlayed = false
+                            }) {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.warmBlack)
+                                    .frame(height: 56)
+                                    .overlay(
+                                        Text("다시 찍기")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                            .padding()
+                                    )
+                            }
+                            // 시작하기 버튼
+                            Button (action: {
+                                //TODO: AttendanceCompleteViewModel에 정보를 저장합니다.
+                                viewRouter.currentView = .apt
+                                attendanceCompletedViewModel.saveAttendanceRecord(record: regenAttendanceRecord())
+                                attendanceCompletedViewModel.updateUserLastActiveDate()
+                            }) {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.warmBlack)
+                                    .frame(height: 56)
+                                    .overlay(
+                                        Text("시작하기")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                            .padding()
+                                    )
+                            }
+                        }//HStack
+                    }
+                }//VStack
+            }//GeometryReader
+            .padding(24)
+        }//ZStack
+    }
+    func regenAttendanceRecord() -> AttendanceRecord {
+        
+        firestoreManager.syncDB()
+        // Get the emptyRooms document
+//        let emptyRoomsRef = db.collection("User").document("emptyRooms")
+//        emptyRoomsRef.getDocument { (document, error) in
+            
+        let userId = currentUser?.uid ?? ""
+        let weatherCondition = weatherViewModel.currentWeather
+        let eyeDirection = [savedFaceOrientation.x, savedFaceOrientation.y, savedFaceOrientation.z]
+        
+        return AttendanceRecord(userId: userId, date: Date(), weatherCondition: weatherCondition, eyeDirection: eyeDirection)
+    }
+>>>>>>> dev:NoonMoaApt/View/AttendanceView.swift
 }
 
 struct AttendanceView_Previews: PreviewProvider {
