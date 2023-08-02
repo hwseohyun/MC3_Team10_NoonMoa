@@ -21,7 +21,7 @@ class LoginViewModel: ObservableObject {
     private var db: Firestore {
         firestoreManager.db
     }
-    private let dummyData = DummyData()
+//    private let dummyData = DummyData()
     
     @Published var nonce = ""
     @Published var fcmToken: String = ""

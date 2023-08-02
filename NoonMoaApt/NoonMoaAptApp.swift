@@ -111,6 +111,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     // Method to set up push notifications
     func setUpPushNotifications(application: UIApplication) {
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
         
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
@@ -127,22 +128,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         application.registerForRemoteNotifications()
         
-        //        var pushNotiController = PushNotiController()
-        //        pushNotiController.responsePushNotification()
-        
-        //        Messaging.messaging().delegate = self
-        
-        // 자정이 되면 모든 user의 userState를 .sleep으로 변경
-        midnightUpdater = MidnightUpdater()
-        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
-            let date = Date()
-            let calendar = Calendar.current
-            let hour = calendar.component(.hour, from: date)
-            let minute = calendar.component(.minute, from: date)
-            if hour == 0 && minute == 0 {
-                self.midnightUpdater?.updateAllUsersToSleep()
-            }
-        }
+        var pushNotiController = PushNotiController()
+        pushNotiController.responsePushNotification()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -211,28 +198,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func handleSceneInactive() {
         print("AppDelegate: ScenePhase: inactive")
-        //        // ... do something when inactive
-        //        // When the app is in the background, update the user's state to .inactive
-        //        if let user = Auth.auth().currentUser {
-        //            firestoreManager.syncDB()
-        //            let userRef = db.collection("User").document(user.uid)
-        //
-        //            userRef.getDocument { (document, error) in
-        //                if let document = document, document.exists {
-        //                    if let userData = document.data(), let userState = userData["userState"] as? String {
-        //                        if userState == UserState.sleep.rawValue {
-        //                            _ = 0
-        //                        } else {
-        //                            self.db.collection("User").document(user.uid).updateData([
-        //                                "userState": UserState.inactive.rawValue
-        //                            ])
-        //                        }
-        //                    }
-        //                } else {
-        //                    print("No user is signed in.")
-        //                }
-        //            }
-        //        }
     }
     
     func handleSceneUnexpectedState() {
@@ -242,7 +207,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 extension AppDelegate: MessagingDelegate {
-    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         messagingToken = fcmToken
         print("Firebase registration token: \(fcmToken ?? "")")

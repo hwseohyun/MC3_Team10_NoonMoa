@@ -94,8 +94,7 @@ struct AptView: View {
                         VStack(spacing: 16) {
                             ForEach(users.indices, id: \.self) { rowIndex in
                                 HStack(spacing: 12) {
-                                    ForEach(users[rowIndex].indices, id: \.self) { userIndex in
-                                        
+                                    ForEach(users[rowIndex].indices, id: \.self) { userIndex in                            
                                         SceneButtons(roomUser: $users[rowIndex][userIndex], buttonText: $buttonText)
                                             .frame(width: (geo.size.width - 48) / 3, height: ((geo.size.width - 48) / 3) / 1.2)
                                         //방 이미지 자체의 비율 1:1.2 통한 높이 산정
@@ -224,24 +223,29 @@ struct AptView: View {
 //            environmentModel.getCurrentRawEnvironment()
 //            environmentModel.convertRawDataToEnvironment(isInputCurrentData: true, weather: environmentModel.rawWeather, time: environmentModel.rawTime, sunrise: environmentModel.rawSunriseTime, sunset: environmentModel.rawSunsetTime)
             
+            // 현재 날씨 데이터 받아오기
+            environmentModel.getCurrentEnvironment()
+            
+            // 현재 아파트 정보 받아오기
             aptModel.fetchCurrentUserApt()
-            if let user = Auth.auth().currentUser {
-                firestoreManager.syncDB()
-                let userRef = db.collection("User").document(user.uid)
-                
-                userRef.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        if let userData = document.data(), let userState = userData["userState"] as? String {
-                            print("AppDelegate | handleSceneActive | userState: \(userState)")
-                            self.db.collection("User").document(user.uid).updateData([
-                                "userState": UserState.active.rawValue
-                            ])
-                        }
-                    } else {
-                        print("No user is signed in.")
-                    }
-                }
-            }
+            
+//            if let user = Auth.auth().currentUser {
+//                firestoreManager.syncDB()
+//                let userRef = db.collection("User").document(user.uid)
+//
+//                userRef.getDocument { (document, error) in
+//                    if let document = document, document.exists {
+//                        if let userData = document.data(), let userState = userData["userState"] as? String {
+//                            print("AppDelegate | handleSceneActive | userState: \(userState)")
+//                            self.db.collection("User").document(user.uid).updateData([
+//                                "userState": UserState.active.rawValue
+//                            ])
+//                        }
+//                    } else {
+//                        print("No user is signed in.")
+//                    }
+//                }
+//            }
             
             attendanceModel.downloadAttendanceRecords(for: Date())
         }

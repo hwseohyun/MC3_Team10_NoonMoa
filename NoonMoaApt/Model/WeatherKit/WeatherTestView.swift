@@ -27,6 +27,9 @@ struct WeatherTestView: View {
             }
             .task {
                 weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                print(locationManager.latitude)
+                print(locationManager.longitude)
+
             }
             
         } else {

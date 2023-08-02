@@ -121,8 +121,8 @@ class EnvironmentModel: ObservableObject {
     func fetchRecordedEnvironment(record: AttendanceRecord)  {
         print("EnvironmentModel | fetchRecordedEnvironment arrived")
         saveRecordedRawEnvironmentToEnvironmentModel(record: record)
-        convertRawDataToEnvironment(isInputCurrentData: false, weather: recordedRawWeather, time: recordedRawTime, sunrise: recordedRawSunriseTime, sunset: recordedRawSunsetTime)
-        convertEnvironmentToViewData(isInputCurrentData: false, weather: recordedWeather, time: recordedTime, isThunder: recordedIsThunder)
+        convertRawDataToEnvironment(isInputCurrentData: true, weather: recordedRawWeather, time: recordedRawTime, sunrise: recordedRawSunriseTime, sunset: recordedRawSunsetTime)
+        convertEnvironmentToViewData(isInputCurrentData: true, weather: recordedWeather, time: recordedTime, isThunder: recordedIsThunder)
     }
     
     // 저장된 recordedRaw... 변수를 받아와서 EnvironmentModel을 업데이트
