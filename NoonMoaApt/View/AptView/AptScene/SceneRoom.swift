@@ -21,19 +21,23 @@ struct SceneRoom: View {
                     .resizable()
                     .scaledToFit()
                 
-                Image.assets.room.dark
-                    .resizable()
-                    .scaledToFit()
+               
                 
-                Image.assets.room.light
-                    .resizable()
-                    .scaledToFit()
+                if roomUser.userState == "active" {
+                    Image.assets.room.light
+                        .resizable()
+                        .scaledToFit()
+                } else if roomUser.userState == "inactive" || roomUser.userState == "sleep" {
+                    Image.assets.room.dark
+                        .resizable()
+                        .scaledToFit()
+                }
                             
                 if roomUser.userState == "active" {
                     if roomUser.roomId == "5" {
-                        SceneMyEye()
-                            .environmentObject(eyeViewController)
-                            .environmentObject(customViewModel)
+//                        SceneMyEye()
+//                            .environmentObject(eyeViewController)
+//                            .environmentObject(customViewModel)
 
                     } else {
                         SceneNeighborEye(roomUser: $roomUser)
@@ -65,13 +69,13 @@ struct SceneRoom: View {
                             isBlindUp = true
                         }
                     }
-                Image("windowBorder")
+                Image.assets.room.windowBorder
                     .resizable()
                     .scaledToFit()
                     .frame(width: geo.size.width)
             }//ZStack
             .overlay(
-                RoundedRectangle(cornerRadius: 7)
+                RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.black, lineWidth: 2)
                     .frame(width: geo.size.width, height: geo.size.width / 1.2)
             )

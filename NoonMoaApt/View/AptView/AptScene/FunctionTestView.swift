@@ -10,6 +10,8 @@ import SwiftUI
 struct FunctionTestView: View {
     @EnvironmentObject var viewRouter: ViewRouter
     @EnvironmentObject var environmentModel: EnvironmentModel
+    @EnvironmentObject var weatherKitManager: WeatherKitManager
+    @EnvironmentObject var locationManager: LocationManager
     
     @State private var indexTime: Int = 0
     @State private var indexWeather: Int = 0
@@ -23,6 +25,7 @@ struct FunctionTestView: View {
                     let array = ["sunrise", "morning", "afternoon", "sunset", "evening", "night"]
                     indexTime = (indexTime + 7) % 6
                     environmentModel.currentTime = array[indexTime]
+                    environmentModel.convertEnvironmentToViewData(isInputCurrentData: true, weather: environmentModel.currentWeather, time: environmentModel.currentTime, isThunder: environmentModel.currentIsThunder)
                     print(indexTime)
                     print(environmentModel.currentTime)
                 }) {
@@ -93,13 +96,17 @@ struct FunctionTestView: View {
                         .opacity(0.1)
                 }
                 Button(action: {
-                    //random
+                    weatherKitManager.getWeather(latitude: locationManager.latitude, longitude: locationManager.longitude)
+                        environmentModel.rawWeather = weatherKitManager.condition
+                    environmentModel.getCurrentEnvironment()
+                    print(environmentModel.rawWeather)
+                    print(environmentModel.currentTime)
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
                         .frame(width: 80, height: 48)
                         .overlay(
-                            Text("Random\nShuffle")
+                            Text("Get\nWeather")
                                 .foregroundColor(.black)
                                 .font(.caption)
                         )

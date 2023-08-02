@@ -10,7 +10,7 @@ import SwiftUI
 
 class EnvironmentModel: ObservableObject {
     
-    //rawData to be uploaded to the server
+    //rawData to be uploaded e server
     var rawWeather: String = ""
     var rawTime: Date = Date()
     var rawSunriseTime: Date {
@@ -70,55 +70,83 @@ class EnvironmentModel: ObservableObject {
     var recordedStampSmallSkyImage: Image = Image.assets.stampSmall.clearMorning
     var recordedStampBorderColor: Color = Color.stampBorder.clearMorning
     
-    //MARK: --
    
+    // MARK: - 업로드 -
+    
     //앱을 시작할 때 실행시키며, 10분단위로 실행시킨다. 이 모델을 따르는 뷰는 자동으로 업데이트 된다.
     func getCurrentEnvironment() {
 //        getCurrentRawEnvironment()
-//        convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
+        convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
         convertEnvironmentToViewData(isInputCurrentData: true, weather: currentWeather, time: currentTime, isThunder: currentIsThunder)
-        print("weather: \(currentWeather)")
-        print("time: \(rawTime)")
-        print("time: \(currentTime)")
-        print("lottie: \(currentLottieImageName)")
     }
     
+    // WeatherKit에서 데이터를 받아와서, raw data 업데이트
     func getCurrentRawEnvironment() {
         //웨더킷?
-            rawWeather = "2"
+        //TODO: 이걸 뷰에서 처리해야할거같은..
+//            rawWeather = "1"
 //            rawSunriseTime = Date()
 //            rawSunsetTime = Date()
-            rawTime = Date()
+//            rawTime = Date()
     }
     
-    func saveRawEnvironmentToAttendanceModel()  {
-        //attendanceModel.newAttendanceRecord(...)
+    // 서버에 저장하기 위해, Attendance 모델을 업데이트 할 때 사용
+    // attendanceModel.newAttendanceRecord에 접근하여, Environment와 관련된 recordedRaw...변수를 업데이트 해주는 방식
+    // 이후 newAttendanceRecord는 CharacterModel로도 업데이트 받은 뒤에, 서버에 업로드
+//        func saveRawEnvironmentToAttendanceModel()  {
+//        //attendanceModel.newAttendanceRecord(...)
+//    }
+    
+    func saveRawEnvironmentToAttendanceModel(newAttendanceRecord: inout AttendanceRecord?) {
+        // Update recorded environment-related data properties in newAttendanceRecord with the raw environment data from EnvironmentModel
+//        if newAttendanceRecord == nil {
+//            rawWeather = "11"
+//            rawSunriseTime = Date()
+//            rawSunsetTime = Date()
+//            rawTime = Date()
+//            return
+//        }
+        newAttendanceRecord?.rawWeather = rawWeather
+        newAttendanceRecord?.rawTime = rawTime
+        newAttendanceRecord?.rawSunriseTime = rawSunriseTime
+        newAttendanceRecord?.rawSunsetTime = rawSunsetTime
+        // Update other recorded environment-related properties as needed
     }
+
+
+    
+    // MARK: - 다운로드 -
     
     //앱을 시작할 때 실행시키고, 달력을 켰을 때 접근한다.
     func fetchRecordedEnvironment(record: AttendanceRecord)  {
+        print("EnvironmentModel | fetchRecordedEnvironment arrived")
         saveRecordedRawEnvironmentToEnvironmentModel(record: record)
-        convertRawDataToEnvironment(isInputCurrentData: false, weather: recordedRawWeather, time: recordedRawTime, sunrise: recordedRawSunriseTime, sunset: recordedRawSunsetTime)
-        convertEnvironmentToViewData(isInputCurrentData: false, weather: recordedWeather, time: recordedTime, isThunder: recordedIsThunder)
+        convertRawDataToEnvironment(isInputCurrentData: true, weather: recordedRawWeather, time: recordedRawTime, sunrise: recordedRawSunriseTime, sunset: recordedRawSunsetTime)
+        convertEnvironmentToViewData(isInputCurrentData: true, weather: recordedWeather, time: recordedTime, isThunder: recordedIsThunder)
     }
     
+    // 저장된 recordedRaw... 변수를 받아와서 EnvironmentModel을 업데이트
     func saveRecordedRawEnvironmentToEnvironmentModel(record: AttendanceRecord) {
+        print("EnvironmentModel | saveRecordedRawEnvironmentToEnvironmentModel arrived")
         recordedRawWeather = record.rawWeather
-        recordedRawSunriseTime = record.rawtSunriseTime
+        recordedRawSunriseTime = record.rawSunriseTime
         recordedRawSunsetTime = record.rawSunsetTime
         recordedRawTime = record.rawTime
     }
     
     
+    // MARK: - 업로드 & 다운로드 -
+    
+    // W[WeatherKit으로부터 받아온 raw data or 서버로부터 받아온 recordedRaw]를 Environment로 중간 변환
     func convertRawDataToEnvironment(isInputCurrentData: Bool, weather: String, time: Date, sunrise: Date, sunset: Date) {
         
         let environmentWeather: String
         switch weather {
-        case "1", "2", "3": environmentWeather = "clear"
-        case "4", "5", "6", "7": environmentWeather = "cloudy"
+        case "1", "2", "partlyCloudy": environmentWeather = "clear"
+        case "mostlyCloudy", "5", "6", "7": environmentWeather = "cloudy"
         case "8", "9", "10": environmentWeather = "rainy"
         case "11", "12", "13": environmentWeather = "snowy"
-        default: environmentWeather = ""
+        default: environmentWeather = "clear"
         }
         
         let environmentIsWind: Bool
@@ -150,7 +178,7 @@ class EnvironmentModel: ObservableObject {
         case let t where t >= 6 && t < 12: environmentTime = "morning"
         case let t where t >= 12 && t < 19: environmentTime = "afternoon"
         case let t where t >= 19 && t < 22: environmentTime = "evening"
-        default: environmentTime = ""
+        default: environmentTime = "sunrise"
         }
         if isInputCurrentData {
             currentWeather = environmentWeather
@@ -171,6 +199,7 @@ class EnvironmentModel: ObservableObject {
         return hour
     }
     
+    // [WeatherKit으로부터 받아온 raw data or 서버로부터 받아온 recordedRaw]를 변환한 Environment를, View에서 사용할 수 있는 ViewData로 변환
     func convertEnvironmentToViewData(isInputCurrentData: Bool, weather: String, time: String, isThunder: Bool) {
         var viewData = [String: Any]()
         switch weather {
@@ -501,12 +530,12 @@ class EnvironmentModel: ObservableObject {
             currentStampSmallSkyImage = viewData["stampSmallSkyImage"] as! Image
             currentStampBorderColor = viewData["stampBorderColor"] as! Color
         } else {
-            recordedLottieImageName = viewData["recordedLottieImageName"] as! String
-            recordedColorOfSky = viewData["recordedColorOfSky"] as! LinearGradient
-            recordedColorOfGround = viewData["recordedColorOfGround"] as! LinearGradient
-            recordedStampLargeSkyImage = viewData["recordedStampLargeSkyImageName"] as! Image
-            recordedStampSmallSkyImage = viewData["recordedStampSmallSkyImageName"] as! Image
-            recordedStampBorderColor = viewData["recordedStampBorderColor"] as! Color
+            recordedLottieImageName = viewData["lottieImageName"] as! String
+            recordedColorOfSky = viewData["colorOfSky"] as! LinearGradient
+            recordedColorOfGround = viewData["colorOfGround"] as! LinearGradient
+            recordedStampLargeSkyImage = viewData["stampLargeSkyImage"] as! Image
+            recordedStampSmallSkyImage = viewData["stampSmallSkyImage"] as! Image
+            recordedStampBorderColor = viewData["stampBorderColor"] as! Color
         }
     }
 }
