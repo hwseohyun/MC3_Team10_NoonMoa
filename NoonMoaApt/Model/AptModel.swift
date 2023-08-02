@@ -14,6 +14,7 @@ class AptModel: ObservableObject {
     @Published var apt: Apt?
     @Published var rooms: [Room] = []
     @Published var users: [User] = []
+    @Published var user2DLayout : [[User]] = [[]]
     
     private var firestoreManager: FirestoreManager {
         FirestoreManager.shared
@@ -96,31 +97,65 @@ class AptModel: ObservableObject {
             self.generateUserLayout(aptId: aptId)
         }
     }
-}
     
+    func fetchUser(userId: String, completion: @escaping (User?) -> Void) {
+        let userDocRef = db.collection("User").document(userId)
+        
+        userDocRef.getDocument { (userDocument, error) in
+            if let error = error {
+                print("Error fetching user data: \(error)")
+                completion(nil)
+            } else if let userDocument = userDocument, userDocument.exists, let data = userDocument.data() {
+                let user = User(dictionary: data) // Changed this line to use the custom initializer
+                completion(user)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+}
+
 
 extension AptModel {
     func generateUserLayout(aptId: String) {
         let aptId = aptId
         print("AptModel | generateUserLayout | aptId: \(aptId)")
-
+        
         // Step 1: Fetch aptUsers from Apt collection
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User ID not available.")
+            return
+        }
+        
         let userDocRef = db.collection("User").document(userId)
         
         userDocRef.getDocument { (userDocument, userError) in
-            guard let userDocument = userDocument, userDocument.exists,
-                  let userRoomId = userDocument.data()?["roomId"] as? Int else { return }
+            guard let userDocument = userDocument, userDocument.exists else {
+                print("User document not available.")
+                return
+            }
             
+            // Check if "roomId" key exists in userDocument data
+            guard let userRoomId = userDocument.data()?["roomId"] as? Int else {
+                print("User document missing roomId.")
+                return
+            }
+            print("AptModel | generateUserLayout | userRoomId: \(userRoomId)")
+            
+            // User의 현재 아파트에서 상대적인 순서 계산하기 -> 0 ~ 11
             let currentUserIndex = userRoomId % 12 - 1
+            print("AptModel | generateUserLayout | currentUserIndex \(currentUserIndex)")
             
-            // Fetch aptUsers from Apt collection
-            guard let aptId = self.apt?.id else { return }
             let aptDocRef = self.db.collection("Apt").document(aptId)
-            
             aptDocRef.getDocument { (aptDocument, aptError) in
                 guard let aptDocument = aptDocument, aptDocument.exists,
-                      let aptUsers = aptDocument.data()?["aptUsers"] as? [String] else { return }
+                      let aptUsers = aptDocument.data()?["aptUsers"] as? [String] else {
+                    print("Apt document not available or missing aptUsers.")
+                    return
+                }
+                print("AptModel | generateUserLayout | userRoomId \(userRoomId)")
+                
+                
                 
                 // Step 2: Create an array with length 12, filling with dummyUserId if needed
                 var userIds = aptUsers
@@ -128,27 +163,47 @@ extension AptModel {
                 while userIds.count < 12 {
                     userIds.append(dummyUserId)
                 }
+                print("AptModel | generateUserLayout | userIds \(userIds)")
                 
                 // Step 3: Use getIndexShaker() to create a 4x3 array
-                // Assuming currentUser's index is 5, as mentioned
                 let shakedIndices = self.getIndexShaker(userIndex: currentUserIndex)
-                var userLayout = [[String]](repeating: [String](repeating: "", count: 3), count: 4)
+                
+                var userLayout = [[User?]](repeating: [User?](repeating: nil, count: 3), count: 4) // Initialize 4x3 array with nil
+                
+                let dispatchGroup = DispatchGroup() // Create a Dispatch Group
+                
                 for i in 0..<12 {
                     let row = i / 3
                     let col = i % 3
                     let userId = userIds[shakedIndices[i]]
-                    userLayout[row][col] = userId
+                    
+                    if userId == "dummyUserId" {
+                        print("ADD dummyUser from User.UTData[0][0]")
+                        userLayout[row][col] = User.UTData[0][0] // Assign dummy user
+                    } else {
+                        dispatchGroup.enter() // Enter the group before starting the async call
+                        
+                        self.fetchUser(userId: userId) { user in
+                            print("self.fetchUser | user: \(String(describing: user))")
+                            if let user = user {
+                                userLayout[row][col] = user // Update with fetched user
+                            }
+                            dispatchGroup.leave() // Leave the group when the async call is finished
+                        }
+                    }
                 }
                 
-                // Step 4: Print the 4x3 array
-                print("userLayout userLayout userLayout userLayout: \(userLayout)")
+                dispatchGroup.notify(queue: .main) { // This block will be called when all async calls are finished
+                    self.user2DLayout = userLayout.compactMap { $0.compactMap { $0 } } // Handle nil values if necessary
+                    print("AptModel | generateUserLayout | self.user2DLayout \(self.user2DLayout)")
+                }
             }
         }
     }
 }
 
 
-    
+
 //    private var userListener: ListenerRegistration?
 //
 //    // Fetch current user's apartment
