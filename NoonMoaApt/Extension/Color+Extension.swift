@@ -22,6 +22,7 @@ extension Color {
     static let userYellow = Color(hex: 0xD4DA97)
     static let userCyan = Color(hex: 0x8BB2B2)
     static let userBlue = Color(hex: 0x8A8DC5)
+    static let announcementGray = Color(hex:0x5F5F5F)
    
     struct stampBorder {
         static let clearSunrise = Color(hex: 0xABD5ED)
