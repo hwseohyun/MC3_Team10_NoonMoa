@@ -76,21 +76,18 @@ class EnvironmentModel: ObservableObject {
     //앱을 시작할 때 실행시키며, 10분단위로 실행시킨다. 이 모델을 따르는 뷰는 자동으로 업데이트 된다.
     func getCurrentEnvironment() {
 //        getCurrentRawEnvironment()
-//        convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
+        convertRawDataToEnvironment(isInputCurrentData: true, weather: rawWeather, time: rawTime, sunrise: rawSunriseTime, sunset: rawSunsetTime)
         convertEnvironmentToViewData(isInputCurrentData: true, weather: currentWeather, time: currentTime, isThunder: currentIsThunder)
-        print("weather: \(currentWeather)")
-        print("time: \(rawTime)")
-        print("time: \(currentTime)")
-        print("lottie: \(currentLottieImageName)")
     }
     
     // WeatherKit에서 데이터를 받아와서, raw data 업데이트
     func getCurrentRawEnvironment() {
         //웨더킷?
-            rawWeather = "2"
+        //TODO: 이걸 뷰에서 처리해야할거같은..
+//            rawWeather = "1"
 //            rawSunriseTime = Date()
 //            rawSunsetTime = Date()
-            rawTime = Date()
+//            rawTime = Date()
     }
     
     // 서버에 저장하기 위해, Attendance 모델을 업데이트 할 때 사용
@@ -145,11 +142,11 @@ class EnvironmentModel: ObservableObject {
         
         let environmentWeather: String
         switch weather {
-        case "1", "2", "3": environmentWeather = "clear"
-        case "4", "5", "6", "7": environmentWeather = "cloudy"
+        case "1", "2", "partlyCloudy": environmentWeather = "clear"
+        case "mostlyCloudy", "5", "6", "7": environmentWeather = "cloudy"
         case "8", "9", "10": environmentWeather = "rainy"
         case "11", "12", "13": environmentWeather = "snowy"
-        default: environmentWeather = ""
+        default: environmentWeather = "clear"
         }
         
         let environmentIsWind: Bool
@@ -181,7 +178,7 @@ class EnvironmentModel: ObservableObject {
         case let t where t >= 6 && t < 12: environmentTime = "morning"
         case let t where t >= 12 && t < 19: environmentTime = "afternoon"
         case let t where t >= 19 && t < 22: environmentTime = "evening"
-        default: environmentTime = ""
+        default: environmentTime = "sunrise"
         }
         if isInputCurrentData {
             currentWeather = environmentWeather
@@ -533,12 +530,12 @@ class EnvironmentModel: ObservableObject {
             currentStampSmallSkyImage = viewData["stampSmallSkyImage"] as! Image
             currentStampBorderColor = viewData["stampBorderColor"] as! Color
         } else {
-            recordedLottieImageName = viewData["recordedLottieImageName"] as! String
-            recordedColorOfSky = viewData["recordedColorOfSky"] as! LinearGradient
-            recordedColorOfGround = viewData["recordedColorOfGround"] as! LinearGradient
-            recordedStampLargeSkyImage = viewData["recordedStampLargeSkyImageName"] as! Image
-            recordedStampSmallSkyImage = viewData["recordedStampSmallSkyImageName"] as! Image
-            recordedStampBorderColor = viewData["recordedStampBorderColor"] as! Color
+            recordedLottieImageName = viewData["lottieImageName"] as! String
+            recordedColorOfSky = viewData["colorOfSky"] as! LinearGradient
+            recordedColorOfGround = viewData["colorOfGround"] as! LinearGradient
+            recordedStampLargeSkyImage = viewData["stampLargeSkyImage"] as! Image
+            recordedStampSmallSkyImage = viewData["stampSmallSkyImage"] as! Image
+            recordedStampBorderColor = viewData["stampBorderColor"] as! Color
         }
     }
 }
