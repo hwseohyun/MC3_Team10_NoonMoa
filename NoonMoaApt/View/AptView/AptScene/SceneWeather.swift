@@ -18,12 +18,15 @@ struct SceneWeather: View {
         case "clear":
             LottieView(name: Lottie.clearMorning, animationSpeed: 1)
                 .ignoresSafeArea()
+                .opacity(0.6)
         case "cloudy":
             LottieView(name: Lottie.cloudyMorning, animationSpeed: 1)
                 .ignoresSafeArea()
+                .opacity(0.6)
         case "rainy":
             LottieView(name: Lottie.rainyMorning, animationSpeed: 1)
                 .ignoresSafeArea()
+                .opacity(0.6)
         case "snowy":
             LottieView(name: Lottie.snowyMorning, animationSpeed: 1)
                 .ignoresSafeArea()

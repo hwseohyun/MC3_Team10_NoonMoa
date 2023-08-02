@@ -41,7 +41,7 @@ struct NoonMoaAptApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
+//            ParticleView()
             MainView(aptModel: AptModel(),
                      attendanceModel: AttendanceModel(newAttendanceRecord: attendanceRecord),
                      characterModel: CharacterModel(),

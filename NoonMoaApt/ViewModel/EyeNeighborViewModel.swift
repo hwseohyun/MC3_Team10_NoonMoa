@@ -13,6 +13,7 @@ struct EyeNeighborViewModel {
     var isBlinkingRight: Bool = false
     var lookAtPoint: SIMD3 = SIMD3<Float>(0.0, 0.0, 0.0)
     var faceOrientation: SIMD3 = SIMD3<Float>(0.0, 0.0, 0.0)
+    var characterColor: Color = .userBlue
     var bodyColor: LinearGradient = .userBlue
     var eyeColor: LinearGradient = .eyeBlue
     var cheekColor: LinearGradient = .cheekRed
@@ -20,15 +21,19 @@ struct EyeNeighborViewModel {
     mutating func update(roomUser: User) {
         switch roomUser.eyeColor {
         case "eyeBlue" :
+            characterColor = .userBlue
             bodyColor = .userBlue
             eyeColor = .eyeBlue
         case "eyeCyan" :
+            characterColor = .userCyan
             bodyColor = .userCyan
             eyeColor = .eyeCyan
         case "eyePink" :
+            characterColor = .userPink
             bodyColor = .userPink
             eyeColor = .eyePink
         case "eyeYellow" :
+            characterColor = .userYellow
             bodyColor = .userYellow
             eyeColor = .eyeYellow
         default:
@@ -40,7 +45,7 @@ struct EyeNeighborViewModel {
     mutating func randomEyeMove(roomUser: User) {
             
             switch roomUser.roomId {
-            case "1", "3", "8", "11":
+            case "1", "3", "5", "8", "11":
                 faceOrientation = SIMD3<Float>(Float(Double.random(in: -1.0...1.0)), Float(Double.random(in: -1.0...1.0)), 0.0)
                 lookAtPoint = SIMD3<Float>(Float(Double.random(in: -1.0...1.0)), Float(Double.random(in: -1.0...1.0)), 0.0)
             case "2", "4", "9":

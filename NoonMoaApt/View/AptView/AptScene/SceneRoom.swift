@@ -21,8 +21,6 @@ struct SceneRoom: View {
                     .resizable()
                     .scaledToFit()
                 
-               
-                
                 if roomUser.userState == "active" {
                     Image.assets.room.light
                         .resizable()
@@ -32,15 +30,16 @@ struct SceneRoom: View {
                         .resizable()
                         .scaledToFit()
                 }
-                            
+    
                 if roomUser.userState == "active" {
                     if roomUser.roomId == "5" {
-//                        SceneMyEye()
+                        SceneMyEye(roomUser: $roomUser, isJumping: roomUser.isJumping)
+                            .environmentObject(customViewModel)
 //                            .environmentObject(eyeViewController)
-//                            .environmentObject(customViewModel)
+//
 
                     } else {
-                        SceneNeighborEye(roomUser: $roomUser)
+                        SceneNeighborEye(roomUser: $roomUser, isJumping: roomUser.isJumping)
                     }
                 } else if roomUser.userState == "inactive" || roomUser.userState == "sleep" {
                     SceneInactiveEye(roomUser: $roomUser)

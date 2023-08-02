@@ -96,6 +96,7 @@ struct AptView: View {
                                 HStack(spacing: 12) {
                                     ForEach(users[rowIndex].indices, id: \.self) { userIndex in                            
                                         SceneButtons(roomUser: $users[rowIndex][userIndex], buttonText: $buttonText)
+                                            .environmentObject(customViewModel)
                                             .frame(width: (geo.size.width - 48) / 3, height: ((geo.size.width - 48) / 3) / 1.2)
                                         //방 이미지 자체의 비율 1:1.2 통한 높이 산정
                                     }

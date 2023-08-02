@@ -28,6 +28,7 @@ struct FunctionTestView: View {
                     environmentModel.convertEnvironmentToViewData(isInputCurrentData: true, weather: environmentModel.currentWeather, time: environmentModel.currentTime, isThunder: environmentModel.currentIsThunder)
                     print(indexTime)
                     print(environmentModel.currentTime)
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -45,6 +46,7 @@ struct FunctionTestView: View {
                     environmentModel.currentWeather = array[indexWeather]
                     print(indexWeather)
                     print(environmentModel.currentWeather)
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -67,6 +69,7 @@ struct FunctionTestView: View {
                     .opacity(0.1)
                 Button(action: {
                     EyeViewController().resetFaceAnchor()
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -84,6 +87,7 @@ struct FunctionTestView: View {
             HStack(spacing: 8) {
                 Button(action: {
                     viewRouter.currentView = .attendance
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -101,6 +105,7 @@ struct FunctionTestView: View {
                     environmentModel.getCurrentEnvironment()
                     print(environmentModel.rawWeather)
                     print(environmentModel.currentTime)
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)
@@ -114,6 +119,7 @@ struct FunctionTestView: View {
                 }
                 Button(action: {
                     viewRouter.currentView = .onBoarding
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 }) {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.white)

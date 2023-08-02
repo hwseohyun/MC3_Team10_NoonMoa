@@ -25,6 +25,7 @@ struct AttendanceView: View {
     @State private var isBlurEffectPlayed: Bool = false
     @State private var isShutterEffectPlayed: Bool = false
     @State private var isColorPickerAppeared: Bool = false
+    @State private var isStartButtonActive: Bool = false
     
     private var firestoreManager: FirestoreManager {
         FirestoreManager.shared
@@ -108,16 +109,19 @@ struct AttendanceView: View {
                             //사용자 색상 최초 지정(default값)
                             customViewModel.pickerValueToCharacterColor(value: customViewModel.pickerValue)
                             DispatchQueue.main.async {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 withAnimation(.easeInOut(duration: 0.2).repeatCount(1, autoreverses: true)) {
                                     isBlurEffectPlayed = true
                                 }
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                                 withAnimation(.easeInOut(duration: 0.4).repeatCount(1, autoreverses: true)) {
                                     isBlurEffectPlayed = false
                                 }
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                                 withAnimation(.easeIn(duration: 0.1)) {
                                     isStamped = true
                                 }
@@ -139,13 +143,16 @@ struct AttendanceView: View {
                                 withAnimation(.spring(response: 0.5, dampingFraction: 0.3).speed(1)) {
                                     isScaleEffectPlayed = true
                                 }
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation(.easeInOut(duration: 1.2)) {
+                                withAnimation(.easeInOut(duration: 1)) {
                                     isColorPickerAppeared = true
                                 }
                             }
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    isStartButtonActive = true
+                                }
+                            }
+                
                         }) {
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(Color.warmBlack)
@@ -166,6 +173,8 @@ struct AttendanceView: View {
                                 isBlurEffectPlayed = false
                                 isShutterEffectPlayed = false
                                 isColorPickerAppeared = false
+                                isStartButtonActive = false
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
@@ -183,10 +192,12 @@ struct AttendanceView: View {
                                 attendanceModel.uploadAttendanceRecord()
                                 //                                attendanceModel.uploadAttendanceRecord()
                                 //                                attendanceCompletedViewModel.updateUserLastActiveDate()
+                                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
                             }) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.warmBlack)
                                     .frame(height: 56)
+                                    .opacity(isStartButtonActive ? 1 : 0.3)
                                     .overlay(
                                         Text("시작하기")
                                             .foregroundColor(.white)
@@ -194,6 +205,7 @@ struct AttendanceView: View {
                                             .padding()
                                     )
                             }
+                            .disabled(!isStartButtonActive)
                         }//HStack
                     }
                 }//VStack
